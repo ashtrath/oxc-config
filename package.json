@@ -1,0 +1,57 @@
+{
+  "name": "oxc-config-monorepo",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashtrat/oxc-config.git"
+  },
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*",
+      "fixtures/*"
+    ],
+    "catalogs": {
+      "dev": {
+        "@types/node": "^24.0.0",
+        "typescript": "^7",
+        "turbo": "^2.11.7",
+        "tsdown": "^0.23.0",
+        "vitest": "^5.0.3",
+        "tsdown-stale-guard": "^0.1.3",
+        "publint": "^0.3.25"
+      },
+      "peer": {
+        "oxlint": "^1.87.0",
+        "oxlint-tsgolint": "^7.0.2003",
+        "oxfmt": "^0.72.0"
+      },
+      "prod": {
+        "@oxlint/plugins": "^1.87.0"
+      }
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "lint": "oxlint && oxfmt --check --no-error-on-unmatched-pattern",
+    "lint:fix": "oxlint --fix && oxfmt --write --no-error-on-unmatched-pattern"
+  },
+  "devDependencies": {
+    "oxfmt": "catalog:peer",
+    "oxlint": "catalog:peer",
+    "oxlint-tsgolint": "catalog:peer",
+    "turbo": "catalog:dev",
+    "vitest": "catalog:dev"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "^1.4.0"
+    }
+  }
+}

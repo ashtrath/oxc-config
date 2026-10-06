@@ -1,0 +1,52 @@
+{
+  "name": "@ashtrath/oxlint-plugin-slop",
+  "version": "0.0.0",
+  "description": "Oxlint rules that flag low-value code and prose patterns.",
+  "keywords": [
+    "ai",
+    "lint",
+    "oxlint",
+    "oxlintplugin",
+    "slop"
+  ],
+  "homepage": "https://github.com/ashtrath/oxc-config",
+  "bugs": {
+    "url": "https://github.com/ashtrath/oxc-config/issues"
+  },
+  "license": "MIT",
+  "author": "Rahadian Fahri Faizani <ashtrath@pm.me> (https://github.com/ashtrath)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashtrath/oxc-config.git",
+    "directory": "packages/oxlint-plugin-slop"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@oxlint/plugins": "catalog:prod"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:dev",
+    "oxlint": "catalog:peer",
+    "publint": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "tsdown-stale-guard": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vitest": "catalog:dev"
+  },
+  "peerDependencies": {
+    "oxlint": ">=1.87.0"
+  }
+}
