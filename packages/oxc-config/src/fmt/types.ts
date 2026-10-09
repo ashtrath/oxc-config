@@ -1,6 +1,6 @@
 import type {
   JsdocConfig,
-  Oxfmtrc,
+  OxfmtConfig,
   SortImportsConfig,
   SortPackageJsonConfig,
   SortTailwindcssConfig,
@@ -9,7 +9,7 @@ import type {
 import type { OmitIndexSignature, Simplify } from '../shared/types'
 
 export type OxfmtFactoryOptions = Simplify<
-  Omit<OmitIndexSignature<Oxfmtrc>, 'overrides'> & {
+  Omit<OmitIndexSignature<OxfmtConfig>, 'overrides'> & {
     /**
      * File patterns to ignore during formatting. Patterns are matched relative to the directory
      * containing oxfmt.config.ts.

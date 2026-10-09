@@ -1,4 +1,4 @@
-import type { OxfmtOverrideConfig } from 'oxfmt'
+import type { OxfmtConfig, OxfmtOverrideConfig } from 'oxfmt'
 
 import type { OxfmtFactoryOptions } from './types'
 
@@ -10,7 +10,7 @@ import { resolveIgnorePatterns } from '../shared/utils'
 export function ashtrathFmt(
   options: OxfmtFactoryOptions = {},
   ...userOverrides: OxfmtOverrideConfig[]
-) {
+): OxfmtConfig {
   const {
     sortImports = true,
     sortPackageJson = true,
@@ -59,7 +59,9 @@ export function ashtrathFmt(
       ],
     }),
 
-    sortPackageJson,
+    sortPackageJson: resolveOptions(sortPackageJson, {
+      sortScripts: true,
+    }),
 
     sortTailwindcss: resolveOptions(sortTailwindcss, {
       functions: ['clsx', 'cn', 'cva', 'tw'],

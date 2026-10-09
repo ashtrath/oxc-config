@@ -25,7 +25,7 @@ export function isInEditorEnv(): boolean {
 export function resolveIgnorePatterns(
   userIgnores: string[] | ((originals: string[]) => string[]) = [],
   ignoreTypeScript = false,
-) {
+): string[] {
   let ignorePatterns = [...GLOB_EXCLUDE]
   if (ignoreTypeScript) ignorePatterns.push(GLOB_TS, GLOB_TSX)
 
