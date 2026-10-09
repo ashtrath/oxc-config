@@ -1,4 +1,5 @@
 import type { OxlintOverride } from 'oxlint'
+
 import { GLOB_SRC } from '../../shared/globs'
 
 export function node(): OxlintOverride[] {
