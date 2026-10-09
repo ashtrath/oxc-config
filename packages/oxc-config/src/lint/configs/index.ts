@@ -1,3 +1,4 @@
+export * from './antislop'
 export * from './command'
 export * from './comments'
 export * from './e18e'

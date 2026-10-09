@@ -7,6 +7,7 @@ import { defineConfig } from 'oxlint'
 
 import { isInEditorEnv, resolveIgnorePatterns } from '../shared/utils'
 import {
+  antislop,
   command,
   comments,
   e18e,
@@ -53,7 +54,7 @@ export function ashtrathLint(
   if (isInEditor == null) {
     isInEditor = isInEditorEnv()
     if (isInEditor)
-      console.info('[@ashtrath/oxc-config] Detected running in editor, some rules are disabled.')
+      console.warn('[@ashtrath/oxc-config] Detected running in editor, some rules are disabled.')
   }
 
   const configs: OxlintOverride[] = []
@@ -96,9 +97,8 @@ export function ashtrathLint(
     configs.push(...typescript({ type: projectType, ...resolveSubOptions(options, 'typescript') }))
   }
 
-  // FIXME: Implement this
   if (enableAntiSlop) {
-    configs.push()
+    configs.push(...antislop(resolveSubOptions(options, 'antislop')))
   }
 
   if (enableRegexp) {

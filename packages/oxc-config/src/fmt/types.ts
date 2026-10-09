@@ -4,7 +4,6 @@ import type {
   SortImportsConfig,
   SortPackageJsonConfig,
   SortTailwindcssConfig,
-  SvelteConfig,
 } from 'oxfmt'
 
 import type { OmitIndexSignature, Simplify } from '../shared/types'
@@ -52,13 +51,5 @@ export type OxfmtFactoryOptions = Simplify<
      * @default true
      */
     jsdoc?: boolean | JsdocConfig
-
-    /**
-     * Svelte file formatting via prettier-plugin-svelte. Requires `svelte` to be installed in the
-     * project.
-     *
-     * @default auto-detected
-     */
-    svelte?: boolean | SvelteConfig
   }
 >

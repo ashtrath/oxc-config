@@ -73,6 +73,9 @@
     },
     "oxlint-plugin-react-doctor": {
       "optional": true
+    },
+    "oxlint-tailwindcss": {
+      "optional": true
     }
   }
 }
