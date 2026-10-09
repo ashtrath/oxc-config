@@ -25,9 +25,10 @@
     "dist"
   ],
   "type": "module",
-  "types": "./dist/index.d.mts",
   "exports": {
-    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli/index.mjs",
+    "./fmt": "./dist/fmt/index.mjs",
+    "./lint": "./dist/lint/index.mjs",
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -37,10 +38,18 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ashtrath/oxlint-plugin-slop": "workspace:*"
+    "@e18e/eslint-plugin": "catalog:prod",
+    "eslint-plugin-antfu": "catalog:prod",
+    "eslint-plugin-command": "catalog:prod",
+    "eslint-plugin-perfectionist": "catalog:prod",
+    "eslint-plugin-regexp": "catalog:prod",
+    "local-pkg": "catalog:prod",
+    "oxlint-plugin-directive-comments": "catalog:prod"
   },
   "devDependencies": {
     "@types/node": "catalog:dev",
+    "oxlint-plugin-react-doctor": "catalog:peer",
+    "oxlint-tailwindcss": "catalog:peer",
     "publint": "catalog:dev",
     "tsdown": "catalog:dev",
     "tsdown-stale-guard": "catalog:dev",
@@ -48,15 +57,21 @@
     "vitest": "catalog:dev"
   },
   "peerDependencies": {
-    "oxfmt": ">=0.72.0",
-    "oxlint": ">=1.87.0",
+    "@ashtrath/oxlint-plugin-slop": "workspace:^",
+    "oxfmt": ">=0.67.0",
+    "oxlint": ">=1.43.0 <1.77.0 || >=1.78.0",
+    "oxlint-plugin-react-doctor": "^0.9.17",
+    "oxlint-tailwindcss": "^1.14.0",
     "oxlint-tsgolint": ">=7.0.2003"
   },
   "peerDependenciesMeta": {
-    "oxfmt": {
+    "@ashtrath/oxlint-plugin-slop": {
       "optional": true
     },
     "oxlint-tsgolint": {
+      "optional": true
+    },
+    "oxlint-plugin-react-doctor": {
       "optional": true
     }
   }

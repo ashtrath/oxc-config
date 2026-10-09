@@ -9,8 +9,7 @@
   "workspaces": {
     "packages": [
       "apps/*",
-      "packages/*",
-      "fixtures/*"
+      "packages/*"
     ],
     "catalogs": {
       "dev": {
@@ -23,12 +22,21 @@
         "publint": "^0.3.25"
       },
       "peer": {
+        "oxfmt": "^0.72.0",
         "oxlint": "^1.87.0",
-        "oxlint-tsgolint": "^7.0.2003",
-        "oxfmt": "^0.72.0"
+        "oxlint-plugin-react-doctor": "^0.9.17",
+        "oxlint-tailwindcss": "^1.14.0",
+        "oxlint-tsgolint": "^7.0.2003"
       },
       "prod": {
-        "@oxlint/plugins": "^1.87.0"
+        "@e18e/eslint-plugin": "^0.8.1",
+        "@oxlint/plugins": "^1.87.0",
+        "eslint-plugin-antfu": "^3.2.3",
+        "eslint-plugin-command": "^4.0.0",
+        "eslint-plugin-perfectionist": "^5.12.1",
+        "eslint-plugin-regexp": "^3.3.1",
+        "local-pkg": "^1.2.1",
+        "oxlint-plugin-directive-comments": "^0.1.0"
       }
     }
   },
@@ -36,16 +44,20 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --write --no-error-on-unmatched-pattern",
     "test": "turbo run test",
-    "typecheck": "turbo run typecheck",
-    "lint": "oxlint && oxfmt --check --no-error-on-unmatched-pattern",
-    "lint:fix": "oxlint --fix && oxfmt --write --no-error-on-unmatched-pattern"
+    "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
+    "@ashtrath/oxc-config": "workspace:*",
+    "@types/node": "catalog:dev",
     "oxfmt": "catalog:peer",
     "oxlint": "catalog:peer",
     "oxlint-tsgolint": "catalog:peer",
     "turbo": "catalog:dev",
+    "typescript": "catalog:dev",
     "vitest": "catalog:dev"
   },
   "devEngines": {
