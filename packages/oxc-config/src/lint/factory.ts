@@ -1,7 +1,8 @@
-import type { OxlintConfig, OxlintOverride } from 'oxlint'
+import type { ExternalPluginEntry, OxlintConfig } from 'oxlint'
 
-import type { FactoryOptions } from './types'
+import type { FactoryOptions, OxlintConfigItem } from './types'
 
+import { createDefu } from 'defu'
 import { isPackageExists } from 'local-pkg'
 import { defineConfig } from 'oxlint'
 
@@ -26,9 +27,40 @@ import {
 } from './configs'
 import { react } from './configs/react'
 
+const mergeConfigs = createDefu((obj, key, value) => {
+  if (
+    (key === 'plugins' || key === 'ignorePatterns') &&
+    Array.isArray(obj[key]) &&
+    Array.isArray(value)
+  ) {
+    obj[key] = [...new Set([...obj[key], ...value])] as never
+    return true
+  }
+
+  if (key === 'jsPlugins' && Array.isArray(obj[key]) && Array.isArray(value)) {
+    const map = new Map<string, ExternalPluginEntry>()
+    for (const item of [...obj[key], ...value] as ExternalPluginEntry[]) {
+      if (!item) continue
+
+      const id = typeof item === 'string' ? item : item.name || item.specifier
+      if (!map.has(id)) map.set(id, item)
+    }
+
+    obj[key] = [...map.values()] as never
+    return true
+  }
+
+  if (key === 'overrides') {
+    const current = Array.isArray(obj[key]) ? obj[key] : obj[key] ? [obj[key]] : []
+    const incoming = Array.isArray(value) ? value : value ? [value] : []
+    obj[key] = [...current, ...incoming] as never
+    return true
+  }
+})
+
 export function ashtrathLint(
   options: FactoryOptions = {},
-  ...userOverrides: OxlintOverride[]
+  ...userConfigs: OxlintConfigItem[]
 ): OxlintConfig {
   const {
     type: projectType = 'app',
@@ -57,78 +89,93 @@ export function ashtrathLint(
       console.warn('[@ashtrath/oxc-config] Detected running in editor, some rules are disabled.')
   }
 
-  const configs: OxlintOverride[] = []
-
-  configs.push(
-    ...javascript({ isInEditor, ...resolveSubOptions(options, 'javascript') }),
-    ...comments(),
-    ...command(),
-  )
-
-  if (enableNode) {
-    configs.push(...node())
-  }
-
-  if (enablePerfectionist) {
-    configs.push(...perfectionist(resolveSubOptions(options, 'perfectionist')))
-  }
-
-  if (enableJsdoc) {
-    configs.push(...jsdoc())
-  }
-
-  if (enableImport) {
-    configs.push(...imports(resolveSubOptions(options, 'import')))
-  }
-
-  if (enableE18e) {
-    configs.push(...e18e(resolveSubOptions(options, 'e18e')))
-  }
-
-  if (enableUnicorn) {
-    configs.push(...unicorn(resolveSubOptions(options, 'unicorn')))
-  }
-
-  if (enableJsx) {
-    configs.push(...jsx(resolveSubOptions(options, 'jsx')))
-  }
-
-  if (enableTypescript) {
-    configs.push(...typescript({ type: projectType, ...resolveSubOptions(options, 'typescript') }))
-  }
-
-  if (enableAntiSlop) {
-    configs.push(...antislop(resolveSubOptions(options, 'antislop')))
-  }
-
-  if (enableRegexp) {
-    configs.push(...regexp(resolveSubOptions(options, 'regexp')))
-  }
-
-  if (enableVitest) {
-    configs.push(...vitest(resolveSubOptions(options, 'vitest')))
-  }
-
-  if (enableReact) {
-    configs.push(...react(resolveSubOptions(options, 'react')))
-  }
-
-  if (enableNextJs) {
-    configs.push(...nextjs(resolveSubOptions(options, 'nextjs')))
-  }
-
-  if (enableTailwindCSS) {
-    configs.push(...tailwindcss(resolveSubOptions(options, 'tailwindcss')))
-  }
-
-  return defineConfig({
+  const baseConfig: OxlintConfig = {
+    // Disable default configs
     categories: { correctness: 'off' },
     ignorePatterns: resolveIgnorePatterns(userIgnorePatterns, !enableTypescript),
-    overrides: [...configs, ...userOverrides],
     options: {
       reportUnusedDisableDirectives: 'error',
     },
-  })
+  }
+
+  const presets: OxlintConfigItem[] = []
+  presets.push(
+    baseConfig,
+    javascript({ isInEditor, ...resolveSubOptions(options, 'javascript') }),
+    comments(),
+    command(),
+  )
+
+  if (enableNode) {
+    presets.push(node())
+  }
+
+  if (enablePerfectionist) {
+    presets.push(perfectionist(resolveSubOptions(options, 'perfectionist')))
+  }
+
+  if (enableJsdoc) {
+    presets.push(jsdoc())
+  }
+
+  if (enableImport) {
+    presets.push(imports(resolveSubOptions(options, 'import')))
+  }
+
+  if (enableE18e) {
+    presets.push(e18e(resolveSubOptions(options, 'e18e')))
+  }
+
+  if (enableUnicorn) {
+    presets.push(unicorn(resolveSubOptions(options, 'unicorn')))
+  }
+
+  if (enableJsx) {
+    presets.push(jsx(resolveSubOptions(options, 'jsx')))
+  }
+
+  if (enableTypescript) {
+    presets.push(typescript({ type: projectType, ...resolveSubOptions(options, 'typescript') }))
+  }
+
+  if (enableAntiSlop) {
+    presets.push(antislop(resolveSubOptions(options, 'antislop')))
+  }
+
+  if (enableRegexp) {
+    presets.push(regexp(resolveSubOptions(options, 'regexp')))
+  }
+
+  if (enableVitest) {
+    presets.push(vitest(resolveSubOptions(options, 'vitest')))
+  }
+
+  if (enableReact) {
+    presets.push(react(resolveSubOptions(options, 'react')))
+  }
+
+  if (enableNextJs) {
+    presets.push(nextjs(resolveSubOptions(options, 'nextjs')))
+  }
+
+  if (enableTailwindCSS) {
+    presets.push(tailwindcss(resolveSubOptions(options, 'tailwindcss')))
+  }
+
+  // HACK: defu prioritizes left-to-right: defu(HighestPriority, LowestPriority)
+  // If a user passes: oxlint({}, configA, configB) -> configB should win.
+  // So we reverse the user configs, then append the reversed presets.
+  const configs: OxlintConfigItem[] = [
+    ...((userConfigs as any[]).flat(Infinity).filter(Boolean).reverse() as OxlintConfigItem[]),
+    ...presets.reverse(),
+  ]
+
+  const merged = configs.reduce<OxlintConfig>(
+    (acc, cur) => mergeConfigs(acc, (cur ?? {}) as OxlintConfig),
+    {} as OxlintConfig,
+  )
+
+  return defineConfig(merged)
 }
 
 type ResolvedOptions<T> = T extends boolean ? Record<string, never> : NonNullable<T>

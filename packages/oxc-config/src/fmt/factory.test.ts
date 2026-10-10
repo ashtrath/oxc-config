@@ -19,7 +19,9 @@ describe('ashtrathFmt factory', () => {
     expect(config.tabWidth).toBe(2)
     expect(config.trailingComma).toBe('all')
     expect(config.useTabs).toBe(false)
-    expect(config.sortPackageJson).toBe(true)
+    expect(config.sortPackageJson).toEqual({
+      sortScripts: true,
+    })
     expect(config.sortImports).toEqual(
       expect.objectContaining({
         internalPattern: ['~/', '@/', '#'],

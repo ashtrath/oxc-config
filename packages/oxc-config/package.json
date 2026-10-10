@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@e18e/eslint-plugin": "catalog:prod",
+    "defu": "catalog:prod",
     "eslint-plugin-antfu": "catalog:prod",
     "eslint-plugin-command": "catalog:prod",
     "eslint-plugin-perfectionist": "catalog:prod",

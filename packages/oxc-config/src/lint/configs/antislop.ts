@@ -1,8 +1,6 @@
-import type { OxlintOverride } from 'oxlint'
-
-import type { AntislopOptions } from '../types'
+import type { AntislopOptions, OxlintConfigItem } from '../types'
 
 // TODO: Configure rules once `oxlint-plugin-slop` is published.
-export function antislop(_options: AntislopOptions = {}): OxlintOverride[] {
-  return []
+export function antislop(_options: AntislopOptions = {}): OxlintConfigItem {
+  return {}
 }

@@ -52,14 +52,14 @@ export const GLOB_EXCLUDE = [
   '**/.output',
   '**/.parcel-cache',
   '**/.svelte-kit',
+  '**/temp',
   '**/.temp',
+  '**/tmp',
   '**/.tmp',
   '**/.turbo',
   '**/.vercel',
   '**/.vite',
   '**/.vitepress/cache',
-  '**/temp',
-  '**/tmp',
 
   // ── Test & coverage ──────────────────────────────────────────────────
   '**/__snapshots__',

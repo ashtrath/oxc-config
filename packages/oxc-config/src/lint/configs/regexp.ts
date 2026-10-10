@@ -1,12 +1,11 @@
 import type { OxlintOverride } from 'oxlint'
 
-import type { RegexpOptions } from '../types'
+import type { OxlintConfigItem, RegexpOptions } from '../types'
 
-import { GLOB_SRC } from '../../shared/globs'
 import { regexpPlugin } from '../plugins'
 
-export function regexp(options: RegexpOptions): OxlintOverride[] {
-  const { level, overrides = {} } = options
+export function regexp(options: RegexpOptions): OxlintConfigItem {
+  const { severity, overrides = {} } = options
 
   // regexp's default recommendation.
   // See: https://github.com/ota-meshi/eslint-plugin-regexp/blob/master/lib/configs/rules/recommended.ts#L3-L75
@@ -85,20 +84,17 @@ export function regexp(options: RegexpOptions): OxlintOverride[] {
     'regexp/use-ignore-case': 'error',
   }
 
-  if (level === 'warn') {
+  if (severity === 'warn') {
     for (const key in rules) {
       if (rules[key] === 'error') rules[key] = 'warn'
     }
   }
 
-  return [
-    {
-      files: [GLOB_SRC],
-      jsPlugins: [regexpPlugin],
-      rules: {
-        ...rules,
-        ...overrides,
-      },
+  return {
+    jsPlugins: [regexpPlugin],
+    rules: {
+      ...rules,
+      ...overrides,
     },
-  ]
+  }
 }

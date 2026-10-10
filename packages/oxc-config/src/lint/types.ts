@@ -1,23 +1,41 @@
-import type { OxlintConfig } from 'oxlint'
+import type { AllowWarnDeny, DummyRule, DummyRuleMap, OxlintConfig } from 'oxlint'
 
-export interface HasEditorContext {
+export type Rules = DummyRuleMap & Record<string, DummyRule | undefined>
+
+export type OxlintConfigItem =
+  | Partial<OxlintConfig>
+  | readonly OxlintConfigItem[]
+  | null
+  | undefined
+  | false
+
+export interface EditorOptions {
   /**
-   * Control to disable some rules in editors.
+   * Disables or adjusts editor-unfriendly rules when running inside an IDE or editor context.
    *
-   * @default auto-detect based on the process.env
+   * If omitted, this is automatically detected by checking common editor environment variables (VS
+   * Code, JetBrains, Vim, Zed) and ensuring it is not running in CI.
+   *
+   * @default 'auto-detected'
    */
   isInEditor?: boolean
 }
 
-export interface HasFilesOption {
+export interface FilesOptions {
+  /**
+   * File glob patterns to include for this configuration block.
+   */
   files?: string[]
 }
 
-export interface HasRuleOverrides {
-  overrides?: OxlintConfig['rules']
+export interface RuleOverridesOptions {
+  /**
+   * Rule overrides applied on top of the preset defaults.
+   */
+  overrides?: Rules
 }
 
-export interface HasProjectContext {
+export interface ProjectOptions {
   /**
    * Type of the project. `lib` will enable more strict rules for libraries.
    *
@@ -26,7 +44,7 @@ export interface HasProjectContext {
   type?: 'app' | 'lib'
 }
 
-export interface HasTypeAwareOptions {
+export interface TypeAwareOptions {
   /**
    * Enable rules that require TypeScript type information. Corresponds to the Oxlint `--type-aware`
    * flag.
@@ -55,10 +73,10 @@ export interface HasTypeAwareOptions {
   /**
    * Override type aware rules.
    */
-  overridesTypeAware?: OxlintConfig['rules']
+  overridesTypeAware?: Rules
 }
 
-export interface HasReactDoctorOptions extends HasRuleOverrides {
+export interface ReactDoctorOptions extends RuleOverridesOptions {
   /**
    * Enable react-doctor rules.
    *
@@ -70,13 +88,13 @@ export interface HasReactDoctorOptions extends HasRuleOverrides {
   reactDoctor?: boolean
 }
 
-export interface JavascriptOptions extends HasEditorContext, HasFilesOption, HasRuleOverrides {}
+export interface JavascriptOptions extends EditorOptions, RuleOverridesOptions {}
 
-export interface PerfectionistOptions extends HasEditorContext, HasRuleOverrides {}
+export interface PerfectionistOptions extends EditorOptions, RuleOverridesOptions {}
 
-export interface ImportOptions extends HasRuleOverrides {}
+export interface ImportOptions extends RuleOverridesOptions {}
 
-export interface E18eOptions extends HasEditorContext, HasProjectContext, HasRuleOverrides {
+export interface E18eOptions extends EditorOptions, ProjectOptions, RuleOverridesOptions {
   /**
    * Include modern syntax and API replacement rules via @e18e/eslint-plugin in jsPlugins.
    *
@@ -100,7 +118,7 @@ export interface E18eOptions extends HasEditorContext, HasProjectContext, HasRul
   performanceImprovements?: boolean
 }
 
-export interface UnicornOptions extends HasRuleOverrides {}
+export interface UnicornOptions extends RuleOverridesOptions {}
 
 export interface JSXOptions {
   /**
@@ -110,13 +128,13 @@ export interface JSXOptions {
    *
    * @default false
    */
-  a11y?: boolean | HasRuleOverrides
+  a11y?: boolean | RuleOverridesOptions
 }
 
 export interface TypescriptOptions
-  extends HasFilesOption, HasProjectContext, HasRuleOverrides, HasTypeAwareOptions {}
+  extends FilesOptions, ProjectOptions, RuleOverridesOptions, TypeAwareOptions {}
 
-export interface AntislopOptions extends HasRuleOverrides {
+export interface AntislopOptions extends RuleOverridesOptions {
   /**
    * Enable anti-slop rules via @ashtrath/oxlint-plugin-slop in jsPlugins.
    *
@@ -139,26 +157,26 @@ export interface AntislopOptions extends HasRuleOverrides {
   cognitiveComplexity?: number | false
 }
 
-export interface RegexpOptions extends HasRuleOverrides {
+export interface RegexpOptions extends RuleOverridesOptions {
   /**
-   * Override rulelevels
+   * Override rule severity
    */
-  level?: 'error' | 'warn'
+  severity?: AllowWarnDeny
 }
 
-export interface VitestOptions extends HasEditorContext, HasFilesOption, HasRuleOverrides {}
+export interface VitestOptions extends EditorOptions, FilesOptions, RuleOverridesOptions {}
 
-export interface ReactOptions extends HasFilesOption, HasReactDoctorOptions, HasRuleOverrides {}
+export interface ReactOptions extends FilesOptions, ReactDoctorOptions, RuleOverridesOptions {}
 
-export interface NextJSOptions extends HasFilesOption, HasReactDoctorOptions, HasRuleOverrides {}
+export interface NextJSOptions extends FilesOptions, ReactDoctorOptions, RuleOverridesOptions {}
 
-export interface TailwindCSSOptions extends HasRuleOverrides {}
+export interface TailwindCSSOptions extends RuleOverridesOptions {}
 
-export interface FactoryOptions extends HasEditorContext, HasProjectContext {
+export interface FactoryOptions extends EditorOptions, ProjectOptions {
   /**
    * Core JavaScript lint rules. Can't be disabled
    */
-  javascript?: HasRuleOverrides
+  javascript?: RuleOverridesOptions
 
   /**
    * Enable Node.js lint rules.
@@ -240,21 +258,21 @@ export interface FactoryOptions extends HasEditorContext, HasProjectContext {
   /**
    * React lint rules.
    *
-   * @default false
+   * @default auto-detected
    */
   react?: boolean | ReactOptions
 
   /**
    * Next.js lint rules.
    *
-   * @default false
+   * @default auto-detected
    */
   nextjs?: boolean | NextJSOptions
 
   /**
    * TailwindCSS lint rules.
    *
-   * @default false
+   * @default auto-detected
    */
   tailwindcss?: boolean | TailwindCSSOptions
 
