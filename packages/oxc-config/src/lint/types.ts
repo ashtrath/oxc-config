@@ -1,7 +1,13 @@
 import type { AllowWarnDeny, DummyRule, DummyRuleMap, OxlintConfig } from 'oxlint'
 
+/**
+ * Map of oxlint rule names to rule configuration or severity levels.
+ */
 export type Rules = DummyRuleMap & Record<string, DummyRule | undefined>
 
+/**
+ * Single oxlint configuration entry, nested list of entries, or falsy value ignored during merging.
+ */
 export type OxlintConfigItem =
   | Partial<OxlintConfig>
   | readonly OxlintConfigItem[]
@@ -9,279 +15,366 @@ export type OxlintConfigItem =
   | undefined
   | false
 
+/**
+ * Options for adjusting linting behavior within editor and IDE environments.
+ */
 export interface EditorOptions {
   /**
-   * Disables or adjusts editor-unfriendly rules when running inside an IDE or editor context.
+   * Controls whether editor-friendly lint adjustments are enabled.
    *
-   * If omitted, this is automatically detected by checking common editor environment variables (VS
-   * Code, JetBrains, Vim, Zed) and ensuring it is not running in CI.
-   *
+   * @remarks
+   *   Relaxes strict or distracting rules (such as perfectionist sorting and focused tests) while
+   *   working inside an IDE or editor. If omitted, automatically detected from common editor
+   *   environment variables (VS Code, JetBrains, Vim/Neovim, Zed) when not in CI or git hooks.
    * @default 'auto-detected'
    */
   isInEditor?: boolean
 }
 
+/**
+ * Options for specifying target file globs for configuration blocks.
+ */
 export interface FilesOptions {
   /**
-   * File glob patterns to include for this configuration block.
+   * Glob patterns matching files targeted by this configuration block.
    */
   files?: string[]
 }
 
+/**
+ * Options for overriding preset rule configurations.
+ */
 export interface RuleOverridesOptions {
   /**
-   * Rule overrides applied on top of the preset defaults.
+   * Custom rule severity and option overrides applied on top of preset defaults.
    */
   overrides?: Rules
 }
 
+/**
+ * Options for specifying target project kinds.
+ */
 export interface ProjectOptions {
   /**
-   * Type of the project. `lib` will enable more strict rules for libraries.
+   * Target project kind.
    *
+   * @remarks
+   *   Setting to `'lib'` activates stricter lint rules suitable for published libraries, such as
+   *   module replacement checks and stricter regex handling.
    * @default 'app'
    */
   type?: 'app' | 'lib'
 }
 
+/**
+ * Options for configuring TypeScript type-aware lint rules.
+ */
 export interface TypeAwareOptions {
   /**
-   * Enable rules that require TypeScript type information. Corresponds to the Oxlint `--type-aware`
-   * flag.
+   * Enables lint rules that require TypeScript type information.
    *
-   * Requires `oxlint-tsgolint` to be installed.
-   *
-   * @default false
-   * @see https://oxc.rs/docs/guide/usage/linter/type-aware
+   * @remarks
+   *   Automatically enabled when `oxlint-tsgolint` is detected.
+   * @default 'auto-detected'
+   * @requires oxlint-tsgolint
+   * @see {@link https://oxc.rs/docs/guide/usage/linter/type-aware | Oxlint Type Aware Docs}
    */
   typeAware?: boolean
 
   /**
-   * Glob patterns for files that should be type aware.
+   * Glob patterns matching TypeScript files analyzed with type information.
    *
    * @default ['**\/*.{ts,tsx}']
    */
   filesTypeAware?: string[]
 
   /**
-   * Glob patterns for files that should not be type aware.
+   * Glob patterns matching files excluded from type-aware lint analysis.
    *
    * @default ['**\/_.md\/**', '**\/_.astro/*.ts']
    */
   ignorePatternsTypeAware?: string[]
 
   /**
-   * Override type aware rules.
+   * Custom rule severity and option overrides applied specifically to type-aware rules.
    */
   overridesTypeAware?: Rules
 }
 
+/**
+ * Options for configuring react-doctor lint rules.
+ */
 export interface ReactDoctorOptions extends RuleOverridesOptions {
   /**
-   * Enable react-doctor rules.
+   * Enables React diagnostic rules.
    *
-   * Requires `oxlint-plugin-react-doctor` to be installed.
-   *
-   * @default auto-detected
-   * @see https://www.react.doctor/docs/rules
+   * @default false
+   * @requires oxlint-plugin-react-doctor
+   * @see {@link https://www.react.doctor/docs/rules | React Doctor Rules}
    */
   reactDoctor?: boolean
 }
 
+/**
+ * Options for core JavaScript lint rules.
+ */
 export interface JavascriptOptions extends EditorOptions, RuleOverridesOptions {}
 
+/**
+ * Options for perfectionist sorting lint rules.
+ */
 export interface PerfectionistOptions extends EditorOptions, RuleOverridesOptions {}
 
+/**
+ * Options for import lint rules.
+ */
 export interface ImportOptions extends RuleOverridesOptions {}
 
+/**
+ * Options for e18e ecosystem performance and modernization lint rules.
+ */
 export interface E18eOptions extends EditorOptions, ProjectOptions, RuleOverridesOptions {
   /**
-   * Include modern syntax and API replacement rules via @e18e/eslint-plugin in jsPlugins.
+   * Enables modern JavaScript syntax and API replacement rules.
    *
    * @default true
+   * @see {@link https://github.com/e18e/eslint-plugin#modernization | e18e Modernization Rules}
    */
   modernization?: boolean
 
   /**
-   * Include module replacements rules
+   * Enables dependency replacement rules flagging heavy packages in favor of lighter alternatives.
    *
    * @default type === 'lib' && isInEditor
-   * @see https://github.com/e18e/eslint-plugin#module-replacements
+   * @see {@link https://github.com/e18e/eslint-plugin#module-replacements | e18e Module Replacement Rules}
    */
   moduleReplacements?: boolean
 
   /**
-   * Include micro-performance checks via @e18e/eslint-plugin in jsPlugins.
+   * Enables micro-performance checks.
    *
    * @default true
+   * @see {@link https://github.com/e18e/eslint-plugin#performance-improvements | e18e Performance Improvement Rules}
    */
   performanceImprovements?: boolean
 }
 
+/**
+ * Options for unicorn lint rules.
+ */
 export interface UnicornOptions extends RuleOverridesOptions {}
 
+/**
+ * Options for JSX and accessibility lint rules.
+ */
 export interface JSXOptions {
   /**
-   * Enable JSX accessibility rules via the built-in jsx-a11y plugin.
+   * Enables JSX accessibility rules.
    *
-   * Can be a boolean or an object for custom options and overrides.
-   *
+   * @remarks
+   *   Accepts a boolean toggle or an options object containing custom rule overrides.
    * @default false
    */
   a11y?: boolean | RuleOverridesOptions
 }
 
+/**
+ * Options for TypeScript lint rules.
+ */
 export interface TypescriptOptions
   extends FilesOptions, ProjectOptions, RuleOverridesOptions, TypeAwareOptions {}
 
+/**
+ * Options for anti-slop and code clarity lint rules.
+ */
 export interface AntislopOptions extends RuleOverridesOptions {
   /**
-   * Enable anti-slop rules via @ashtrath/oxlint-plugin-slop in jsPlugins.
+   * Enables anti-slop rules from `@ashtrath/oxlint-plugin-slop`.
    *
    * @default true
+   * @requires `@ashtrath/oxlint-plugin-slop`
    */
   slop?: boolean
 
   /**
-   * Enable cognitive complexity and bug detection rules from sonarjs in jsPlugins.
+   * Enables cognitive complexity and bug detection rules from `sonarjs`.
    *
    * @default true
    */
   sonarjs?: boolean
 
   /**
-   * Threshold for cognitive complexity checks. Pass `false` to disable.
+   * Maximum cognitive complexity score allowed per function before triggering an error.
    *
+   * @remarks
+   *   Pass `false` to disable cognitive complexity validation.
    * @default 15
    */
   cognitiveComplexity?: number | false
 }
 
+/**
+ * Options for regular expression lint rules.
+ */
 export interface RegexpOptions extends RuleOverridesOptions {
   /**
-   * Override rule severity
+   * Base severity level applied to regular expression rules.
    */
   severity?: AllowWarnDeny
 }
 
+/**
+ * Options for Vitest test lint rules.
+ */
 export interface VitestOptions extends EditorOptions, FilesOptions, RuleOverridesOptions {}
 
+/**
+ * Options for React lint rules.
+ */
 export interface ReactOptions extends FilesOptions, ReactDoctorOptions, RuleOverridesOptions {}
 
+/**
+ * Options for Next.js lint rules.
+ */
 export interface NextJSOptions extends FilesOptions, ReactDoctorOptions, RuleOverridesOptions {}
 
+/**
+ * Options for Tailwind CSS lint rules.
+ */
 export interface TailwindCSSOptions extends RuleOverridesOptions {}
 
+/**
+ * Factory configuration options for `ashtrathLint`.
+ *
+ * @remarks
+ *   Provides toggles and sub-options for all built-in lint presets, project environment settings,
+ *   and ignore pattern customization.
+ */
 export interface FactoryOptions extends EditorOptions, ProjectOptions {
   /**
-   * Core JavaScript lint rules. Can't be disabled
+   * Rule overrides for core JavaScript rules and environments.
+   *
+   * @remarks
+   *   Core JavaScript rules cannot be disabled.
    */
   javascript?: RuleOverridesOptions
 
   /**
-   * Enable Node.js lint rules.
+   * Enables Node.js lint rules and globals.
    *
    * @default true
    */
   node?: boolean
 
   /**
-   * Perfectionist lint rules.
+   * Enables or configures perfectionist sorting rules for imports, exports, and object keys.
    *
    * @default true
    */
   perfectionist?: boolean | PerfectionistOptions
 
   /**
-   * Enable JSDoc lint rules.
+   * Enables JSDoc documentation comment validation rules.
    *
    * @default true
    */
   jsdoc?: boolean
 
   /**
-   * Import lint rules.
+   * Enables or configures import hygiene and module boundary rules.
    *
    * @default true
    */
   import?: boolean | ImportOptions
 
   /**
-   * Ecosystem performance and modernization rules via Oxlint jsPlugins.
+   * Enables or configures e18e ecosystem performance and modernization rules.
    *
    * @default true
    */
   e18e?: boolean | E18eOptions
 
   /**
-   * Unicorn lint rules.
+   * Enables or configures unicorn rules for idiomatic JavaScript and Node.js code.
    *
    * @default true
    */
   unicorn?: boolean | UnicornOptions
 
   /**
-   * JSX and JSX-A11y lint rules.
+   * Enables or configures JSX accessibility rules.
    *
    * @default true
    */
   jsx?: boolean | JSXOptions
 
   /**
-   * TypeScript lint rules.
+   * Enables or configures TypeScript lint rules and optional type-aware checks.
    *
-   * @default auto-detected
+   * @remarks
+   *   Automatically enabled when `typescript` or `@typescript/native-preview` is detected.
+   * @default 'auto-detected'
+   * @requires `typescript`
+   * @requires `@typescript/native-preview`
    */
   typescript?: boolean | TypescriptOptions
 
   /**
-   * Anti-slop lint rules.
+   * Enables or configures anti-slop rules from `@ashtrath/oxlint-plugin-slop`.
    *
    * @default false
+   * @requires `@ashtrath/oxlint-plugin-slop`
    */
   antislop?: boolean | AntislopOptions
 
   /**
-   * Regular expression lint rules.
+   * Enables or configures regular expression lint rules.
    *
    * @default true
    */
   regexp?: boolean | RegexpOptions
 
   /**
-   * Vitest lint rules.
+   * Enables or configures Vitest testing rules and test file overrides.
    *
    * @default true
    */
   vitest?: boolean | VitestOptions
 
   /**
-   * React lint rules.
+   * Enables or configures React and React Hooks lint rules.
    *
-   * @default auto-detected
+   * @remarks
+   *   Automatically enabled when `react` is detected.
+   * @default 'auto-detected'
    */
   react?: boolean | ReactOptions
 
   /**
-   * Next.js lint rules.
+   * Enables or configures Next.js rules and core web vitals checks.
    *
-   * @default auto-detected
+   * @remarks
+   *   Automatically enabled when `next` is detected.
+   * @default 'auto-detected'
    */
   nextjs?: boolean | NextJSOptions
 
   /**
-   * TailwindCSS lint rules.
+   * Enables or configures Tailwind CSS utility class linting.
    *
-   * @default auto-detected
+   * @remarks
+   *   Automatically enabled when `tailwindcss` is detected.
+   * @default 'auto-detected'
    */
   tailwindcss?: boolean | TailwindCSSOptions
 
   /**
    * File patterns to ignore during linting. Patterns are matched relative to the directory
-   * containing oxlint.config.ts.
+   * containing `oxlint.config.ts`.
    *
-   * - Passing an array extends the default ignores.
-   * - Passing a function allows modifying the default ignores.
+   * @remarks
+   *   - Passing an array extends the default ignores.
+   *   - Passing a function allows modifying the default ignores.
    *
    * @default [ ]
    */

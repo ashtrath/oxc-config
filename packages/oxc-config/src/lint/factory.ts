@@ -58,6 +58,26 @@ const mergeConfigs = createDefu((obj, key, value) => {
   }
 })
 
+/**
+ * Creates an opinionated oxlint configuration combining built-in presets and user overrides.
+ *
+ * @remarks
+ *   Assembles linting presets based on project environment and specified options. User
+ *   configuration items passed after `options` take precedence over preset defaults.
+ * @example
+ *   ;```ts
+ *   import ashtrathLint from '@ashtrath/oxc-config/lint'
+ *
+ *   export default ashtrathLint({
+ *     type: 'lib',
+ *     typescript: true,
+ *   })
+ *   ```
+ *
+ * @param options - Factory configuration options for enabling, disabling, and tuning presets.
+ * @param userConfigs - Additional oxlint configuration objects, arrays, or falsy values to merge.
+ * @returns Fully merged oxlint configuration object.
+ */
 export function ashtrathLint(
   options: FactoryOptions = {},
   ...userConfigs: OxlintConfigItem[]

@@ -7,6 +7,25 @@ import { defineConfig } from 'oxfmt'
 
 import { resolveIgnorePatterns } from '../shared/utils'
 
+/**
+ * Creates an opinionated oxfmt formatter configuration.
+ *
+ * @remarks
+ *   Sets project defaults including 2-space indentation, single quotes, no semicolons, all trailing
+ *   commas, print width 100, perfectionist import sorting, package.json sorting, and auto-detected
+ *   Tailwind CSS class sorting. Custom overrides passed as additional arguments are appended to the
+ *   configuration overrides list.
+ * @example
+ *   ;```ts
+ *   import ashtrathFmt from '@ashtrath/oxc-config/fmt'
+ *
+ *   export default ashtrathFmt()
+ *   ```
+ *
+ * @param options - Formatting options and toggle flags for built-in formatters.
+ * @param userOverrides - Additional oxfmt override configurations applied to specific file globs.
+ * @returns Configured oxfmt configuration object.
+ */
 export function ashtrathFmt(
   options: OxfmtFactoryOptions = {},
   ...userOverrides: OxfmtOverrideConfig[]
