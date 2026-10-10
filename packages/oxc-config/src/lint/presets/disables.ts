@@ -30,7 +30,7 @@ export function disables(): OxlintConfigItem {
       {
         files: ['**/*.d.?([cm])ts'],
         rules: {
-          'oxlint-commets/no-unlimited-disable': 'off',
+          'oxlint-comments/no-unlimited-disable': 'off',
         },
       },
       {
