@@ -1,30 +1,14 @@
 import type { ExternalPluginEntry } from 'oxlint'
 
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
-import { antislop } from './presets'
+import * as utils from '../shared/utils'
 import { ashtrathLint } from './factory'
-import { reactDoctorPlugin, tailwindcssPlugin } from './plugins'
+import { antislop, nextjs, react, tailwindcss, typescript } from './presets'
 
 describe('ashtrathLint factory', () => {
-  it('defines optional plugin entries with resolved specifiers', () => {
-    const tailwindPlugin = tailwindcssPlugin as { name?: string; specifier?: string }
-    const tailwindDesc = Object.getOwnPropertyDescriptor(tailwindPlugin, 'specifier')
-    expect(tailwindDesc?.value).toBeTypeOf('string')
-    expect(tailwindDesc?.get).toBeUndefined()
-    expect(tailwindPlugin.name).toBe('tailwindcss')
-    expect(typeof tailwindPlugin.specifier).toBe('string')
-
-    const reactDoctor = reactDoctorPlugin as { name?: string; specifier?: string }
-    const reactDoctorDesc = Object.getOwnPropertyDescriptor(reactDoctor, 'specifier')
-    expect(reactDoctorDesc?.value).toBeTypeOf('string')
-    expect(reactDoctorDesc?.get).toBeUndefined()
-    expect(reactDoctor.name).toBe('react-doctor')
-    expect(typeof reactDoctor.specifier).toBe('string')
-  })
-
-  it('generates valid OxlintConfig under default options', () => {
-    const config = ashtrathLint()
+  it('generates valid OxlintConfig under default options', async () => {
+    const config = await ashtrathLint()
     expect(config).toBeDefined()
     expect(config.categories).toEqual({ correctness: 'off' })
     expect(config.options).toEqual({ reportUnusedDisableDirectives: 'error' })
@@ -38,8 +22,8 @@ describe('ashtrathLint factory', () => {
     expect(config.overrides?.length).toBeGreaterThan(0)
   })
 
-  it('keeps antislop as a dormant no-op returning an empty config when disabled', () => {
-    const configWithoutSlop = ashtrathLint({ antislop: false })
+  it('keeps antislop as a dormant no-op returning an empty config when disabled', async () => {
+    const configWithoutSlop = await ashtrathLint({ antislop: false })
     const hasSlopRootRules = Object.keys(configWithoutSlop.rules ?? {}).some(r =>
       r.startsWith('slop/'),
     )
@@ -50,8 +34,8 @@ describe('ashtrathLint factory', () => {
     expect(hasSlopOverrideRules).toBe(false)
   })
 
-  it('applies customized option flags without module resolution failures', () => {
-    const customConfig = ashtrathLint({
+  it('applies customized option flags without module resolution failures', async () => {
+    const customConfig = await ashtrathLint({
       antislop: false,
       nextjs: false,
       react: true,
@@ -68,8 +52,8 @@ describe('ashtrathLint factory', () => {
     expect(antislop({ slop: true })).toEqual({})
   })
 
-  it('returns valid config with empty rules when antislop is enabled', () => {
-    const configWithSlop = ashtrathLint({ antislop: true })
+  it('returns valid config with empty rules when antislop is enabled', async () => {
+    const configWithSlop = await ashtrathLint({ antislop: true })
     expect(configWithSlop).toBeDefined()
     const hasSlopRootRules = Object.keys(configWithSlop.rules ?? {}).some(r =>
       r.startsWith('slop/'),
@@ -81,16 +65,16 @@ describe('ashtrathLint factory', () => {
     expect(hasSlopOverrideRules).toBe(false)
   })
 
-  it('omits tailwindcss from root jsPlugins when tailwindcss is disabled', () => {
-    const config = ashtrathLint({ tailwindcss: false })
+  it('omits tailwindcss from root jsPlugins when tailwindcss is disabled', async () => {
+    const config = await ashtrathLint({ tailwindcss: false })
     const hasTailwindPlugin = config.jsPlugins?.some(
       p => (typeof p === 'string' ? p : p.name) === 'tailwindcss',
     )
     expect(hasTailwindPlugin).toBe(false)
   })
 
-  it('includes tailwindcss plugin entry in root jsPlugins when tailwindcss is enabled', () => {
-    const config = ashtrathLint({ tailwindcss: true })
+  it('includes tailwindcss plugin entry in root jsPlugins when tailwindcss is enabled', async () => {
+    const config = await ashtrathLint({ tailwindcss: true })
     const tailwindPlugin = config.jsPlugins?.find(
       p => typeof p === 'object' && p.name === 'tailwindcss',
     )
@@ -105,8 +89,8 @@ describe('ashtrathLint factory', () => {
     expect(hasTailwindInOverrides).toBe(false)
   })
 
-  it('merges duplicate entries in plugins and ignorePatterns into unique lists', () => {
-    const config = ashtrathLint(
+  it('merges duplicate entries in plugins and ignorePatterns into unique lists', async () => {
+    const config = await ashtrathLint(
       { ignorePatterns: ['**/custom-ignore/**', '**/custom-ignore/**'] },
       {
         ignorePatterns: ['**/custom-ignore/**', '**/another-ignore/**'],
@@ -133,8 +117,8 @@ describe('ashtrathLint factory', () => {
     expect(new Set(config.ignorePatterns).size).toBe(config.ignorePatterns?.length)
   })
 
-  it('deduplicates jsPlugins sharing the same name or specifier', () => {
-    const config = ashtrathLint(
+  it('deduplicates jsPlugins sharing the same name or specifier', async () => {
+    const config = await ashtrathLint(
       {},
       {
         jsPlugins: [
@@ -166,22 +150,66 @@ describe('ashtrathLint factory', () => {
     expect(byString).toHaveLength(1)
   })
 
-  it('gives userConfigs precedence over default presets', () => {
-    const defaultConfig = ashtrathLint()
+  it('gives userConfigs precedence over default presets', async () => {
+    const defaultConfig = await ashtrathLint()
     expect(defaultConfig.rules?.['eqeqeq']).toEqual(['error', 'smart'])
 
-    const configWithUserOverride = ashtrathLint(
+    const configWithUserOverride = await ashtrathLint(
       {},
       { rules: { 'custom-user-rule': 'error', eqeqeq: 'off' } },
     )
     expect(configWithUserOverride.rules?.['eqeqeq']).toBe('off')
     expect(configWithUserOverride.rules?.['custom-user-rule']).toBe('error')
 
-    const configWithMultipleUserConfigs = ashtrathLint(
+    const configWithMultipleUserConfigs = await ashtrathLint(
       {},
       { rules: { eqeqeq: 'warn' } },
       { rules: { eqeqeq: 'off' } },
     )
     expect(configWithMultipleUserConfigs.rules?.['eqeqeq']).toBe('off')
+  })
+
+  it('resolves async user configs passed to ashtrathLint', async () => {
+    const config = await ashtrathLint({}, Promise.resolve({ rules: { 'async-rule': 'error' } }))
+    expect(config.rules?.['async-rule']).toBe('error')
+  })
+
+  it('checks peer dependencies when presets are enabled in ashtrathLint', async () => {
+    const ensureSpy = vi.spyOn(utils, 'ensurePackages')
+    ensureSpy.mockClear()
+
+    await ashtrathLint({
+      react: { reactDoctor: true },
+      tailwindcss: true,
+      typescript: { typeAware: true },
+    })
+
+    expect(ensureSpy).toHaveBeenCalledWith(['oxlint-tsgolint'])
+    expect(ensureSpy).toHaveBeenCalledWith(['oxlint-plugin-react-doctor'])
+    expect(ensureSpy).toHaveBeenCalledWith(['oxlint-tailwindcss'])
+
+    ensureSpy.mockRestore()
+  })
+
+  it('checks dependencies when calling presets directly', async () => {
+    const ensureSpy = vi.spyOn(utils, 'ensurePackages')
+    ensureSpy.mockClear()
+
+    await tailwindcss()
+    expect(ensureSpy).toHaveBeenCalledWith(['oxlint-tailwindcss'])
+
+    ensureSpy.mockClear()
+    await react({ reactDoctor: true })
+    expect(ensureSpy).toHaveBeenCalledWith(['oxlint-plugin-react-doctor'])
+
+    ensureSpy.mockClear()
+    await nextjs({ reactDoctor: true })
+    expect(ensureSpy).toHaveBeenCalledWith(['oxlint-plugin-react-doctor'])
+
+    ensureSpy.mockClear()
+    await typescript({ typeAware: true })
+    expect(ensureSpy).toHaveBeenCalledWith(['oxlint-tsgolint'])
+
+    ensureSpy.mockRestore()
   })
 })

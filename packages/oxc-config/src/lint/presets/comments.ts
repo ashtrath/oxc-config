@@ -2,7 +2,7 @@ import type { OxlintConfigItem } from '../types'
 
 import { oxlintCommentsPlugin } from '../plugins'
 
-export function comments(): OxlintConfigItem {
+export async function comments(): Promise<OxlintConfigItem> {
   return {
     jsPlugins: [oxlintCommentsPlugin],
     rules: {

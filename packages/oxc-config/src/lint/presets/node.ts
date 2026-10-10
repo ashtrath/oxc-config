@@ -2,7 +2,7 @@ import type { OxlintConfigItem } from '../types'
 
 import { GLOB_SRC } from '../../shared/globs'
 
-export function node(): OxlintConfigItem {
+export async function node(): Promise<OxlintConfigItem> {
   return {
     overrides: [
       {

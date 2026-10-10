@@ -2,7 +2,7 @@ import type { JSXOptions, OxlintConfigItem } from '../types'
 
 import { GLOB_JSX, GLOB_TSX } from '../../shared/globs'
 
-export function jsx(options: JSXOptions): OxlintConfigItem {
+export async function jsx(options: JSXOptions): Promise<OxlintConfigItem> {
   const { a11y } = options
 
   if (!a11y) return []

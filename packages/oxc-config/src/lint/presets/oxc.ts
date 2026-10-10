@@ -1,6 +1,6 @@
 import type { OxlintConfigItem } from '../types'
 
-export function oxc(): OxlintConfigItem {
+export async function oxc(): Promise<OxlintConfigItem> {
   return {
     plugins: ['oxc'],
     rules: {

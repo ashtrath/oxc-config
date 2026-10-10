@@ -1,10 +1,6 @@
 import type { ExternalPluginEntry } from 'oxlint'
 
-import { fileURLToPath } from 'node:url'
-
-function resolvePlugin(name: string): string {
-  return fileURLToPath(import.meta.resolve(name))
-}
+import { resolvePlugin } from '../shared/utils'
 
 export const antfuPlugin: ExternalPluginEntry = {
   name: 'antfu',
@@ -31,17 +27,7 @@ export const perfectionistPlugin: ExternalPluginEntry = {
   specifier: resolvePlugin('eslint-plugin-perfectionist'),
 }
 
-export const reactDoctorPlugin: ExternalPluginEntry = {
-  name: 'react-doctor',
-  specifier: resolvePlugin('oxlint-plugin-react-doctor'),
-}
-
 export const regexpPlugin: ExternalPluginEntry = {
   name: 'regexp',
   specifier: resolvePlugin('eslint-plugin-regexp'),
-}
-
-export const tailwindcssPlugin: ExternalPluginEntry = {
-  name: 'tailwindcss',
-  specifier: resolvePlugin('oxlint-tailwindcss'),
 }

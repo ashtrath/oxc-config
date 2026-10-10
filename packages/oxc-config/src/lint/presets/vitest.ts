@@ -2,7 +2,7 @@ import type { OxlintConfigItem, VitestOptions } from '../types'
 
 import { GLOB_TESTS } from '../../shared/globs'
 
-export function vitest(options: VitestOptions): OxlintConfigItem {
+export async function vitest(options: VitestOptions): Promise<OxlintConfigItem> {
   const { files = GLOB_TESTS, isInEditor = false, overrides = {} } = options
 
   return {

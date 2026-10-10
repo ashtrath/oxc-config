@@ -2,7 +2,7 @@ import type { OxlintConfigItem } from '../types'
 
 import { commandPlugin } from '../plugins'
 
-export function command(): OxlintConfigItem {
+export async function command(): Promise<OxlintConfigItem> {
   return {
     jsPlugins: [commandPlugin],
     rules: {

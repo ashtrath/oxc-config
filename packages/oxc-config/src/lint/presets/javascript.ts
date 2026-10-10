@@ -2,7 +2,7 @@ import type { JavascriptOptions, OxlintConfigItem } from '../types'
 
 import { antfuPlugin } from '../plugins'
 
-export function javascript(options: JavascriptOptions = {}): OxlintConfigItem {
+export async function javascript(options: JavascriptOptions = {}): Promise<OxlintConfigItem> {
   const { isInEditor = false, overrides = {} } = options
 
   return {

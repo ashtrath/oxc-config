@@ -38,6 +38,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@antfu/install-pkg": "catalog:prod",
+    "@clack/prompts": "catalog:prod",
     "@e18e/eslint-plugin": "catalog:prod",
     "defu": "catalog:prod",
     "eslint-plugin-antfu": "catalog:prod",

@@ -1,15 +1,13 @@
-import type { OxlintOverride } from 'oxlint'
-
-import type { OxlintConfigItem, RegexpOptions } from '../types'
+import type { OxlintConfigItem, RegexpOptions, Rules } from '../types'
 
 import { regexpPlugin } from '../plugins'
 
-export function regexp(options: RegexpOptions): OxlintConfigItem {
+export async function regexp(options: RegexpOptions): Promise<OxlintConfigItem> {
   const { severity, overrides = {} } = options
 
   // regexp's default recommendation.
   // See: https://github.com/ota-meshi/eslint-plugin-regexp/blob/master/lib/configs/rules/recommended.ts#L3-L75
-  const rules: OxlintOverride['rules'] = {
+  const rules: Rules = {
     // ESLint core rules
     'no-empty-character-class': 'off',
     'no-invalid-regexp': 'off',

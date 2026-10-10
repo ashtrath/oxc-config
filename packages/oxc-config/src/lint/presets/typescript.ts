@@ -5,19 +5,21 @@ import type { OxlintConfigItem, TypescriptOptions } from '../types'
 import { isPackageExists } from 'local-pkg'
 
 import { GLOB_TS, GLOB_TSX } from '../../shared/globs'
+import { ensurePackages } from '../../shared/utils'
 
-// TODO: add oxlint-tsgolint package check for type aware rules
-export function typescript(options: TypescriptOptions = {}): OxlintConfigItem {
+export async function typescript(options: TypescriptOptions = {}): Promise<OxlintConfigItem> {
   const {
     files = [GLOB_TS, GLOB_TSX],
     type = 'app',
     overrides = {},
-    typeAware = false,
+    typeAware = isPackageExists('oxlint-tsgolint'),
     filesTypeAware = [GLOB_TS, GLOB_TSX],
     overridesTypeAware = {},
   } = options
 
-  const isTypeAware = typeAware && isPackageExists('oxlint-tsgolint')
+  if (typeAware) {
+    await ensurePackages(['oxlint-tsgolint'])
+  }
 
   const typeAwareRules: OxlintConfig['rules'] = {
     'no-implied-eval': 'off',
@@ -52,7 +54,7 @@ export function typescript(options: TypescriptOptions = {}): OxlintConfigItem {
   }
 
   return {
-    ...(isTypeAware ? { options: { typeAware: true } } : {}),
+    ...(typeAware ? { options: { typeAware: true } } : {}),
     overrides: [
       {
         files,
@@ -154,7 +156,7 @@ export function typescript(options: TypescriptOptions = {}): OxlintConfigItem {
         },
       },
 
-      ...(isTypeAware
+      ...(typeAware
         ? [
             {
               files: filesTypeAware,

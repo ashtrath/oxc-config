@@ -1,5 +1,6 @@
 import type { ExternalPluginEntry, OxlintConfig } from 'oxlint'
 
+import type { Awaitable } from '../shared/types'
 import type { FactoryOptions, OxlintConfigItem } from './types'
 
 import { createDefu } from 'defu'
@@ -80,10 +81,10 @@ const mergeConfigs = createDefu((obj, key, value) => {
  * @param userConfigs - Additional oxlint configuration objects, arrays, or falsy values to merge.
  * @returns Fully merged oxlint configuration object.
  */
-export function ashtrathLint(
+export async function ashtrathLint(
   options: FactoryOptions = {},
-  ...userConfigs: OxlintConfigItem[]
-): OxlintConfig {
+  ...userConfigs: Awaitable<OxlintConfigItem>[]
+): Promise<OxlintConfig> {
   const {
     type: projectType = 'app',
     perfectionist: enablePerfectionist = true,
@@ -120,7 +121,7 @@ export function ashtrathLint(
     },
   }
 
-  const presets: OxlintConfigItem[] = []
+  const presets: Awaitable<OxlintConfigItem>[] = []
   presets.push(
     baseConfig,
     javascript({ isInEditor, ...resolveSubOptions(options, 'javascript') }),
@@ -187,14 +188,22 @@ export function ashtrathLint(
 
   presets.push(disables())
 
+  // TODO: Refactor this config resolution abomination
+  const [resolvedUserConfigs, resolvedPresets] = await Promise.all([
+    Promise.all(userConfigs),
+    Promise.all(presets),
+  ])
+
   // HACK: defu prioritizes left-to-right: defu(HighestPriority, LowestPriority)
   // If a user passes: oxlint({}, configA, configB) -> configB should win.
   // So we reverse the user configs, then append the reversed presets.
   const configs: OxlintConfigItem[] = [
-    ...((userConfigs as any[]).flat(Infinity).filter(Boolean).reverse() as OxlintConfigItem[]),
-    ...presets.reverse(),
+    ...((resolvedUserConfigs as any[])
+      .flat(Infinity)
+      .filter(Boolean)
+      .reverse() as OxlintConfigItem[]),
+    ...((resolvedPresets as any[]).flat(Infinity).filter(Boolean).reverse() as OxlintConfigItem[]),
   ]
-
   const merged = configs.reduce<OxlintConfig>(
     (acc, cur) => mergeConfigs(acc, (cur ?? {}) as OxlintConfig),
     {} as OxlintConfig,

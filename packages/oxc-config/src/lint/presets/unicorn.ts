@@ -2,7 +2,7 @@ import type { OxlintConfigItem, UnicornOptions } from '../types'
 
 import { GLOB_SRC } from '../../shared/globs'
 
-export function unicorn(options: UnicornOptions): OxlintConfigItem {
+export async function unicorn(options: UnicornOptions): Promise<OxlintConfigItem> {
   const { overrides = {} } = options
 
   return {

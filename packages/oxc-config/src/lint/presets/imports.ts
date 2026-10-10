@@ -2,7 +2,7 @@ import type { ImportOptions, OxlintConfigItem } from '../types'
 
 import { antfuPlugin } from '../plugins'
 
-export function imports(options: ImportOptions): OxlintConfigItem {
+export async function imports(options: ImportOptions): Promise<OxlintConfigItem> {
   const { overrides = {} } = options
 
   return {

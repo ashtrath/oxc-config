@@ -1,10 +1,15 @@
 import type { OxlintConfigItem, TailwindCSSOptions } from '../types'
 
-import { tailwindcssPlugin } from '../plugins'
+import { ensurePackages, resolvePlugin } from '../../shared/utils'
 
-// TODO: Add dependency checking and prompt to install the package if its missing
-export function tailwindcss(options: TailwindCSSOptions): OxlintConfigItem {
+export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<OxlintConfigItem> {
   const { overrides = {} } = options
+
+  await ensurePackages(['oxlint-tailwindcss'])
+  const tailwindcssPlugin = {
+    name: 'tailwindcss',
+    specifier: resolvePlugin('oxlint-tailwindcss'),
+  }
 
   return {
     jsPlugins: [tailwindcssPlugin],

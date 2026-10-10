@@ -4,7 +4,7 @@ import type { OxlintConfigItem, PerfectionistOptions } from '../types'
 
 import { perfectionistPlugin } from '../plugins'
 
-export function perfectionist(options: PerfectionistOptions): OxlintConfigItem {
+export async function perfectionist(options: PerfectionistOptions): Promise<OxlintConfigItem> {
   const { isInEditor = false, overrides = {} } = options
 
   const severity: AllowWarnDeny = isInEditor ? 'warn' : 'error'

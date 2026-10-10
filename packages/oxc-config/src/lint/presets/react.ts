@@ -3,7 +3,7 @@ import type { OxlintConfigItem, ReactOptions } from '../types'
 import { isPackageExists } from 'local-pkg'
 
 import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../../shared/globs'
-import { reactDoctorPlugin } from '../plugins'
+import { ensurePackages, resolvePlugin } from '../../shared/utils'
 
 const REMIX_PACKAGES = ['@remix-run/node', '@remix-run/react', '@remix-run/serve', '@remix-run/dev']
 
@@ -14,15 +14,24 @@ const REACT_ROUTER_PACKAGES = [
   '@react-router/dev',
 ]
 
-// TODO: Add dependency checking and prompt to install the package if its missing
-export function react(options: ReactOptions): OxlintConfigItem {
+export async function react(options: ReactOptions = {}): Promise<OxlintConfigItem> {
   const { files = [GLOB_SRC], reactDoctor = false, overrides = {} } = options
 
+  let reactDoctorPlugin: any
+  if (reactDoctor) {
+    await ensurePackages(['oxlint-plugin-react-doctor'])
+
+    reactDoctorPlugin = {
+      name: 'react-doctor',
+      specifier: resolvePlugin('oxlint-plugin-react-doctor'),
+    }
+  }
+
   const isAllowConstantExport = isPackageExists('vite')
-  const isUsingRemix = REMIX_PACKAGES.some(i => isPackageExists(i))
-  const isUsingReactRouter = REACT_ROUTER_PACKAGES.some(i => isPackageExists(i))
   const isUsingNext = isPackageExists('next')
   const isUsingReactCompiler = isPackageExists('babel-plugin-react-compiler')
+  const isUsingRemix = REMIX_PACKAGES.some(pkg => isPackageExists(pkg))
+  const isUsingReactRouter = REACT_ROUTER_PACKAGES.some(pkg => isPackageExists(pkg))
 
   return {
     overrides: [

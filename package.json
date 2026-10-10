@@ -29,6 +29,8 @@
         "oxlint-tsgolint": "^7.0.2003"
       },
       "prod": {
+        "@antfu/install-pkg": "^2.1.0",
+        "@clack/prompts": "^1.8.1",
         "@e18e/eslint-plugin": "^0.8.1",
         "@oxlint/plugins": "^1.87.0",
         "defu": "^6.1.7",

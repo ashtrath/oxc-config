@@ -1,11 +1,20 @@
 import type { NextJSOptions, OxlintConfigItem, Rules } from '../types'
 
 import { GLOB_SRC } from '../../shared/globs'
-import { reactDoctorPlugin } from '../plugins'
+import { ensurePackages, resolvePlugin } from '../../shared/utils'
 
-// TODO: Add dependency checking and prompt to install the package if its missing
-export function nextjs(options: NextJSOptions): OxlintConfigItem {
+export async function nextjs(options: NextJSOptions = {}): Promise<OxlintConfigItem> {
   const { files = [GLOB_SRC], reactDoctor = false, overrides = {} } = options
+
+  let reactDoctorPlugin: any
+  if (reactDoctor) {
+    await ensurePackages(['oxlint-plugin-react-doctor'])
+
+    reactDoctorPlugin = {
+      name: 'react-doctor',
+      specifier: resolvePlugin('oxlint-plugin-react-doctor'),
+    }
+  }
 
   const reactDoctorRules: Rules = {
     'react-doctor/nextjs-async-dynamic-api-not-awaited': 'error',

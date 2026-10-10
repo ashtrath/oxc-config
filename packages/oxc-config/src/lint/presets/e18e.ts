@@ -2,7 +2,7 @@ import type { E18eOptions, OxlintConfigItem } from '../types'
 
 import { e18ePlugin } from '../plugins'
 
-export function e18e(options: E18eOptions): OxlintConfigItem {
+export async function e18e(options: E18eOptions): Promise<OxlintConfigItem> {
   const {
     type = 'app',
     isInEditor = false,
