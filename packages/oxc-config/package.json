@@ -32,8 +32,9 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "bun gen && tsdown",
     "dev": "tsdown --watch",
+    "gen": "bun ./scripts/versiongen.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
@@ -41,6 +42,8 @@
     "@antfu/install-pkg": "catalog:prod",
     "@clack/prompts": "catalog:prod",
     "@e18e/eslint-plugin": "catalog:prod",
+    "ansis": "catalog:prod",
+    "citty": "catalog:prod",
     "defu": "catalog:prod",
     "eslint-plugin-antfu": "catalog:prod",
     "eslint-plugin-command": "catalog:prod",
