@@ -14,6 +14,7 @@ export function vitest(options: VitestOptions): OxlintConfigItem {
           'vitest/consistent-test-it': ['error', { fn: 'it', withinDescribe: 'it' }],
           'vitest/expect-expect': 'error',
           'vitest/no-conditional-expect': 'error',
+          'vitest/no-conditional-in-test': 'error',
           'vitest/no-identical-title': 'error',
           'vitest/no-import-node-test': 'error',
           'vitest/no-interpolation-in-snapshots': 'error',

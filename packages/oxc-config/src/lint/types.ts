@@ -1,15 +1,24 @@
-import type { AllowWarnDeny, DummyRule, DummyRuleMap, OxlintConfig } from 'oxlint'
+import type { AllowWarnDeny, DummyRule, DummyRuleMap, OxlintConfig, OxlintOverride } from 'oxlint'
 
 /**
  * Map of oxlint rule names to rule configuration or severity levels.
  */
 export type Rules = DummyRuleMap & Record<string, DummyRule | undefined>
 
+export interface TypedOxlintOverride extends Omit<OxlintOverride, 'rules'> {
+  rules?: Rules
+}
+
+export interface TypedOxlintConfig extends Omit<OxlintConfig, 'rules' | 'overrides'> {
+  rules?: Rules
+  overrides?: TypedOxlintOverride[]
+}
+
 /**
  * Single oxlint configuration entry, nested list of entries, or falsy value ignored during merging.
  */
 export type OxlintConfigItem =
-  | Partial<OxlintConfig>
+  | Partial<TypedOxlintConfig>
   | readonly OxlintConfigItem[]
   | null
   | undefined

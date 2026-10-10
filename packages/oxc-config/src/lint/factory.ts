@@ -11,6 +11,7 @@ import {
   antislop,
   command,
   comments,
+  disables,
   e18e,
   imports,
   javascript,
@@ -18,6 +19,7 @@ import {
   jsx,
   nextjs,
   node,
+  oxc,
   perfectionist,
   regexp,
   tailwindcss,
@@ -122,6 +124,7 @@ export function ashtrathLint(
   presets.push(
     baseConfig,
     javascript({ isInEditor, ...resolveSubOptions(options, 'javascript') }),
+    oxc(),
     comments(),
     command(),
   )
@@ -181,6 +184,8 @@ export function ashtrathLint(
   if (enableTailwindCSS) {
     presets.push(tailwindcss(resolveSubOptions(options, 'tailwindcss')))
   }
+
+  presets.push(disables())
 
   // HACK: defu prioritizes left-to-right: defu(HighestPriority, LowestPriority)
   // If a user passes: oxlint({}, configA, configB) -> configB should win.
