@@ -2,7 +2,7 @@ import type { ExternalPluginEntry } from 'oxlint'
 
 import { describe, expect, it } from 'vitest'
 
-import { antislop } from './configs'
+import { antislop } from './presets'
 import { ashtrathLint } from './factory'
 import { reactDoctorPlugin, tailwindcssPlugin } from './plugins'
 

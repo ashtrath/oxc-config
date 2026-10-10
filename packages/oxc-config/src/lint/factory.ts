@@ -21,13 +21,13 @@ import {
   node,
   oxc,
   perfectionist,
+  react,
   regexp,
   tailwindcss,
   typescript,
   unicorn,
   vitest,
-} from './configs'
-import { react } from './configs/react'
+} from './presets'
 
 const mergeConfigs = createDefu((obj, key, value) => {
   if (
