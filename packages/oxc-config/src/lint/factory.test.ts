@@ -11,7 +11,10 @@ describe('ashtrathLint factory', () => {
     const config = await ashtrathLint()
     expect(config).toBeDefined()
     expect(config.categories).toEqual({ correctness: 'off' })
-    expect(config.options).toEqual({ reportUnusedDisableDirectives: 'error' })
+    expect(config.options).toEqual({
+      reportUnusedDisableDirectives: 'error',
+      typeAware: true,
+    })
     expect(config.rules).toBeDefined()
     expect(Object.keys(config.rules ?? {}).length).toBeGreaterThan(0)
     expect(config.plugins).toBeInstanceOf(Array)
@@ -47,9 +50,9 @@ describe('ashtrathLint factory', () => {
     expect(customConfig.overrides?.length).toBeGreaterThan(0)
   })
 
-  it('antislop configuration returns an empty config object', () => {
-    expect(antislop()).toEqual({})
-    expect(antislop({ slop: true })).toEqual({})
+  it('antislop configuration returns an empty config object', async () => {
+    expect(await antislop()).toEqual({})
+    expect(await antislop({ slop: true })).toEqual({})
   })
 
   it('returns valid config with empty rules when antislop is enabled', async () => {
