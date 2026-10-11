@@ -54,7 +54,15 @@ export async function typescript(options: TypescriptOptions = {}): Promise<Oxlin
   }
 
   return {
-    ...(typeAware ? { options: { typeAware: true } } : {}),
+    ...(typeAware
+      ? {
+          options: {
+            typeAware: true,
+            typeCheck: true,
+          },
+        }
+      : {}),
+
     overrides: [
       {
         files,

@@ -14,6 +14,7 @@ describe('ashtrathLint factory', () => {
     expect(config.options).toEqual({
       reportUnusedDisableDirectives: 'error',
       typeAware: true,
+      typeCheck: true,
     })
     expect(config.rules).toBeDefined()
     expect(Object.keys(config.rules ?? {}).length).toBeGreaterThan(0)
