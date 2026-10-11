@@ -6,10 +6,10 @@ import type { InternalType } from '@/types'
 import { readFile } from 'node:fs/promises'
 import { z } from 'zod'
 
-import { internalB, internalA } from '@/components'
+import { internalA, internalB } from '@/components'
 import { helper } from '~/helpers'
 
-import { siblingBeta, siblingAlpha } from './sibling'
+import { siblingAlpha, siblingBeta } from './sibling'
 
 import './styles.css'
 

@@ -1,0 +1,980 @@
+[
+  {
+    "message": "`alert`, `confirm` and `prompt` functions are not allowed",
+    "code": "eslint(no-alert)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-alert.html",
+    "help": "Use a custom UI instead",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 157,
+          "length": 5,
+          "line": 7,
+          "column": 30
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected console statement.",
+    "code": "eslint(no-console)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-console.html",
+    "help": "Supported methods are: warn, error.",
+    "filename": "overrides.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 93,
+          "length": 11,
+          "line": 4,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Variable 'count' is declared but never used. Unused variables should start with a '_'.",
+    "code": "eslint(no-unused-vars)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-unused-vars.html",
+    "help": "Consider removing this declaration.",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "label": "'count' is declared here",
+        "span": {
+          "offset": 64,
+          "length": 5,
+          "line": 4,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "message": "Identifier 'format' is imported but never used.",
+    "code": "eslint(no-unused-vars)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-unused-vars.html",
+    "help": "Consider removing this import.",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "label": "'format' is imported here",
+        "span": {
+          "offset": 9,
+          "length": 6,
+          "line": 1,
+          "column": 10
+        }
+      }
+    ]
+  },
+  {
+    "message": "Identifier 'readFile' is imported but never used.",
+    "code": "eslint(no-unused-vars)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-unused-vars.html",
+    "help": "Consider removing this import.",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "label": "'readFile' is imported here",
+        "span": {
+          "offset": 45,
+          "length": 8,
+          "line": 2,
+          "column": 10
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected var, use let or const instead.",
+    "code": "eslint(no-var)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-var.html",
+    "help": "Replace var with let or const",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 0,
+          "length": 3,
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected var, use let or const instead.",
+    "code": "eslint(no-var)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-var.html",
+    "help": "Replace var with let or const",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 24,
+          "length": 3,
+          "line": 2,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected var, use let or const instead.",
+    "code": "eslint(no-var)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-var.html",
+    "help": "Replace var with let or const",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 60,
+          "length": 3,
+          "line": 4,
+          "column": 3
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected var, use let or const instead.",
+    "code": "eslint(no-var)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-var.html",
+    "help": "Replace var with let or const",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 129,
+          "length": 3,
+          "line": 9,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "All 'var' declarations must be at the top of the function scope.",
+    "code": "eslint(vars-on-top)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/vars-on-top.html",
+    "help": "Consider moving this to the top of the functions scope or using let or const to declare this variable.",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 129,
+          "length": 49,
+          "line": 9,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Exporting mutable 'var' binding, use 'const' instead.",
+    "code": "import(no-mutable-exports)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/import/no-mutable-exports.html",
+    "help": "Replace 'var' with 'const' to export an immutable binding.",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 0,
+          "length": 23,
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Exporting mutable 'var' binding, use 'const' instead.",
+    "code": "import(no-mutable-exports)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/import/no-mutable-exports.html",
+    "help": "Replace 'var' with 'const' to export an immutable binding.",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 24,
+          "length": 14,
+          "line": 2,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Exporting mutable 'var' binding, use 'const' instead.",
+    "code": "import(no-mutable-exports)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/import/no-mutable-exports.html",
+    "help": "Replace 'var' with 'const' to export an immutable binding.",
+    "filename": "overrides.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 68,
+          "length": 15,
+          "line": 2,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Exporting mutable 'var' binding, use 'const' instead.",
+    "code": "import(no-mutable-exports)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/import/no-mutable-exports.html",
+    "help": "Replace 'var' with 'const' to export an immutable binding.",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 129,
+          "length": 49,
+          "line": 9,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Do not use `<head>` element. Use `<Head />` from `next/head` instead.",
+    "code": "next(no-head-element)",
+    "severity": "warning",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/nextjs/no-head-element.html",
+    "help": "See https://nextjs.org/docs/messages/no-head-element",
+    "filename": "nextjs.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 52,
+          "length": 6,
+          "line": 4,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "message": "Using `<img>` could result in slower LCP and higher bandwidth.",
+    "code": "next(no-img-element)",
+    "severity": "warning",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/nextjs/no-img-element.html",
+    "help": "Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images.",
+    "note": "See https://nextjs.org/docs/messages/no-img-element",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "label": "Use `<Image />` from `next/image` instead.",
+        "span": {
+          "offset": 217,
+          "length": 3,
+          "line": 10,
+          "column": 8
+        }
+      },
+      {
+        "label": "Use a static image import instead.",
+        "span": {
+          "offset": 225,
+          "length": 13,
+          "line": 10,
+          "column": 16
+        }
+      }
+    ]
+  },
+  {
+    "message": "Prevent synchronous scripts.",
+    "code": "next(no-sync-scripts)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/nextjs/no-sync-scripts.html",
+    "help": "See https://nextjs.org/docs/messages/no-sync-scripts",
+    "filename": "nextjs.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 112,
+          "length": 6,
+          "line": 7,
+          "column": 8
+        }
+      }
+    ]
+  },
+  {
+    "message": "Expected \"className\" to come before \"id\".",
+    "code": "perfectionist(sort-jsx-props)",
+    "severity": "error",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 104,
+          "length": 21,
+          "line": 6,
+          "column": 19
+        }
+      }
+    ]
+  },
+  {
+    "message": "Expected \"count\" to come before \"greeting\".",
+    "code": "perfectionist(sort-named-exports)",
+    "severity": "error",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 99,
+          "length": 5,
+          "line": 8,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "Expected \"add\" to come before \"count\".",
+    "code": "perfectionist(sort-named-exports)",
+    "severity": "error",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 106,
+          "length": 3,
+          "line": 8,
+          "column": 27
+        }
+      }
+    ]
+  },
+  {
+    "message": "Expected \"siblingAlpha\" to come before \"siblingBeta\".",
+    "code": "perfectionist(sort-named-imports)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 45,
+          "length": 12,
+          "line": 2,
+          "column": 23
+        }
+      }
+    ]
+  },
+  {
+    "message": "Expected \"internalA\" to come before \"internalB\".",
+    "code": "perfectionist(sort-named-imports)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 134,
+          "length": 9,
+          "line": 4,
+          "column": 21
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(enforce-canonical)",
+    "severity": "warning",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 114,
+          "length": 11,
+          "line": 6,
+          "column": 29
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(enforce-canonical)",
+    "severity": "warning",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 83,
+          "length": 55,
+          "line": 5,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(enforce-canonical)",
+    "severity": "warning",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 161,
+          "length": 40,
+          "line": 6,
+          "column": 21
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(enforce-canonical)",
+    "severity": "warning",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 249,
+          "length": 28,
+          "line": 9,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-conflicting-classes)",
+    "severity": "error",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 114,
+          "length": 11,
+          "line": 6,
+          "column": 29
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-conflicting-classes)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 83,
+          "length": 55,
+          "line": 5,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-conflicting-classes)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 161,
+          "length": 40,
+          "line": 6,
+          "column": 21
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-conflicting-classes)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 249,
+          "length": 28,
+          "line": 9,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unknown-classes)",
+    "severity": "error",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 114,
+          "length": 11,
+          "line": 6,
+          "column": 29
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unknown-classes)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 83,
+          "length": 55,
+          "line": 5,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unknown-classes)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 161,
+          "length": 40,
+          "line": 6,
+          "column": 21
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unknown-classes)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 249,
+          "length": 28,
+          "line": 9,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unnecessary-arbitrary-value)",
+    "severity": "warning",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 114,
+          "length": 11,
+          "line": 6,
+          "column": 29
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unnecessary-arbitrary-value)",
+    "severity": "warning",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 83,
+          "length": 55,
+          "line": 5,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unnecessary-arbitrary-value)",
+    "severity": "warning",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 161,
+          "length": 40,
+          "line": 6,
+          "column": 21
+        }
+      }
+    ]
+  },
+  {
+    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "code": "tailwindcss(no-unnecessary-arbitrary-value)",
+    "severity": "warning",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 249,
+          "length": 28,
+          "line": 9,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "message": "Use `interface` instead of `type`.",
+    "code": "typescript(consistent-type-definitions)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/typescript/consistent-type-definitions.html",
+    "help": "Replace `type User = {\n  id: string;\n  name: string;\n}` with `interface User {\n  id: string;\n  name: string;\n}`.",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 82,
+          "length": 4,
+          "line": 4,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module './sibling' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 65,
+          "length": 11,
+          "line": 2,
+          "column": 43
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module '~/helpers' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 101,
+          "length": 11,
+          "line": 3,
+          "column": 24
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module '@/components' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 151,
+          "length": 14,
+          "line": 4,
+          "column": 38
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module 'zod' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 185,
+          "length": 5,
+          "line": 5,
+          "column": 19
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module './types' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 270,
+          "length": 9,
+          "line": 7,
+          "column": 34
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module '@/types' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 315,
+          "length": 9,
+          "line": 8,
+          "column": 35
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module 'zod' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 355,
+          "length": 5,
+          "line": 9,
+          "column": 30
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module 'react' or its corresponding type declarations.",
+    "code": "typescript(TS2307)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 18,
+          "length": 7,
+          "line": 1,
+          "column": 19
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find name 'node:fs/promises'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.",
+    "code": "typescript(TS2591)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 217,
+          "length": 18,
+          "line": 6,
+          "column": 26
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find name 'node:path'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.",
+    "code": "typescript(TS2591)",
+    "severity": "error",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 23,
+          "length": 11,
+          "line": 1,
+          "column": 24
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find name 'node:fs/promises'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.",
+    "code": "typescript(TS2591)",
+    "severity": "error",
+    "filename": "typescript.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 61,
+          "length": 18,
+          "line": 2,
+          "column": 26
+        }
+      }
+    ]
+  },
+  {
+    "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.",
+    "code": "typescript(TS2875)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 68,
+          "length": 253,
+          "line": 5,
+          "column": 5
+        }
+      }
+    ]
+  },
+  {
+    "message": "Cannot find module or type declarations for side-effect import of './styles.css'.",
+    "code": "typescript(TS2882)",
+    "severity": "error",
+    "filename": "imports.ts",
+    "labels": [
+      {
+        "span": {
+          "offset": 7,
+          "length": 14,
+          "line": 1,
+          "column": 8
+        }
+      }
+    ]
+  },
+  {
+    "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "code": "typescript(TS7026)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 68,
+          "length": 72,
+          "line": 5,
+          "column": 5
+        }
+      }
+    ]
+  },
+  {
+    "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "code": "typescript(TS7026)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 147,
+          "length": 56,
+          "line": 6,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "code": "typescript(TS7026)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 224,
+          "length": 5,
+          "line": 8,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "code": "typescript(TS7026)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 236,
+          "length": 43,
+          "line": 9,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "code": "typescript(TS7026)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 306,
+          "length": 4,
+          "line": 11,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "code": "typescript(TS7026)",
+    "severity": "error",
+    "filename": "tailwind.tsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 315,
+          "length": 6,
+          "line": 12,
+          "column": 5
+        }
+      }
+    ]
+  }
+]

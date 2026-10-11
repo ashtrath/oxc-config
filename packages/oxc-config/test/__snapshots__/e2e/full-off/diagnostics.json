@@ -1,0 +1,111 @@
+[
+  {
+    "message": "`alert`, `confirm` and `prompt` functions are not allowed",
+    "code": "eslint(no-alert)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-alert.html",
+    "help": "Use a custom UI instead",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 157,
+          "length": 5,
+          "line": 7,
+          "column": 30
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected console statement.",
+    "code": "eslint(no-console)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-console.html",
+    "help": "Supported methods are: warn, error.",
+    "filename": "overrides.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 93,
+          "length": 11,
+          "line": 4,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Variable 'count' is declared but never used. Unused variables should start with a '_'.",
+    "code": "eslint(no-unused-vars)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-unused-vars.html",
+    "help": "Consider removing this declaration.",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "label": "'count' is declared here",
+        "span": {
+          "offset": 64,
+          "length": 5,
+          "line": 4,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected var, use let or const instead.",
+    "code": "eslint(no-var)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-var.html",
+    "help": "Replace var with let or const",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 0,
+          "length": 3,
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected var, use let or const instead.",
+    "code": "eslint(no-var)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-var.html",
+    "help": "Replace var with let or const",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "offset": 24,
+          "length": 3,
+          "line": 2,
+          "column": 1
+        }
+      }
+    ]
+  },
+  {
+    "message": "Unexpected var, use let or const instead.",
+    "code": "eslint(no-var)",
+    "severity": "error",
+    "url": "https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-var.html",
+    "help": "Replace var with let or const",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 60,
+          "length": 3,
+          "line": 4,
+          "column": 3
+        }
+      }
+    ]
+  }
+]
