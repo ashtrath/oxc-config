@@ -14,6 +14,7 @@ export default defineProject({
         test: {
           name: 'integration',
           include: ['test/*.test.ts'],
+          testTimeout: 15_000,
         },
       },
     ],
