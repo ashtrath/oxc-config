@@ -4,6 +4,7 @@ export default ashtrathLint({
   type: 'lib',
   antislop: true,
   tailwindcss: true,
+  vitest: true,
   jsx: {
     a11y: true,
   },
@@ -13,7 +14,6 @@ export default ashtrathLint({
   react: {
     reactDoctor: true,
   },
-
   typescript: {
     typeAware: true,
   },

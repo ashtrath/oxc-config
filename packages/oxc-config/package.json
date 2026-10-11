@@ -57,6 +57,8 @@
     "oxlint-plugin-react-doctor": "catalog:peer",
     "oxlint-tailwindcss": "catalog:peer",
     "publint": "catalog:dev",
+    "tinyexec": "catalog:dev",
+    "tinyglobby": "catalog:dev",
     "tsdown": "catalog:dev",
     "tsdown-stale-guard": "catalog:dev",
     "tsnapi": "catalog:dev",

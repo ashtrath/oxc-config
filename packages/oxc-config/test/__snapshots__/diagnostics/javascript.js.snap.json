@@ -1,0 +1,82 @@
+[
+  {
+    "code": "eslint(eqeqeq)",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "column": 23,
+          "length": 2,
+          "line": 3,
+          "offset": 50,
+        },
+      },
+    ],
+    "message": "Expected === and instead saw ==",
+    "severity": "error",
+  },
+  {
+    "code": "eslint(no-console)",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "column": 1,
+          "length": 11,
+          "line": 3,
+          "offset": 28,
+        },
+      },
+    ],
+    "message": "Unexpected console statement.",
+    "severity": "error",
+  },
+  {
+    "code": "eslint(no-debugger)",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "column": 1,
+          "length": 8,
+          "line": 2,
+          "offset": 19,
+        },
+      },
+    ],
+    "message": "`debugger` statement is not allowed",
+    "severity": "error",
+  },
+  {
+    "code": "eslint(no-var)",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "column": 1,
+          "length": 3,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+    ],
+    "message": "Unexpected var, use let or const instead.",
+    "severity": "error",
+  },
+  {
+    "code": "import(no-mutable-exports)",
+    "filename": "javascript.js",
+    "labels": [
+      {
+        "span": {
+          "column": 1,
+          "length": 18,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+    ],
+    "message": "Exporting mutable 'var' binding, use 'const' instead.",
+    "severity": "error",
+  },
+]

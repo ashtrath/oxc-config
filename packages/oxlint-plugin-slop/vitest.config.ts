@@ -7,7 +7,7 @@ export default defineProject({
       {
         test: {
           name: 'unit',
-          include: ['**/*.test.ts'],
+          include: ['src/**/*.test.ts'],
         },
       },
     ],

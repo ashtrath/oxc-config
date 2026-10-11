@@ -1,0 +1,102 @@
+[
+  {
+    "code": "jsx-a11y(alt-text)",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "column": 7,
+          "length": 25,
+          "line": 4,
+          "offset": 60,
+        },
+      },
+    ],
+    "message": "Missing `alt` attribute.",
+    "severity": "error",
+  },
+  {
+    "code": "jsx-a11y(anchor-has-content)",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "column": 7,
+          "length": 32,
+          "line": 5,
+          "offset": 92,
+        },
+      },
+    ],
+    "message": "Missing accessible content when using `a` elements.",
+    "severity": "error",
+  },
+  {
+    "code": "next(no-img-element)",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "label": "Use `<Image />` from `next/image` instead.",
+        "span": {
+          "column": 8,
+          "length": 3,
+          "line": 4,
+          "offset": 61,
+        },
+      },
+      {
+        "label": "Use a static image import instead.",
+        "span": {
+          "column": 16,
+          "length": 13,
+          "line": 4,
+          "offset": 69,
+        },
+      },
+    ],
+    "message": "Using `<img>` could result in slower LCP and higher bandwidth.",
+    "severity": "warning",
+  },
+  {
+    "code": "react(jsx-key)",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "label": "Iterator starts here.",
+        "span": {
+          "column": 15,
+          "length": 3,
+          "line": 7,
+          "offset": 197,
+        },
+      },
+      {
+        "label": "Element generated here.",
+        "span": {
+          "column": 25,
+          "length": 4,
+          "line": 7,
+          "offset": 207,
+        },
+      },
+    ],
+    "message": "Missing "key" prop for element in iterator.",
+    "severity": "error",
+  },
+  {
+    "code": "react(no-danger)",
+    "filename": "react.jsx",
+    "labels": [
+      {
+        "span": {
+          "column": 12,
+          "length": 23,
+          "line": 6,
+          "offset": 136,
+        },
+      },
+    ],
+    "message": "Do not use `dangerouslySetInnerHTML` prop",
+    "severity": "warning",
+  },
+]
