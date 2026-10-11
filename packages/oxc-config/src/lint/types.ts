@@ -259,7 +259,7 @@ export interface TailwindCSSOptions extends RuleOverridesOptions {}
  *   Provides toggles and sub-options for all built-in lint presets, project environment settings,
  *   and ignore pattern customization.
  */
-export interface FactoryOptions extends EditorOptions, ProjectOptions {
+export interface OxlintFactoryOptions extends EditorOptions, ProjectOptions {
   /**
    * Rule overrides for core JavaScript rules and environments.
    *

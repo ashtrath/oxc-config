@@ -15,7 +15,16 @@ export interface E18eOptions extends EditorOptions, ProjectOptions, RuleOverride
 export interface EditorOptions {
   isInEditor?: boolean;
 }
-export interface FactoryOptions extends EditorOptions, ProjectOptions {
+export interface FilesOptions {
+  files?: string[];
+}
+export interface ImportOptions extends RuleOverridesOptions {}
+export interface JavascriptOptions extends EditorOptions, RuleOverridesOptions {}
+export interface JSXOptions {
+  a11y?: boolean | RuleOverridesOptions;
+}
+export interface NextJSOptions extends FilesOptions, ReactDoctorOptions, RuleOverridesOptions {}
+export interface OxlintFactoryOptions extends EditorOptions, ProjectOptions {
   javascript?: RuleOverridesOptions;
   node?: boolean;
   perfectionist?: boolean | PerfectionistOptions;
@@ -33,15 +42,6 @@ export interface FactoryOptions extends EditorOptions, ProjectOptions {
   tailwindcss?: boolean | TailwindCSSOptions;
   ignorePatterns?: string[] | ((_: string[]) => string[]);
 }
-export interface FilesOptions {
-  files?: string[];
-}
-export interface ImportOptions extends RuleOverridesOptions {}
-export interface JavascriptOptions extends EditorOptions, RuleOverridesOptions {}
-export interface JSXOptions {
-  a11y?: boolean | RuleOverridesOptions;
-}
-export interface NextJSOptions extends FilesOptions, ReactDoctorOptions, RuleOverridesOptions {}
 export interface PerfectionistOptions extends EditorOptions, RuleOverridesOptions {}
 export interface ProjectOptions {
   type?: 'app' | 'lib';
@@ -103,6 +103,6 @@ export declare function vitest(_: VitestOptions): Promise<OxlintConfigItem>;
 // #endregion
 
 // #region Default Export
-declare function _default(_?: FactoryOptions, ..._: Awaitable<OxlintConfigItem>[]): Promise<OxlintConfig>;
+declare function _default(_?: OxlintFactoryOptions, ..._: Awaitable<OxlintConfigItem>[]): Promise<OxlintConfig>;
 export default _default
 // #endregion

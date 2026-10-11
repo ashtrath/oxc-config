@@ -1,7 +1,7 @@
 import type { ExternalPluginEntry, OxlintConfig } from 'oxlint'
 
 import type { Awaitable } from '../shared/types'
-import type { FactoryOptions, OxlintConfigItem } from './types'
+import type { OxlintFactoryOptions, OxlintConfigItem } from './types'
 
 import { createDefu } from 'defu'
 import { isPackageExists } from 'local-pkg'
@@ -82,7 +82,7 @@ const mergeConfigs = createDefu((obj, key, value) => {
  * @returns Fully merged oxlint configuration object.
  */
 export async function ashtrathLint(
-  options: FactoryOptions = {},
+  options: OxlintFactoryOptions = {},
   ...userConfigs: Awaitable<OxlintConfigItem>[]
 ): Promise<OxlintConfig> {
   const {
@@ -214,13 +214,13 @@ export async function ashtrathLint(
 
 type ResolvedOptions<T> = T extends boolean ? Record<string, never> : NonNullable<T>
 
-function resolveSubOptions<K extends keyof FactoryOptions>(
-  options: FactoryOptions,
+function resolveSubOptions<K extends keyof OxlintFactoryOptions>(
+  options: OxlintFactoryOptions,
   key: K,
-): ResolvedOptions<FactoryOptions[K]> {
+): ResolvedOptions<OxlintFactoryOptions[K]> {
   const value = options[key]
   if (typeof value === 'boolean' || value == null) {
-    return {} as ResolvedOptions<FactoryOptions[K]>
+    return {} as ResolvedOptions<OxlintFactoryOptions[K]>
   }
-  return value as ResolvedOptions<FactoryOptions[K]>
+  return value as ResolvedOptions<OxlintFactoryOptions[K]>
 }
