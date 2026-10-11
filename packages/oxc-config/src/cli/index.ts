@@ -3,7 +3,7 @@ import path from 'node:path'
 
 import { run } from './run'
 
-export const main = defineCommand({
+const main = defineCommand({
   async run({ args }) {
     const targetDir = path.resolve(args.cwd || '.')
     await run({ cwd: targetDir })

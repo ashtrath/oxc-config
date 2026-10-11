@@ -59,6 +59,7 @@
     "publint": "catalog:dev",
     "tsdown": "catalog:dev",
     "tsdown-stale-guard": "catalog:dev",
+    "tsnapi": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:dev"
   },
