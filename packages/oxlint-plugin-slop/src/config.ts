@@ -13,6 +13,26 @@ export const PLUGIN: ExternalPluginEntry = {
 }
 
 /**
+ * Rule configuration dictionary for the `slop/architecture` preset. Configures all five
+ * architectural rules with `error` severity.
+ */
+export const architectureRules: SlopRules = {
+  'slop/no-chained-type-assertions': 'error',
+  'slop/no-conditional-empty-object-spread': 'error',
+  'slop/no-static-only-class': 'error',
+  'slop/no-trivial-functions': 'error',
+  'slop/no-trivial-type-aliases': 'error',
+}
+
+/**
+ * Curated preset configuration for architectural rules with `error` severity.
+ */
+export const architecturePreset: SlopConfig = {
+  jsPlugins: [PLUGIN],
+  rules: { ...architectureRules },
+}
+
+/**
  * Rule configuration dictionary for the `slop/performance` preset. Configures both collection
  * performance rules with `error` severity.
  */
@@ -52,8 +72,10 @@ export const prosePreset: SlopConfig = {
  * Available named presets in `@ashtrath/oxlint-plugin-slop`.
  */
 export const presets = {
+  architecture: architecturePreset,
   performance: performancePreset,
   prose: prosePreset,
+  'slop/architecture': architecturePreset,
   'slop/performance': performancePreset,
   'slop/prose': prosePreset,
 } as const
@@ -65,7 +87,7 @@ export const presets = {
  *   ;```ts
  *   import { createSlopConfig } from '@ashtrath/oxlint-plugin-slop'
  *
- *   export default createSlopConfig({ preset: 'prose' })
+ *   export default createSlopConfig({ preset: 'architecture' })
  *   ```
  *
  * @param options - Configuration options specifying preset selection and rule overrides.

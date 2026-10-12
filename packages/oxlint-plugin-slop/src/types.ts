@@ -13,7 +13,13 @@ export interface SlopConfig {
   rules: SlopRules
 }
 
-export type SlopPresetName = 'performance' | 'prose' | 'slop/performance' | 'slop/prose'
+export type SlopPresetName =
+  | 'architecture'
+  | 'performance'
+  | 'prose'
+  | 'slop/architecture'
+  | 'slop/performance'
+  | 'slop/prose'
 
 export interface SlopConfigOptions {
   preset?: SlopPresetName
@@ -24,3 +30,5 @@ export interface SlopConfigOptions {
 export type { MaxCommentLengthOptions } from './rules/max-comment-length'
 export type { NoArrayFilterMapOptions } from './rules/no-array-filter-map'
 export type { NoJargonOptions } from './rules/no-jargon'
+export type { NoTrivialFunctionsOptions } from './rules/no-trivial-functions'
+export type { NoTrivialTypeAliasesOptions } from './rules/no-trivial-type-aliases'

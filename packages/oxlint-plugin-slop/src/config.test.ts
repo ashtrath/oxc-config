@@ -2,6 +2,8 @@ import { RuleTester } from 'oxlint/plugins-dev'
 import { describe, expect, it } from 'vitest'
 
 import {
+  architecturePreset,
+  architectureRules,
   createSlopConfig,
   performancePreset,
   performanceRules,
@@ -98,6 +100,80 @@ describe('slop/performance preset', () => {
       ruleTester.run(`slop/performance > ${ruleName}`, rule, {
         invalid: [],
         valid: ['const fine = true;'],
+      })
+    }
+  })
+})
+
+describe('slop/architecture preset', () => {
+  it('configures all five architectural rules with error severity', () => {
+    expect(architectureRules).toEqual({
+      'slop/no-chained-type-assertions': 'error',
+      'slop/no-conditional-empty-object-spread': 'error',
+      'slop/no-static-only-class': 'error',
+      'slop/no-trivial-functions': 'error',
+      'slop/no-trivial-type-aliases': 'error',
+    })
+
+    expect(architecturePreset.rules).toEqual(architectureRules)
+    expect(architecturePreset.jsPlugins).toHaveLength(1)
+    const firstPlugin = architecturePreset.jsPlugins?.[0]
+    expect(
+      firstPlugin && typeof firstPlugin === 'object' && 'name' in firstPlugin && firstPlugin.name,
+    ).toBe('slop')
+  })
+
+  it('exports preset in presets dictionary and createSlopConfig', () => {
+    expect(presets.architecture).toBe(architecturePreset)
+    expect(presets['slop/architecture']).toBe(architecturePreset)
+
+    const config = createSlopConfig({ preset: 'architecture' })
+    expect(config.rules).toEqual(architectureRules)
+
+    const configWithPrefix = createSlopConfig({ preset: 'slop/architecture' })
+    expect(configWithPrefix.rules).toEqual(architectureRules)
+  })
+
+  describe('runs all rules in the architecture preset under RuleTester', () => {
+    const ruleTester = new RuleTester()
+
+    const architectureViolations: Record<string, { code: string; messageId: string }> = {
+      'no-chained-type-assertions': {
+        code: 'const x = a as unknown as string;',
+        messageId: 'chained',
+      },
+      'no-conditional-empty-object-spread': {
+        code: 'const x = { ...(cond ? { a: 1 } : {}) };',
+        messageId: 'avoid',
+      },
+      'no-static-only-class': {
+        code: 'class Util { static run() {} }',
+        messageId: 'staticOnly',
+      },
+      'no-trivial-functions': {
+        code: 'const getName = (u: any) => u.name;\ngetName(a);',
+        messageId: 'trivial',
+      },
+      'no-trivial-type-aliases': {
+        code: 'type Raw = unknown;',
+        messageId: 'unknown',
+      },
+    }
+
+    for (const [prefixedName, severity] of Object.entries(architectureRules)) {
+      it(`enforces error severity for ${prefixedName}`, () => {
+        expect(severity).toBe('error')
+      })
+
+      const ruleName = prefixedName.replace(/^slop\//, '') as keyof typeof rules
+      const rule = rules[ruleName]
+      const violation = architectureViolations[ruleName]
+
+      ruleTester.run(`slop/architecture > ${ruleName}`, rule, {
+        valid: ['const fine = true;'],
+        invalid: violation
+          ? [{ code: violation.code, errors: [{ messageId: violation.messageId }] }]
+          : [],
       })
     }
   })
