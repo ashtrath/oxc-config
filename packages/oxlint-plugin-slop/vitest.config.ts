@@ -7,6 +7,7 @@ export default defineProject({
       {
         test: {
           name: 'unit',
+          fileParallelism: false,
           include: ['src/**/*.test.ts'],
           setupFiles: ['./test/setup.ts'],
         },
