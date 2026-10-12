@@ -9,13 +9,13 @@ const LAST_LINE_PATTERN = /\s*\}$/
 const VSCODE_SETTINGS_STRING = `
   // Disable the default formatter, use oxc instead
   "prettier.enable": false,
-  "editor.formatOnSave": false,
 
   // Auto fix
   "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file", // Oxfmt does not support partial formatting
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit",
-    "source.format.oxc": "explicit",
     "source.organizeImports": "never"
   },
 
