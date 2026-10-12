@@ -8,6 +8,7 @@ export default defineProject({
         test: {
           name: 'unit',
           include: ['src/**/*.test.ts'],
+          setupFiles: ['./test/setup.ts'],
         },
       },
     ],

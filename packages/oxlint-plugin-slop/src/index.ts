@@ -1,7 +1,7 @@
-/**
- * Oxlint plugin rules that flag low-value code and prose patterns.
- *
- * @packageDocumentation
- */
+import { plugin } from './plugin'
 
-export {}
+export * from './config'
+export * from './rules'
+export * from './types'
+
+export default plugin

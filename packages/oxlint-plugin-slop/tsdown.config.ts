@@ -9,4 +9,7 @@ export default defineConfig({
   platform: 'node',
   plugins: [StaleGuardRecorder()],
   publint: true,
+  deps: {
+    neverBundle: ['@oxlint/plugins'],
+  },
 })

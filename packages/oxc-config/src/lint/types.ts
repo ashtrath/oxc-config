@@ -1,5 +1,6 @@
 import type { AllowWarnDeny, DummyRule, DummyRuleMap, OxlintConfig, OxlintOverride } from 'oxlint'
 import type { PluginSettings as TailwindCSSPluginSettings } from 'oxlint-tailwindcss/config'
+
 /**
  * Map of oxlint rule names to rule configuration or severity levels.
  */
