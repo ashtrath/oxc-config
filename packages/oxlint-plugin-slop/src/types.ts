@@ -13,10 +13,14 @@ export interface SlopConfig {
   rules: SlopRules
 }
 
-export type SlopPresetName = 'prose' | 'slop/prose'
+export type SlopPresetName = 'performance' | 'prose' | 'slop/performance' | 'slop/prose'
 
 export interface SlopConfigOptions {
   preset?: SlopPresetName
   recommended?: boolean
   rules?: SlopRules
 }
+
+export type { MaxCommentLengthOptions } from './rules/max-comment-length'
+export type { NoArrayFilterMapOptions } from './rules/no-array-filter-map'
+export type { NoJargonOptions } from './rules/no-jargon'

@@ -13,6 +13,23 @@ export const PLUGIN: ExternalPluginEntry = {
 }
 
 /**
+ * Rule configuration dictionary for the `slop/performance` preset. Configures both collection
+ * performance rules with `error` severity.
+ */
+export const performanceRules: SlopRules = {
+  'slop/no-array-filter-map': 'error',
+  'slop/no-reduce-accumulator-copy': 'error',
+}
+
+/**
+ * Curated preset configuration for performance rules with `error` severity.
+ */
+export const performancePreset: SlopConfig = {
+  jsPlugins: [PLUGIN],
+  rules: { ...performanceRules },
+}
+
+/**
  * Rule configuration dictionary for the `slop/prose` preset. Configures all four prose rules with
  * `warn` severity.
  */
@@ -35,7 +52,9 @@ export const prosePreset: SlopConfig = {
  * Available named presets in `@ashtrath/oxlint-plugin-slop`.
  */
 export const presets = {
+  performance: performancePreset,
   prose: prosePreset,
+  'slop/performance': performancePreset,
   'slop/prose': prosePreset,
 } as const
 

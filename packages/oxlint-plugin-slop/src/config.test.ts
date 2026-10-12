@@ -1,7 +1,14 @@
 import { RuleTester } from 'oxlint/plugins-dev'
 import { describe, expect, it } from 'vitest'
 
-import { createSlopConfig, presets, prosePreset, proseRules } from './config'
+import {
+  createSlopConfig,
+  performancePreset,
+  performanceRules,
+  presets,
+  prosePreset,
+  proseRules,
+} from './config'
 import { rules } from './rules'
 
 describe('slop/prose preset', () => {
@@ -44,6 +51,51 @@ describe('slop/prose preset', () => {
       const rule = rules[ruleName]
 
       ruleTester.run(`slop/prose > ${ruleName}`, rule, {
+        invalid: [],
+        valid: ['const fine = true;'],
+      })
+    }
+  })
+})
+
+describe('slop/performance preset', () => {
+  it('configures both performance rules with error severity', () => {
+    expect(performanceRules).toEqual({
+      'slop/no-array-filter-map': 'error',
+      'slop/no-reduce-accumulator-copy': 'error',
+    })
+
+    expect(performancePreset.rules).toEqual(performanceRules)
+    expect(performancePreset.jsPlugins).toHaveLength(1)
+    const firstPlugin = performancePreset.jsPlugins?.[0]
+    expect(
+      firstPlugin && typeof firstPlugin === 'object' && 'name' in firstPlugin && firstPlugin.name,
+    ).toBe('slop')
+  })
+
+  it('exports preset in presets dictionary and createSlopConfig', () => {
+    expect(presets.performance).toBe(performancePreset)
+    expect(presets['slop/performance']).toBe(performancePreset)
+
+    const config = createSlopConfig({ preset: 'performance' })
+    expect(config.rules).toEqual(performanceRules)
+
+    const configWithPrefix = createSlopConfig({ preset: 'slop/performance' })
+    expect(configWithPrefix.rules).toEqual(performanceRules)
+  })
+
+  describe('runs all rules in the performance preset under RuleTester', () => {
+    const ruleTester = new RuleTester()
+
+    for (const [prefixedName, severity] of Object.entries(performanceRules)) {
+      it(`enforces error severity for ${prefixedName}`, () => {
+        expect(severity).toBe('error')
+      })
+
+      const ruleName = prefixedName.replace(/^slop\//, '') as keyof typeof rules
+      const rule = rules[ruleName]
+
+      ruleTester.run(`slop/performance > ${ruleName}`, rule, {
         invalid: [],
         valid: ['const fine = true;'],
       })
