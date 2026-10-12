@@ -39,7 +39,19 @@ export async function updateConfigFiles(results: RunResult): Promise<void> {
   const oxfmtConfig: string[] = []
 
   if (results.extra.includes('tailwindcss')) {
-    oxlintConfig.push('tailwindcss: true,')
+    const entryPoint = await p.path({
+      message: 'Where is your Tailwind CSS entry point?',
+      validate(value) {
+        if (!value?.trim()) return 'A Tailwind CSS entry point is required.'
+      },
+    })
+
+    if (p.isCancel(entryPoint)) {
+      p.cancel('Cancelled.')
+      process.exit(1)
+    }
+
+    oxlintConfig.push(`tailwindcss: { entryPoint: ${JSON.stringify(entryPoint)} },`)
     oxfmtConfig.push('sortTailwindcss: true,')
   }
 

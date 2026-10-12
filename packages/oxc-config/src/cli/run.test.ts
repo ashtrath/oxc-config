@@ -104,7 +104,7 @@ describe('cli run runner', () => {
     const updatedPkg = JSON.parse(await fsp.readFile(path.join(tempDir, 'package.json'), 'utf8'))
     expect(updatedPkg.scripts.lint).toBe('oxlint')
     expect(updatedPkg.scripts['lint:fix']).toBe('oxlint --fix')
-    expect(updatedPkg.scripts.format).toBe('oxfmt --write --no-error-on-unmatched-pattern')
+    expect(updatedPkg.scripts.fmt).toBe('oxfmt --write --no-error-on-unmatched-pattern')
     expect(updatedPkg.devDependencies['@ashtrath/oxc-config']).toBeDefined()
     expect(updatedPkg.devDependencies.oxlint).toBeDefined()
     expect(updatedPkg.devDependencies.oxfmt).toBeDefined()
