@@ -52,7 +52,7 @@ export async function perfectionist(options: PerfectionistOptions): Promise<Oxli
         severity,
         {
           type: 'natural',
-          groups: ['top', 'unknown', 'callback', 'method', 'multiline-member'],
+          groups: ['top', 'unknown', 'multiline-member', 'callback', 'method'],
           order: 'asc',
           partitionByComment: true,
           partitionByNewLine: true,

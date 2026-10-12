@@ -409,9 +409,9 @@
         "groups": [
           "top",
           "unknown",
+          "multiline-member",
           "callback",
-          "method",
-          "multiline-member"
+          "method"
         ],
         "order": "asc",
         "partitionByComment": true,

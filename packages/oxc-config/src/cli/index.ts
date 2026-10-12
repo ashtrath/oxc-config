@@ -4,10 +4,6 @@ import path from 'node:path'
 import { run } from './run'
 
 const main = defineCommand({
-  async run({ args }) {
-    const targetDir = path.resolve(args.cwd || '.')
-    await run({ cwd: targetDir })
-  },
   args: {
     cwd: {
       type: 'positional',
@@ -20,6 +16,10 @@ const main = defineCommand({
     name: 'oxc-config',
     description: 'Ashtrath OXC configuration toolchain initialization wizard',
     version: '0.0.0',
+  },
+  async run({ args }) {
+    const targetDir = path.resolve(args.cwd || '.')
+    await run({ cwd: targetDir })
   },
 })
 

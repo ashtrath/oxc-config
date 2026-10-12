@@ -20,18 +20,18 @@ const mockSpinner = vi.fn(() => ({
 
 vi.mock('@clack/prompts', () => ({
   cancel: vi.fn(),
-  confirm: (...args: any[]) => mockConfirm(...args),
-  group: (...args: any[]) => mockGroup(...args),
-  intro: (...args: any[]) => mockIntro(...args),
-  isCancel: () => false,
-  outro: (...args: any[]) => mockOutro(...args),
-  spinner: () => mockSpinner(),
   log: {
     error: (...args: any[]) => mockError(...args),
     info: (...args: any[]) => mockInfo(...args),
     success: (...args: any[]) => mockSuccess(...args),
     warn: (...args: any[]) => mockWarn(...args),
   },
+  confirm: (...args: any[]) => mockConfirm(...args),
+  group: (...args: any[]) => mockGroup(...args),
+  intro: (...args: any[]) => mockIntro(...args),
+  isCancel: () => false,
+  outro: (...args: any[]) => mockOutro(...args),
+  spinner: () => mockSpinner(),
 }))
 
 describe('cli run runner', () => {
