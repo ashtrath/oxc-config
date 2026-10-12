@@ -78,7 +78,7 @@ describe('ashtrathLint factory', () => {
   })
 
   it('includes tailwindcss plugin entry in root jsPlugins when tailwindcss is enabled', async () => {
-    const config = await ashtrathLint({ tailwindcss: true })
+    const config = await ashtrathLint({ tailwindcss: { entryPoint: 'src/styles.css' } })
     const tailwindPlugin = config.jsPlugins?.find(
       p => typeof p === 'object' && p.name === 'tailwindcss',
     )
@@ -184,7 +184,7 @@ describe('ashtrathLint factory', () => {
 
     await ashtrathLint({
       react: { reactDoctor: true },
-      tailwindcss: true,
+      tailwindcss: { entryPoint: 'src/styles.css' },
       typescript: { typeAware: true },
     })
 
@@ -199,7 +199,7 @@ describe('ashtrathLint factory', () => {
     const ensureSpy = vi.spyOn(utils, 'ensurePackages')
     ensureSpy.mockClear()
 
-    await tailwindcss()
+    await tailwindcss({ entryPoint: 'src/styles.css' })
     expect(ensureSpy).toHaveBeenCalledWith(['oxlint-tailwindcss'])
 
     ensureSpy.mockClear()

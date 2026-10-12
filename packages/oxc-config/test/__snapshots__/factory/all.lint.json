@@ -1015,5 +1015,10 @@
         "typescript/explicit-function-return-type": "off"
       }
     }
-  ]
+  ],
+  "settings": {
+    "tailwindcss": {
+      "entryPoint": "src/styles.css"
+    }
+  }
 }

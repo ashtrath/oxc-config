@@ -2,8 +2,8 @@ import type { OxlintConfigItem, TailwindCSSOptions } from '../types'
 
 import { ensurePackages, resolvePlugin } from '../../shared/utils'
 
-export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<OxlintConfigItem> {
-  const { overrides = {} } = options
+export async function tailwindcss(options: TailwindCSSOptions): Promise<OxlintConfigItem> {
+  const { overrides = {}, ...tailwindSettings } = options
 
   await ensurePackages(['oxlint-tailwindcss'])
   const tailwindcssPlugin = {
@@ -13,6 +13,10 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Oxl
 
   return {
     jsPlugins: [tailwindcssPlugin],
+    settings: {
+      tailwindcss: tailwindSettings,
+    },
+
     rules: {
       'tailwindcss/consistent-variant-order': 'warn',
       'tailwindcss/enforce-canonical': 'warn',

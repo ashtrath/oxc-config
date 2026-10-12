@@ -4,7 +4,6 @@ export default ashtrathLint({
   type: 'lib',
   antislop: true,
   ignorePatterns: ['**/__fixtures__/**'],
-  tailwindcss: true,
   vitest: true,
   jsx: {
     a11y: true,

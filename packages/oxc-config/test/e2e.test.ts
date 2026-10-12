@@ -62,7 +62,7 @@ const scenarios: Scenario[] = [
       lint: {
         nextjs: true,
         react: true,
-        tailwindcss: true,
+        tailwindcss: { entryPoint: 'src/styles.css' },
         typescript: true,
       },
     },

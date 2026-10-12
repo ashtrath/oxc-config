@@ -101,7 +101,7 @@ export async function ashtrathLint(
     vitest: enableVitest = true,
     react: enableReact = isPackageExists('react'),
     nextjs: enableNextJs = isPackageExists('next'),
-    tailwindcss: enableTailwindCSS = isPackageExists('tailwindcss'),
+    tailwindcss: tailwindcssSettings = false,
     ignorePatterns: userIgnorePatterns = [],
   } = options
 
@@ -182,8 +182,8 @@ export async function ashtrathLint(
     presets.push(nextjs(resolveSubOptions(options, 'nextjs')))
   }
 
-  if (enableTailwindCSS) {
-    presets.push(tailwindcss(resolveSubOptions(options, 'tailwindcss')))
+  if (tailwindcssSettings) {
+    presets.push(tailwindcss(tailwindcssSettings))
   }
 
   presets.push(disables())

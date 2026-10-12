@@ -1,5 +1,5 @@
 import type { AllowWarnDeny, DummyRule, DummyRuleMap, OxlintConfig, OxlintOverride } from 'oxlint'
-
+import type { PluginSettings as TailwindCSSPluginSettings } from 'oxlint-tailwindcss/config'
 /**
  * Map of oxlint rule names to rule configuration or severity levels.
  */
@@ -250,8 +250,13 @@ export interface NextJSOptions extends FilesOptions, ReactDoctorOptions, RuleOve
 /**
  * Options for Tailwind CSS lint rules.
  */
-export interface TailwindCSSOptions extends RuleOverridesOptions {}
-
+export interface TailwindCSSOptions
+  extends Omit<TailwindCSSPluginSettings, 'entryPoint'>, RuleOverridesOptions {
+  /**
+   * CSS entry point used to resolve the Tailwind design system.
+   */
+  entryPoint: NonNullable<TailwindCSSPluginSettings['entryPoint']>
+}
 /**
  * Factory configuration options for `ashtrathLint`.
  *
@@ -371,11 +376,9 @@ export interface OxlintFactoryOptions extends EditorOptions, ProjectOptions {
   /**
    * Enables or configures Tailwind CSS utility class linting.
    *
-   * @remarks
-   *   Automatically enabled when `tailwindcss` is detected.
-   * @default 'auto-detected'
+   * @default false
    */
-  tailwindcss?: boolean | TailwindCSSOptions
+  tailwindcss?: false | TailwindCSSOptions
 
   /**
    * File patterns to ignore during linting. Patterns are matched relative to the directory

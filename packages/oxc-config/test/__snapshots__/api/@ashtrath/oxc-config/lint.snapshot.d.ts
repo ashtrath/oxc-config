@@ -39,7 +39,7 @@ export interface OxlintFactoryOptions extends EditorOptions, ProjectOptions {
   vitest?: boolean | VitestOptions;
   react?: boolean | ReactOptions;
   nextjs?: boolean | NextJSOptions;
-  tailwindcss?: boolean | TailwindCSSOptions;
+  tailwindcss?: false | TailwindCSSOptions;
   ignorePatterns?: string[] | ((_: string[]) => string[]);
 }
 export interface PerfectionistOptions extends EditorOptions, RuleOverridesOptions {}
@@ -56,7 +56,9 @@ export interface RegexpOptions extends RuleOverridesOptions {
 export interface RuleOverridesOptions {
   overrides?: Rules;
 }
-export interface TailwindCSSOptions extends RuleOverridesOptions {}
+export interface TailwindCSSOptions extends Omit<PluginSettings, 'entryPoint'>, RuleOverridesOptions {
+  entryPoint: NonNullable<PluginSettings['entryPoint']>;
+}
 export interface TypeAwareOptions {
   typeAware?: boolean;
   filesTypeAware?: string[];
@@ -96,7 +98,7 @@ export declare function oxc(): Promise<OxlintConfigItem>;
 export declare function perfectionist(_: PerfectionistOptions): Promise<OxlintConfigItem>;
 export declare function react(_?: ReactOptions): Promise<OxlintConfigItem>;
 export declare function regexp(_: RegexpOptions): Promise<OxlintConfigItem>;
-export declare function tailwindcss(_?: TailwindCSSOptions): Promise<OxlintConfigItem>;
+export declare function tailwindcss(_: TailwindCSSOptions): Promise<OxlintConfigItem>;
 export declare function typescript(_?: TypescriptOptions): Promise<OxlintConfigItem>;
 export declare function unicorn(_: UnicornOptions): Promise<OxlintConfigItem>;
 export declare function vitest(_: VitestOptions): Promise<OxlintConfigItem>;

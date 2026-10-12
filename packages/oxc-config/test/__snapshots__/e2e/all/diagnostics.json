@@ -400,7 +400,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(enforce-canonical)",
     "severity": "warning",
     "filename": "react.jsx",
@@ -416,7 +416,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(enforce-canonical)",
     "severity": "warning",
     "filename": "tailwind.tsx",
@@ -432,7 +432,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(enforce-canonical)",
     "severity": "warning",
     "filename": "tailwind.tsx",
@@ -448,7 +448,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(enforce-canonical)",
     "severity": "warning",
     "filename": "tailwind.tsx",
@@ -464,7 +464,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-conflicting-classes)",
     "severity": "error",
     "filename": "react.jsx",
@@ -480,7 +480,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-conflicting-classes)",
     "severity": "error",
     "filename": "tailwind.tsx",
@@ -496,7 +496,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-conflicting-classes)",
     "severity": "error",
     "filename": "tailwind.tsx",
@@ -512,7 +512,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-conflicting-classes)",
     "severity": "error",
     "filename": "tailwind.tsx",
@@ -528,7 +528,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unknown-classes)",
     "severity": "error",
     "filename": "react.jsx",
@@ -544,7 +544,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unknown-classes)",
     "severity": "error",
     "filename": "tailwind.tsx",
@@ -560,7 +560,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unknown-classes)",
     "severity": "error",
     "filename": "tailwind.tsx",
@@ -576,7 +576,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unknown-classes)",
     "severity": "error",
     "filename": "tailwind.tsx",
@@ -592,7 +592,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/react.jsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unnecessary-arbitrary-value)",
     "severity": "warning",
     "filename": "react.jsx",
@@ -608,7 +608,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unnecessary-arbitrary-value)",
     "severity": "warning",
     "filename": "tailwind.tsx",
@@ -624,7 +624,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unnecessary-arbitrary-value)",
     "severity": "warning",
     "filename": "tailwind.tsx",
@@ -640,7 +640,7 @@
     ]
   },
   {
-    "message": "`settings.tailwindcss.entryPoint` is required (linting `<sandbox>/tailwind.tsx`).\n\nHint: Set it to a string (single-project) or an array of `{ files, use }` mappings (monorepo).",
+    "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(no-unnecessary-arbitrary-value)",
     "severity": "warning",
     "filename": "tailwind.tsx",
