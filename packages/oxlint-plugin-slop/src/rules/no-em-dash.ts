@@ -70,6 +70,7 @@ export const noEmDash = defineRule({
       before() {
         return context.sourceCode.text.includes(EM_DASH)
       },
+
       JSXText(node) {
         if (node.range) {
           scanRange(node.range, context)

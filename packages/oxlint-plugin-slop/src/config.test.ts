@@ -1,0 +1,52 @@
+import { RuleTester } from 'oxlint/plugins-dev'
+import { describe, expect, it } from 'vitest'
+
+import { createSlopConfig, presets, prosePreset, proseRules } from './config'
+import { rules } from './rules'
+
+describe('slop/prose preset', () => {
+  it('configures all four prose rules with warn severity', () => {
+    expect(proseRules).toEqual({
+      'slop/max-comment-length': 'warn',
+      'slop/no-em-dash': 'warn',
+      'slop/no-jargon': 'warn',
+      'slop/prefer-jsdoc': 'warn',
+    })
+
+    expect(prosePreset.rules).toEqual(proseRules)
+    expect(prosePreset.jsPlugins).toHaveLength(1)
+    const firstPlugin = prosePreset.jsPlugins?.[0]
+    expect(
+      firstPlugin && typeof firstPlugin === 'object' && 'name' in firstPlugin && firstPlugin.name,
+    ).toBe('slop')
+  })
+
+  it('exports preset in presets dictionary and createSlopConfig', () => {
+    expect(presets.prose).toBe(prosePreset)
+    expect(presets['slop/prose']).toBe(prosePreset)
+
+    const config = createSlopConfig({ preset: 'prose' })
+    expect(config.rules).toEqual(proseRules)
+
+    const configWithPrefix = createSlopConfig({ preset: 'slop/prose' })
+    expect(configWithPrefix.rules).toEqual(proseRules)
+  })
+
+  describe('runs all rules in the prose preset under RuleTester', () => {
+    const ruleTester = new RuleTester()
+
+    for (const [prefixedName, severity] of Object.entries(proseRules)) {
+      it(`enforces warn severity for ${prefixedName}`, () => {
+        expect(severity).toBe('warn')
+      })
+
+      const ruleName = prefixedName.replace(/^slop\//, '') as keyof typeof rules
+      const rule = rules[ruleName]
+
+      ruleTester.run(`slop/prose > ${ruleName}`, rule, {
+        invalid: [],
+        valid: ['const fine = true;'],
+      })
+    }
+  })
+})
