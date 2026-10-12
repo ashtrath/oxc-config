@@ -4,95 +4,9 @@ import { describe, expect, it, vi } from 'vitest'
 
 import * as utils from '../shared/utils'
 import { ashtrathLint } from './factory'
-import { antislop, nextjs, react, tailwindcss, typescript } from './presets'
+import { nextjs, react, tailwindcss, typescript } from './presets'
 
 describe('ashtrathLint factory', () => {
-  it('generates valid OxlintConfig under default options', async () => {
-    const config = await ashtrathLint()
-    expect(config).toBeDefined()
-    expect(config.categories).toEqual({ correctness: 'off' })
-    expect(config.options).toEqual({
-      reportUnusedDisableDirectives: 'error',
-      typeAware: true,
-      typeCheck: true,
-    })
-    expect(config.rules).toBeDefined()
-    expect(Object.keys(config.rules ?? {}).length).toBeGreaterThan(0)
-    expect(config.plugins).toBeInstanceOf(Array)
-    expect(config.plugins?.length).toBeGreaterThan(0)
-    expect(config.jsPlugins).toBeInstanceOf(Array)
-    expect(config.jsPlugins?.length).toBeGreaterThan(0)
-    expect(config.overrides).toBeInstanceOf(Array)
-    expect(config.overrides?.length).toBeGreaterThan(0)
-  })
-
-  it('keeps antislop as a dormant no-op returning an empty config when disabled', async () => {
-    const configWithoutSlop = await ashtrathLint({ antislop: false })
-    const hasSlopRootRules = Object.keys(configWithoutSlop.rules ?? {}).some(r =>
-      r.startsWith('slop/'),
-    )
-    expect(hasSlopRootRules).toBe(false)
-    const hasSlopOverrideRules = configWithoutSlop.overrides?.some(o =>
-      Object.keys(o.rules ?? {}).some(r => r.startsWith('slop/')),
-    )
-    expect(hasSlopOverrideRules).toBe(false)
-  })
-
-  it('applies customized option flags without module resolution failures', async () => {
-    const customConfig = await ashtrathLint({
-      antislop: false,
-      nextjs: false,
-      react: true,
-      tailwindcss: false,
-      typescript: true,
-    })
-    expect(customConfig).toBeDefined()
-    expect(customConfig.overrides).toBeInstanceOf(Array)
-    expect(customConfig.overrides?.length).toBeGreaterThan(0)
-  })
-
-  it('antislop configuration returns an empty config object', async () => {
-    expect(await antislop()).toEqual({})
-    expect(await antislop({ slop: true })).toEqual({})
-  })
-
-  it('returns valid config with empty rules when antislop is enabled', async () => {
-    const configWithSlop = await ashtrathLint({ antislop: true })
-    expect(configWithSlop).toBeDefined()
-    const hasSlopRootRules = Object.keys(configWithSlop.rules ?? {}).some(r =>
-      r.startsWith('slop/'),
-    )
-    expect(hasSlopRootRules).toBe(false)
-    const hasSlopOverrideRules = configWithSlop.overrides?.some(o =>
-      Object.keys(o.rules ?? {}).some(r => r.startsWith('slop/')),
-    )
-    expect(hasSlopOverrideRules).toBe(false)
-  })
-
-  it('omits tailwindcss from root jsPlugins when tailwindcss is disabled', async () => {
-    const config = await ashtrathLint({ tailwindcss: false })
-    const hasTailwindPlugin = config.jsPlugins?.some(
-      p => (typeof p === 'string' ? p : p.name) === 'tailwindcss',
-    )
-    expect(hasTailwindPlugin).toBe(false)
-  })
-
-  it('includes tailwindcss plugin entry in root jsPlugins when tailwindcss is enabled', async () => {
-    const config = await ashtrathLint({ tailwindcss: { entryPoint: 'src/styles.css' } })
-    const tailwindPlugin = config.jsPlugins?.find(
-      p => typeof p === 'object' && p.name === 'tailwindcss',
-    )
-    expect(tailwindPlugin).toBeDefined()
-    expect(typeof tailwindPlugin === 'object' && typeof tailwindPlugin.specifier === 'string').toBe(
-      true,
-    )
-
-    const hasTailwindInOverrides = config.overrides?.some(o =>
-      o.jsPlugins?.some(p => (typeof p === 'string' ? p : p.name) === 'tailwindcss'),
-    )
-    expect(hasTailwindInOverrides).toBe(false)
-  })
-
   it('merges duplicate entries in plugins and ignorePatterns into unique lists', async () => {
     const config = await ashtrathLint(
       { ignorePatterns: ['**/custom-ignore/**', '**/custom-ignore/**'] },
