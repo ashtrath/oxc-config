@@ -1,7 +1,7 @@
 import type { ExternalPluginEntry, OxlintConfig } from 'oxlint'
 
 import type { Awaitable } from '../shared/types'
-import type { OxlintFactoryOptions, OxlintConfigItem } from './types'
+import type { OxlintConfigItem, OxlintFactoryOptions } from './types'
 
 import { createDefu } from 'defu'
 import { isPackageExists } from 'local-pkg'

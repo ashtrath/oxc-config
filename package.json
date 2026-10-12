@@ -52,7 +52,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "format": "oxfmt --write --no-error-on-unmatched-pattern",
+    "fmt": "oxfmt --write --no-error-on-unmatched-pattern",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "test": "turbo run test",

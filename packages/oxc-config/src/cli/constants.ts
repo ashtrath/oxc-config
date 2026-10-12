@@ -21,7 +21,7 @@ export const EXTRA_OPTIONS: Option<ExtraLibrariesOption>[] = [
 ] as const
 
 export const STANDARD_SCRIPTS = {
-  format: 'oxfmt --write --no-error-on-unmatched-pattern',
+  fmt: 'oxfmt --write --no-error-on-unmatched-pattern',
   lint: 'oxlint',
   'lint:fix': 'oxlint --fix',
 } as const
