@@ -2,16 +2,22 @@ import type { Rule } from '@oxlint/plugins'
 
 import { maxCommentLength } from './max-comment-length'
 import { noArrayFilterMap } from './no-array-filter-map'
+import { noChainedTypeAssertions } from './no-chained-type-assertions'
+import { noConditionalEmptyObjectSpread } from './no-conditional-empty-object-spread'
 import { noEmDash } from './no-em-dash'
 import { noJargon } from './no-jargon'
 import { noReduceAccumulatorCopy } from './no-reduce-accumulator-copy'
+import { noStaticOnlyClass } from './no-static-only-class'
 import { preferJsdoc } from './prefer-jsdoc'
 
 export const rules = {
   'max-comment-length': maxCommentLength,
   'no-array-filter-map': noArrayFilterMap,
+  'no-chained-type-assertions': noChainedTypeAssertions,
+  'no-conditional-empty-object-spread': noConditionalEmptyObjectSpread,
   'no-em-dash': noEmDash,
   'no-jargon': noJargon,
   'no-reduce-accumulator-copy': noReduceAccumulatorCopy,
+  'no-static-only-class': noStaticOnlyClass,
   'prefer-jsdoc': preferJsdoc,
 } satisfies Record<string, Rule>

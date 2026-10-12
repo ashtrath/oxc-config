@@ -21,3 +21,11 @@ export function getNodeParent(node: ESTree.Node): ESTree.Node | null {
 
   return null
 }
+
+export function unwrapParenthesizedExpression<T extends ESTree.Node>(node: T): T {
+  let current: ESTree.Node = node
+  while (current.type === 'ParenthesizedExpression') {
+    current = (current as ESTree.ParenthesizedExpression).expression
+  }
+  return current as T
+}
