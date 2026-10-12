@@ -3,6 +3,7 @@ import ashtrathLint from '@ashtrath/oxc-config/lint'
 export default ashtrathLint({
   type: 'lib',
   antislop: true,
+  ignorePatterns: ['**/__fixtures__/**'],
   tailwindcss: true,
   vitest: true,
   jsx: {

@@ -1,14 +1,15 @@
 {
   "$schema": "./node_modules/turbo/schema.json",
   "ui": "stream",
+  "globalDependencies": ["tsconfig.base.json"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$"],
+      "inputs": ["$TURBO_DEFAULT$", "!README.md", "!test/**"],
       "outputs": ["dist/**"]
     },
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "build"]
     },
     "typecheck": {
       "dependsOn": ["^build"]
