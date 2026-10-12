@@ -1,11 +1,6 @@
 {
   "categories": {
-    "correctness": "off",
-  },
-  "env": {
-    "browser": true,
-    "builtin": true,
-    "node": true,
+    "correctness": "off"
   },
   "ignorePatterns": [
     "**/node_modules",
@@ -70,86 +65,28 @@
     "**/LICENSE*",
     "**/*.min.*",
     "**/*.{ts,mts,cts}",
-    "**/*.{tsx,mtsx,ctsx}",
-  ],
-  "jsPlugins": [
-    "antfu",
-    "oxlint-comments",
-    "command",
+    "**/*.{tsx,mtsx,ctsx}"
   ],
   "options": {
-    "reportUnusedDisableDirectives": "error",
+    "reportUnusedDisableDirectives": "error"
   },
-  "overrides": [
-    {
-      "files": [
-        "**/scripts/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
-      ],
-      "rules": {
-        "antfu/no-top-level-await": "off",
-        "no-console": "off",
-        "typescript/explicit-function-return-type": "off",
-      },
-    },
-    {
-      "files": [
-        "**/cli/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
-        "**/cli.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
-      ],
-      "rules": {
-        "antfu/no-top-level-await": "off",
-        "no-console": "off",
-      },
-    },
-    {
-      "files": [
-        "**/bin/**/*",
-        "**/bin.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
-      ],
-      "rules": {
-        "antfu/no-import-dist": "off",
-        "antfu/no-import-node-modules-by-path": "off",
-      },
-    },
-    {
-      "files": [
-        "**/*.d.?([cm])ts",
-      ],
-      "rules": {
-        "oxlint-comments/no-unlimited-disable": "off",
-      },
-    },
-    {
-      "files": [
-        "**/*.js",
-        "**/*.cjs",
-      ],
-      "rules": {
-        "typescript/no-require-imports": "off",
-      },
-    },
-    {
-      "files": [
-        "**/*.config.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
-        "**/*.config.*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
-      ],
-      "rules": {
-        "antfu/no-top-level-await": "off",
-        "no-console": "off",
-        "typescript/explicit-function-return-type": "off",
-      },
-    },
+  "jsPlugins": [
+    "antfu",
+    "command",
+    "oxlint-comments"
   ],
-  "plugins": [
-    "oxc",
-  ],
+  "env": {
+    "browser": true,
+    "builtin": true,
+    "node": true
+  },
   "rules": {
     "accessor-pairs": [
       "error",
       {
         "enforceForClassMembers": true,
-        "setWithoutGet": true,
-      },
+        "setWithoutGet": true
+      }
     ],
     "antfu/no-top-level-await": "error",
     "array-callback-return": "error",
@@ -158,15 +95,15 @@
     "constructor-super": "error",
     "eqeqeq": [
       "error",
-      "smart",
+      "smart"
     ],
     "new-cap": [
       "error",
       {
         "capIsNew": false,
         "newIsCap": true,
-        "properties": true,
-      },
+        "properties": true
+      }
     ],
     "no-alert": "error",
     "no-array-constructor": "error",
@@ -181,9 +118,9 @@
       {
         "allow": [
           "warn",
-          "error",
-        ],
-      },
+          "error"
+        ]
+      }
     ],
     "no-const-assign": "error",
     "no-control-regex": "error",
@@ -195,8 +132,8 @@
     "no-empty": [
       "error",
       {
-        "allowEmptyCatch": true,
-      },
+        "allowEmptyCatch": true
+      }
     ],
     "no-empty-character-class": "error",
     "no-empty-pattern": "error",
@@ -217,8 +154,8 @@
       "error",
       {
         "allowLoop": true,
-        "allowSwitch": true,
-      },
+        "allowSwitch": true
+      }
     ],
     "no-lone-blocks": "error",
     "no-loss-of-precision": "error",
@@ -236,42 +173,42 @@
     "no-restricted-globals": [
       "error",
       {
-        "message": "Use `globalThis` instead.",
         "name": "global",
+        "message": "Use `globalThis` instead."
       },
       {
-        "message": "Use `globalThis` instead.",
         "name": "self",
-      },
+        "message": "Use `globalThis` instead."
+      }
     ],
     "no-restricted-properties": [
       "error",
       {
         "message": "Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.",
-        "property": "__proto__",
+        "property": "__proto__"
       },
       {
         "message": "Use `Object.defineProperty` instead.",
-        "property": "__defineGetter__",
+        "property": "__defineGetter__"
       },
       {
         "message": "Use `Object.defineProperty` instead.",
-        "property": "__defineSetter__",
+        "property": "__defineSetter__"
       },
       {
         "message": "Use `Object.getOwnPropertyDescriptor` instead.",
-        "property": "__lookupGetter__",
+        "property": "__lookupGetter__"
       },
       {
         "message": "Use `Object.getOwnPropertyDescriptor` instead.",
-        "property": "__lookupSetter__",
-      },
+        "property": "__lookupSetter__"
+      }
     ],
     "no-self-assign": [
       "error",
       {
-        "props": true,
-      },
+        "props": true
+      }
     ],
     "no-self-compare": "error",
     "no-sequences": "error",
@@ -293,8 +230,8 @@
       {
         "allowShortCircuit": true,
         "allowTaggedTemplates": true,
-        "allowTernary": true,
-      },
+        "allowTernary": true
+      }
     ],
     "no-unused-vars": [
       "error",
@@ -302,20 +239,20 @@
         "args": "after-used",
         "argsIgnorePattern": "^_",
         "fix": {
-          "imports": "safe-fix",
+          "imports": "safe-fix"
         },
         "ignoreRestSiblings": true,
         "vars": "all",
-        "varsIgnorePattern": "^_",
-      },
+        "varsIgnorePattern": "^_"
+      }
     ],
     "no-use-before-define": [
       "error",
       {
         "classes": false,
         "functions": false,
-        "variables": true,
-      },
+        "variables": true
+      }
     ],
     "no-useless-backreference": "error",
     "no-useless-call": "error",
@@ -331,14 +268,14 @@
       "always",
       {
         "avoidQuotes": true,
-        "ignoreConstructors": false,
-      },
+        "ignoreConstructors": false
+      }
     ],
     "one-var": [
       "error",
       {
-        "initialized": "never",
-      },
+        "initialized": "never"
+      }
     ],
     "oxc/bad-array-method-on-arguments": "error",
     "oxc/bad-char-at-comparison": "error",
@@ -364,23 +301,23 @@
       "error",
       {
         "allowNamedFunctions": true,
-        "allowUnboundThis": true,
-      },
+        "allowUnboundThis": true
+      }
     ],
     "prefer-const": [
       "error",
       {
         "destructuring": "all",
-        "ignoreReadBeforeAssign": true,
-      },
+        "ignoreReadBeforeAssign": true
+      }
     ],
     "prefer-exponentiation-operator": "error",
     "prefer-promise-reject-errors": "error",
     "prefer-regex-literals": [
       "error",
       {
-        "disallowRedundantWrapping": true,
-      },
+        "disallowRedundantWrapping": true
+      }
     ],
     "prefer-rest-params": "error",
     "prefer-spread": "error",
@@ -388,25 +325,88 @@
     "symbol-description": "error",
     "unicode-bom": [
       "error",
-      "never",
+      "never"
     ],
     "use-isnan": [
       "error",
       {
         "enforceForIndexOf": true,
-        "enforceForSwitchCase": true,
-      },
+        "enforceForSwitchCase": true
+      }
     ],
     "valid-typeof": [
       "error",
       {
-        "requireStringLiterals": true,
-      },
+        "requireStringLiterals": true
+      }
     ],
     "vars-on-top": "error",
     "yoda": [
       "error",
-      "never",
-    ],
+      "never"
+    ]
   },
+  "plugins": [
+    "oxc"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/scripts/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"
+      ],
+      "rules": {
+        "antfu/no-top-level-await": "off",
+        "no-console": "off",
+        "typescript/explicit-function-return-type": "off"
+      }
+    },
+    {
+      "files": [
+        "**/cli/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
+        "**/cli.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"
+      ],
+      "rules": {
+        "antfu/no-top-level-await": "off",
+        "no-console": "off"
+      }
+    },
+    {
+      "files": [
+        "**/bin/**/*",
+        "**/bin.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"
+      ],
+      "rules": {
+        "antfu/no-import-dist": "off",
+        "antfu/no-import-node-modules-by-path": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.d.?([cm])ts"
+      ],
+      "rules": {
+        "oxlint-comments/no-unlimited-disable": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.js",
+        "**/*.cjs"
+      ],
+      "rules": {
+        "typescript/no-require-imports": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.config.{js,mjs,cjs,jsx,ts,mts,cts,tsx}",
+        "**/*.config.*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"
+      ],
+      "rules": {
+        "antfu/no-top-level-await": "off",
+        "no-console": "off",
+        "typescript/explicit-function-return-type": "off"
+      }
+    }
+  ]
 }

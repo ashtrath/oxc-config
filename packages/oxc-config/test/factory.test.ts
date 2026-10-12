@@ -3,148 +3,122 @@ import type { OxlintConfig } from 'oxlint'
 import type { OxfmtFactoryOptions } from '../src/fmt'
 import type { OxlintFactoryOptions } from '../src/lint'
 
-import { it } from 'vitest'
+import { describe, it } from 'vitest'
 
 import ashtrathFmt from '../src/fmt'
 import ashtrathLint from '../src/lint'
 
-interface Suite<T> {
+interface Scenario {
   name: string
-  presets: T
+  presets: {
+    fmt: OxfmtFactoryOptions
+    lint: OxlintFactoryOptions
+  }
 }
 
-const lintSuites: Suite<OxlintFactoryOptions>[] = [
+const scenarios: Scenario[] = [
   {
     name: 'default',
-    presets: {},
-  },
-  {
-    name: 'full-off',
     presets: {
-      antislop: false,
-      e18e: false,
-      import: false,
-      jsdoc: false,
-      jsx: false,
-      nextjs: false,
-      node: false,
-      perfectionist: false,
-      react: false,
-      regexp: false,
-      tailwindcss: false,
-      typescript: false,
-      unicorn: false,
-      vitest: false,
+      fmt: {},
+      lint: {},
     },
   },
   {
-    name: 'full-on',
+    name: 'all',
     presets: {
-      antislop: true,
-      e18e: true,
-      import: true,
-      jsdoc: true,
-      node: true,
-      perfectionist: true,
-      regexp: true,
-      tailwindcss: true,
-      unicorn: true,
-      vitest: true,
-      jsx: {
-        a11y: true,
+      fmt: {
+        sortTailwindcss: true,
       },
-      nextjs: {
-        reactDoctor: true,
-      },
-      react: {
-        reactDoctor: true,
-      },
-      typescript: {
-        typeAware: true,
+      lint: {
+        nextjs: true,
+        react: true,
+        tailwindcss: true,
+        typescript: true,
       },
     },
   },
   {
     name: 'in-editor',
     presets: {
-      isInEditor: true,
+      fmt: {},
+      lint: { isInEditor: true },
     },
   },
   {
     name: 'lib',
     presets: {
-      type: 'lib',
+      fmt: {},
+      lint: { type: 'lib' },
     },
-  },
-]
-
-const fmtSuites: Suite<OxfmtFactoryOptions>[] = [
-  {
-    name: 'default',
-    presets: {},
   },
   {
     name: 'full-off',
     presets: {
-      jsdoc: false,
-      sortImports: false,
-      sortPackageJson: false,
-      sortTailwindcss: false,
-    },
-  },
-  {
-    name: 'full-on',
-    presets: {
-      jsdoc: true,
-      sortImports: true,
-      sortPackageJson: true,
-      sortTailwindcss: true,
+      fmt: {
+        jsdoc: false,
+        sortImports: false,
+        sortPackageJson: false,
+        sortTailwindcss: false,
+      },
+      lint: {
+        antislop: false,
+        e18e: false,
+        import: false,
+        jsdoc: false,
+        jsx: false,
+        nextjs: false,
+        node: false,
+        perfectionist: false,
+        react: false,
+        regexp: false,
+        tailwindcss: false,
+        typescript: false,
+        unicorn: false,
+        vitest: false,
+      },
     },
   },
 ]
 
-function serializeConfig(config: OxlintConfig): unknown {
-  const clone = { ...config } as any
+function serializeLintConfig(config: OxlintConfig): Record<string, unknown> {
+  const clone: Record<string, unknown> = { ...config }
 
   if (config.plugins) {
-    clone.plugins = [...config.plugins].sort()
+    clone.plugins = [...config.plugins].toSorted()
   }
 
   if (config.jsPlugins) {
-    clone.jsPlugins = config.jsPlugins.map(plugin =>
-      typeof plugin === 'string' ? plugin : plugin.name,
-    )
+    clone.jsPlugins = config.jsPlugins.map(p => (typeof p === 'string' ? p : p.name)).toSorted()
   }
 
   if (config.rules) {
     clone.rules = Object.fromEntries(
-      Object.entries(config.rules).sort(([ruleA], [ruleB]) => ruleA.localeCompare(ruleB)),
+      Object.entries(config.rules).toSorted(([a], [b]) => a.localeCompare(b)),
     )
   }
 
   if (config.overrides) {
-    clone.overrides = config.overrides.map(override => serializeConfig(override))
+    clone.overrides = config.overrides.map(serializeLintConfig)
   }
 
   return clone
 }
 
-it.concurrent.for(lintSuites)(
-  'ashtrathLint $name snapshots',
-  async ({ name, presets }, { expect }) => {
-    const config = await ashtrathLint(presets)
-    await expect(serializeConfig(config)).toMatchFileSnapshot(
-      `./__snapshots__/factory/lint/${name}.snap.json`,
-    )
-  },
-)
+describe('factory config snapshots', () => {
+  it.concurrent.for(scenarios)('$name scenario', async ({ name, presets }, { expect }) => {
+    const [lintConfig, fmtConfig] = await Promise.all([
+      ashtrathLint(presets.lint),
+      ashtrathFmt(presets.fmt),
+    ])
 
-it.concurrent.for(fmtSuites)(
-  'ashtrathFmt $name snapshots',
-  async ({ name, presets }, { expect }) => {
-    const config = await ashtrathFmt(presets)
-    await expect(serializeConfig(config)).toMatchFileSnapshot(
-      `./__snapshots__/factory/fmt/${name}.snap.json`,
-    )
-  },
-)
+    await Promise.all([
+      expect(JSON.stringify(serializeLintConfig(lintConfig), null, 2)).toMatchFileSnapshot(
+        `./__snapshots__/factory/${name}.lint.json`,
+      ),
+      expect(JSON.stringify(fmtConfig, null, 2)).toMatchFileSnapshot(
+        `./__snapshots__/factory/${name}.fmt.json`,
+      ),
+    ])
+  })
+})

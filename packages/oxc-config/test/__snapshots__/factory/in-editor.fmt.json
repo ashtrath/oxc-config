@@ -3,6 +3,58 @@
   "bracketSameLine": false,
   "bracketSpacing": true,
   "endOfLine": "lf",
+  "insertFinalNewline": true,
+  "jsxSingleQuote": false,
+  "printWidth": 100,
+  "quoteProps": "as-needed",
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false,
+  "sortImports": {
+    "internalPattern": [
+      "~/",
+      "@/",
+      "#"
+    ],
+    "order": "asc",
+    "partitionByComment": false,
+    "partitionByNewline": false,
+    "groups": [
+      "type-import",
+      [
+        "type-parent",
+        "type-sibling",
+        "type-index",
+        "type-internal"
+      ],
+      {
+        "newlinesBetween": true
+      },
+      [
+        "value-builtin",
+        "value-external"
+      ],
+      "value-internal",
+      [
+        "value-parent",
+        "value-sibling",
+        "value-index"
+      ],
+      "side_effect",
+      "style",
+      "unknown"
+    ]
+  },
+  "sortPackageJson": {
+    "sortScripts": true
+  },
+  "sortTailwindcss": false,
+  "jsdoc": {
+    "commentLineStrategy": "multiline",
+    "preferCodeFences": true
+  },
   "ignorePatterns": [
     "**/node_modules",
     "**/bun.lock",
@@ -64,59 +116,7 @@
     "**/*.generated.*",
     "**/CHANGELOG*.md",
     "**/LICENSE*",
-    "**/*.min.*",
+    "**/*.min.*"
   ],
-  "insertFinalNewline": true,
-  "jsdoc": {
-    "commentLineStrategy": "multiline",
-    "preferCodeFences": true,
-  },
-  "jsxSingleQuote": false,
-  "overrides": [],
-  "printWidth": 100,
-  "quoteProps": "as-needed",
-  "semi": false,
-  "singleQuote": true,
-  "sortImports": {
-    "groups": [
-      "type-import",
-      [
-        "type-parent",
-        "type-sibling",
-        "type-index",
-        "type-internal",
-      ],
-      {
-        "newlinesBetween": true,
-      },
-      [
-        "value-builtin",
-        "value-external",
-      ],
-      "value-internal",
-      [
-        "value-parent",
-        "value-sibling",
-        "value-index",
-      ],
-      "side_effect",
-      "style",
-      "unknown",
-    ],
-    "internalPattern": [
-      "~/",
-      "@/",
-      "#",
-    ],
-    "order": "asc",
-    "partitionByComment": false,
-    "partitionByNewline": false,
-  },
-  "sortPackageJson": {
-    "sortScripts": true,
-  },
-  "sortTailwindcss": false,
-  "tabWidth": 2,
-  "trailingComma": "all",
-  "useTabs": false,
+  "overrides": []
 }
