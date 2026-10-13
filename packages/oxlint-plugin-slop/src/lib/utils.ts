@@ -29,3 +29,14 @@ export function unwrapParenthesizedExpression<T extends ESTree.Node>(node: T): T
   }
   return current as T
 }
+
+export type TypeAssertionExpression = ESTree.TSAsExpression | ESTree.TSTypeAssertion
+
+export function isConstAssertion(node: TypeAssertionExpression): boolean {
+  const { typeAnnotation } = node
+  return (
+    typeAnnotation.type === 'TSTypeReference' &&
+    typeAnnotation.typeName.type === 'Identifier' &&
+    typeAnnotation.typeName.name === 'const'
+  )
+}
