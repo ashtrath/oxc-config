@@ -53,6 +53,7 @@
     "oxlint-plugin-directive-comments": "catalog:prod"
   },
   "devDependencies": {
+    "@ashtrath/oxlint-plugin-slop": "catalog:peer",
     "@types/node": "catalog:dev",
     "eslint-plugin-sonarjs": "catalog:peer",
     "oxlint-plugin-react-doctor": "catalog:peer",

@@ -34,6 +34,7 @@
         "oxlint-plugin-directive-comments": "catalog:prod",
       },
       "devDependencies": {
+        "@ashtrath/oxlint-plugin-slop": "catalog:peer",
         "@types/node": "catalog:dev",
         "eslint-plugin-sonarjs": "catalog:peer",
         "oxlint-plugin-react-doctor": "catalog:peer",
@@ -98,6 +99,7 @@
       "vitest": "^5.0.3",
     },
     "peer": {
+      "@ashtrath/oxlint-plugin-slop": "workspace:^*",
       "eslint-plugin-sonarjs": "^4.2.2",
       "oxfmt": "^0.72.0",
       "oxlint": "^1.87.0",

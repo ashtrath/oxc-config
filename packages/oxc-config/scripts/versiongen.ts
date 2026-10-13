@@ -1,3 +1,4 @@
+import { getPackageInfo } from 'local-pkg'
 import fs from 'node:fs/promises'
 
 import { DEPENDENCIES_MAP } from '../src/cli/constants'
@@ -22,8 +23,16 @@ const versions: Record<string, string> = {
 }
 
 for (const name of names) {
-  if (peerCatalog[name]) {
-    versions[name] = peerCatalog[name]
+  const catalogVersion = peerCatalog[name]
+  if (catalogVersion?.startsWith('workspace:')) {
+    const info = await getPackageInfo(name)
+    if (!info?.version) {
+      throw new Error(`Failed to resolve workspace version for "${name}"`)
+    }
+    const prefix = catalogVersion.startsWith('workspace:~') ? '~' : '^'
+    versions[name] = `${prefix}${info.version}`
+  } else if (catalogVersion) {
+    versions[name] = catalogVersion
   }
 }
 
