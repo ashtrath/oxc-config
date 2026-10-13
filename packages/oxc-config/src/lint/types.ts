@@ -86,7 +86,7 @@ export interface TypeAwareOptions {
    * @remarks
    *   Automatically enabled when `oxlint-tsgolint` is detected.
    * @default 'auto-detected'
-   * @requires oxlint-tsgolint
+   * @requires `oxlint-tsgolint`
    * @see {@link https://oxc.rs/docs/guide/usage/linter/type-aware | Oxlint Type Aware Docs}
    */
   typeAware?: boolean
@@ -119,7 +119,7 @@ export interface ReactDoctorOptions extends RuleOverridesOptions {
    * Enables React diagnostic rules.
    *
    * @default false
-   * @requires oxlint-plugin-react-doctor
+   * @requires `oxlint-plugin-react-doctor`
    * @see {@link https://www.react.doctor/docs/rules | React Doctor Rules}
    */
   reactDoctor?: boolean
@@ -207,9 +207,10 @@ export interface AntislopOptions extends RuleOverridesOptions {
   slop?: boolean
 
   /**
-   * Enables cognitive complexity and bug detection rules from `sonarjs`.
+   * Enables cognitive complexity and bug detection rules from `eslint-plugin-sonarjs`.
    *
    * @default true
+   * @requires `eslint-plugin-sonarjs`
    */
   sonarjs?: boolean
 

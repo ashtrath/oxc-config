@@ -60,8 +60,7 @@ const scenarios: Scenario[] = [
         sortTailwindcss: true,
       },
       lint: {
-        nextjs: true,
-        react: true,
+        antislop: true,
         tailwindcss: { entryPoint: 'src/styles.css' },
         typescript: true,
       },

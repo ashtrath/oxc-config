@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@types/node": "catalog:dev",
+    "eslint-plugin-sonarjs": "catalog:peer",
     "oxlint-plugin-react-doctor": "catalog:peer",
     "oxlint-tailwindcss": "catalog:peer",
     "publint": "catalog:dev",
@@ -67,6 +68,7 @@
   },
   "peerDependencies": {
     "@ashtrath/oxlint-plugin-slop": "workspace:^",
+    "eslint-plugin-sonarjs": "^4.2.2",
     "oxfmt": ">=0.67.0",
     "oxlint": ">=1.43.0 <1.77.0 || >=1.78.0",
     "oxlint-plugin-react-doctor": "^0.9.17",
