@@ -1,3 +1,4 @@
+/* oxlint-disable sonarjs/cognitive-complexity -- reducer AST boundary traversal requires upward parent and argument inspection */
 import type { ESTree, SourceCode, Variable } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'

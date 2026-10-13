@@ -1,3 +1,4 @@
+/* oxlint-disable sonarjs/cognitive-complexity -- grouping multiline comments requires sequential block and line inspection */
 import type { Comment, Context } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'

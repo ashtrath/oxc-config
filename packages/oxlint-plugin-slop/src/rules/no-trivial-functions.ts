@@ -1,3 +1,4 @@
+/* oxlint-disable sonarjs/cognitive-complexity -- function AST analysis requires statement-type classification and scope checking */
 import type { ESTree, Variable } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'

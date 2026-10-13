@@ -41,15 +41,7 @@ export async function run(options: RunOptions = {}): Promise<void> {
   const packageManager = (await detectPackageManager(targetDir)) ?? 'npm'
   p.log.info(`Using ${c.green.bold(packageManager)} based on your lockfile`)
 
-  let results: RunResult = {
-    cwd: targetDir,
-    extra: [],
-    frameworks: [],
-    uncommittedConfirmed: false,
-    updateVscodeSettings: false,
-  }
-
-  results = (await p.group(
+  const answers = (await p.group(
     {
       uncommittedConfirmed: () => {
         if (isGitClean()) return Promise.resolve(true)
@@ -96,6 +88,14 @@ export async function run(options: RunOptions = {}): Promise<void> {
       },
     },
   )) as RunResult
+
+  const results: RunResult = {
+    cwd: targetDir,
+    extra: answers.extra ?? [],
+    frameworks: answers.frameworks ?? [],
+    uncommittedConfirmed: answers.uncommittedConfirmed ?? false,
+    updateVscodeSettings: answers.updateVscodeSettings ?? false,
+  }
 
   if (!results.uncommittedConfirmed) return process.exit(1)
 

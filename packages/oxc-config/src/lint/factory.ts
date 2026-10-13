@@ -1,3 +1,4 @@
+/* oxlint-disable sonarjs/cognitive-complexity -- preset builder requires sequential conditional configuration branches */
 import type { ExternalPluginEntry, OxlintConfig } from 'oxlint'
 
 import type { Awaitable } from '../shared/types'

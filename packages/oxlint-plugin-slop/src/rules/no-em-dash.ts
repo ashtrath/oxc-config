@@ -1,3 +1,4 @@
+/* oxlint-disable slop/no-em-dash -- rule documentation demonstrates em dashes */
 import type { Context } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'

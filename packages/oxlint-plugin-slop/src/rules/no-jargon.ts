@@ -1,3 +1,4 @@
+/* oxlint-disable slop/no-jargon, sonarjs/cognitive-complexity -- rule documentation demonstrates jargon terms, and token masking visitor requires nested scanning */
 import type { Context } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
