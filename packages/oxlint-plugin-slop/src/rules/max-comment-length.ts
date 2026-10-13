@@ -4,11 +4,6 @@ import { defineRule } from '@oxlint/plugins'
 
 import { startsOwnLine } from '../lib/prose'
 
-export interface MaxCommentLengthOptions {
-  ignoreJSDoc?: boolean
-  maximumWords?: number
-}
-
 interface CommentGroup {
   endIndex: number
   endLoc: Comment['loc']['end']
@@ -115,16 +110,40 @@ function groupComments(
 }
 
 /**
- * Rule that enforces a maximum word limit on prose comments.
+ * Configuration options for {@link maxCommentLength}.
+ */
+export interface MaxCommentLengthOptions {
+  /**
+   * Whether to ignore JSDoc block comments (`/** ... *\/`).
+   *
+   * @defaultValue true
+   */
+  ignoreJSDoc?: boolean
+  /**
+   * Maximum allowed words in a comment or contiguous comment block.
+   *
+   * @defaultValue 50
+   */
+  maximumWords?: number
+}
+
+/**
+ * Enforces a maximum word limit on prose comments.
  *
+ * @remarks
+ *   Contiguous single-line comments on consecutive lines are grouped into a single block. URLs,
+ *   markdown code fences, and linter directives do not count toward the word total. JSDoc comments
+ *   (`/** ... *\/`) are ignored by default.
  * @example
- *   ;```ts
- *   // Avoid:
- *   // A multi-line comment spanning more than 50 words that narrates code mechanics.
+ *   // Incorrect (exceeds 50 words)
+ *   // This function takes the incoming user identifier and checks whether the
+ *   // identifier exists in our distributed cache layer. When the identifier
+ *   // exists, we retrieve the full database record, validate each field against
+ *   // our local schema, serialize the output to JSON, and return the payload to
+ *   // the caller for downstream request handling and event emission.
  *
- *   // Prefer:
- *   // Concise note explaining non-obvious invariants.
- *   ```
+ *   // Correct
+ *   // Validates and returns the user record from the cache layer.
  */
 export const maxCommentLength = defineRule({
   meta: {

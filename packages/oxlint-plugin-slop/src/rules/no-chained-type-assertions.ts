@@ -43,17 +43,21 @@ function isForbiddenAssertionChain(node: TypeAssertionExpression): boolean {
 }
 
 /**
- * Disallows chained TypeScript type assertions (`as` and `<Type>`), including parenthesized chains,
- * while permitting chains comprised exclusively of const assertions.
+ * Disallows chained TypeScript type assertions (`as` and `<Type>`), including parenthesized chains.
  *
+ * @remarks
+ *   Assertion chains such as `x as unknown as T` or `<T><unknown>x` bypass type safety and discard
+ *   static type evidence. Chains comprised exclusively of const assertions (`as const`) are
+ *   permitted. Parse or validate untrusted values at module boundaries instead of forcing chained
+ *   casts.
  * @example
  *   // Incorrect
  *   const value = input as unknown as User
- *   const value = input as any as string
+ *   const value = input as unknown as string
  *
  *   // Correct
  *   const value = input as User
- *   const value = { id: 1 } as const as const
+ *   const value = { id: 1 } as const
  */
 export const noChainedTypeAssertions = defineRule({
   meta: {

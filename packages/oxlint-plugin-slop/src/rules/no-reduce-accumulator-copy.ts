@@ -78,8 +78,23 @@ function referencesAccumulator(
 }
 
 /**
- * Disallows copying growing reducer accumulators with Object.assign, array spreads, Array.from, or
- * array copying methods.
+ * Disallows copying growing reducer accumulators in `reduce` callbacks.
+ *
+ * @remarks
+ *   Copying the accumulator on each iteration with `Object.assign`, array spread (`[...acc]`),
+ *   `Array.from`, or copy methods causes quadratic time and memory consumption. Mutate a local
+ *   accumulator directly and return it, or use `flatMap` or a loop.
+ * @example
+ *   // Incorrect
+ *   const result = items.reduce((acc, item) => Object.assign({}, acc, item), {})
+ *   const list = items.reduce((acc, item) => [...acc, item], [])
+ *
+ *   // Correct
+ *   const result = items.reduce((acc, item) => Object.assign(acc, item), {})
+ *   const list = items.reduce((acc, item) => {
+ *     acc.push(item)
+ *     return acc
+ *   }, [])
  */
 export const noReduceAccumulatorCopy = defineRule({
   meta: {

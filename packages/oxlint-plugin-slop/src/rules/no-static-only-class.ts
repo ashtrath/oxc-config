@@ -60,18 +60,22 @@ function isStaticOnlyClass(node: ClassNode): boolean {
 }
 
 /**
- * Disallows classes that group only static members and act as namespace shells.
+ * Disallows classes that contain only static members.
  *
+ * @remarks
+ *   Classes containing exclusively static members act as namespace shells. Use standalone functions
+ *   and module-scoped declarations instead of static class wrappers. Classes with superclasses,
+ *   decorators, ambient declarations, or implemented interfaces are exempt.
  * @example
  *   // Incorrect
- *   class MathUtils {
- *     static add(a: number, b: number) {
+ *   export class MathUtils {
+ *     static add(a: number, b: number): number {
  *       return a + b
  *     }
  *   }
  *
  *   // Correct
- *   export function add(a: number, b: number) {
+ *   export function add(a: number, b: number): number {
  *     return a + b
  *   }
  */

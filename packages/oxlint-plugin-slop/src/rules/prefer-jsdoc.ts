@@ -88,19 +88,21 @@ function getRunBefore(node: Node, comments: readonly Comment[], sourceText: stri
 }
 
 /**
- * Rule that requires JSDoc blocks on exported declarations and public members instead of line
+ * Requires JSDoc block comments on exported declarations and public members instead of line
  * comments.
  *
+ * @remarks
+ *   Editors and language servers display JSDoc comments (`/** ... *\/`) on hover and in completion
+ *   tooltips. Line comments (`// ...`) are not surfaced by language tools. Unexported declarations,
+ *   task tags (`TODO:`, `FIXME:`), and linter directives are exempt.
  * @example
- *   ;```ts
- *   // Avoid:
+ *   // Incorrect
  *   // User display name.
  *   export const userName = 'Alice';
  *
- *   // Prefer:
+ *   // Correct
  *   /** User display name. *\/
  *   export const userName = 'Alice';
- *   ```
  */
 export const preferJsdoc = defineRule({
   meta: {

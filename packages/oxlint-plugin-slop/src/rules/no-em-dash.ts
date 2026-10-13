@@ -54,6 +54,21 @@ function scanRange(range: readonly [number, number], context: Context): void {
   }
 }
 
+/**
+ * Disallows em dashes in string literals, template literals, JSX text, and comments.
+ *
+ * @remarks
+ *   Em dashes (`—` / `\u2014`) disrupt sentence flow and often indicate conversational filler.
+ *   Separate thoughts with a period or use a comma instead.
+ * @example
+ *   // Incorrect
+ *   const note = 'hello — world'
+ *   // Comment with — em dash.
+ *
+ *   // Correct
+ *   const note = 'hello, world'
+ *   // Comment with plain punctuation.
+ */
 export const noEmDash = defineRule({
   meta: {
     type: 'suggestion',

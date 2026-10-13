@@ -5,18 +5,6 @@ import { defineRule } from '@oxlint/plugins'
 import { isKnownArrayExpression } from '../lib/array'
 import { getStaticMemberTarget, unwrapExpression } from '../lib/ast'
 
-/**
- * Configuration options for the `slop/no-array-filter-map` rule.
- */
-export interface NoArrayFilterMapOptions {
-  /**
-   * Whether to ignore consecutive passes when `.filter(Boolean)` is used.
-   *
-   * @default false
-   */
-  ignoreBooleanFilter?: boolean
-}
-
 function isBooleanFilter(call: ESTree.CallExpression): boolean {
   const argument = call.arguments[0]
   if (argument === undefined) return false
@@ -26,8 +14,31 @@ function isBooleanFilter(call: ESTree.CallExpression): boolean {
 }
 
 /**
- * Disallows consecutive array filter and map passes in favor of lazy iterator helpers, a single
- * flatMap, or a single loop pass.
+ * Configuration options for {@link noArrayFilterMap}.
+ */
+export interface NoArrayFilterMapOptions {
+  /**
+   * Whether to ignore consecutive passes when `.filter(Boolean)` is used.
+   *
+   * @defaultValue false
+   */
+  ignoreBooleanFilter?: boolean
+}
+
+/**
+ * Disallows consecutive array `filter` and `map` passes in favor of lazy iterator helpers, a single
+ * `flatMap`, or a loop.
+ *
+ * @remarks
+ *   Chaining `.filter().map()` or `.map().filter()` allocates an intermediate array for the first
+ *   pass. Use `.values().filter(...).map(...).toArray()` where iterator helpers are supported,
+ *   `flatMap`, or a single loop.
+ * @example
+ *   // Incorrect
+ *   const activeEmails = users.filter(user => user.active).map(user => user.email)
+ *
+ *   // Correct
+ *   const activeEmails = users.flatMap(user => (user.active ? [user.email] : []))
  */
 export const noArrayFilterMap = defineRule({
   meta: {

@@ -4,12 +4,6 @@ import { defineRule } from '@oxlint/plugins'
 
 import { maskPreservingOffsets } from '../lib/prose'
 
-export interface NoJargonOptions {
-  allow?: string[]
-  extraWords?: string[]
-  ignoreJSDoc?: boolean
-}
-
 interface CompiledConfig {
   ignoreJSDoc: boolean
   regex: RegExp
@@ -137,16 +131,38 @@ function isQuoted(text: string, start: number, end: number): boolean {
 }
 
 /**
- * Rule that disallows conversational jargon and AI filler terms in comments.
+ * Configuration options for {@link noJargon}.
+ */
+export interface NoJargonOptions {
+  /**
+   * Words to allow even if present in the default forbidden word list.
+   */
+  allow?: string[]
+  /**
+   * Additional forbidden words to disallow alongside the default list.
+   */
+  extraWords?: string[]
+  /**
+   * Whether to ignore JSDoc block comments (`/** ... *\/`).
+   *
+   * @defaultValue false
+   */
+  ignoreJSDoc?: boolean
+}
+
+/**
+ * Disallows conversational jargon and filler words in comments.
  *
+ * @remarks
+ *   Flags conversational filler terms and buzzwords in code comments. Suggests plainer alternatives
+ *   where available, such as replacing "utilize" with "use". Words inside inline code backticks,
+ *   URLs, code fences, and linter directives are ignored.
  * @example
- *   ;```ts
- *   // Avoid:
- *   // We utilize this helper.
+ *   // Incorrect
+ *   // We utilize this helper to process input.
  *
- *   // Prefer:
- *   // We use this helper.
- *   ```
+ *   // Correct
+ *   // We use this helper to process input.
  */
 export const noJargon = defineRule({
   meta: {

@@ -30,17 +30,20 @@ function isBorrowedMemberName(node: ESTree.Node): boolean {
 }
 
 /**
- * Disallows the case-insensitive substring "shape" in JavaScript, TypeScript, private, and JSX
- * symbol names while permitting borrowed member access on existing objects.
+ * Disallows the substring "shape" in JavaScript, TypeScript, private, and JSX symbol names.
  *
+ * @remarks
+ *   Symbol names should describe domain ownership and purpose rather than structural shape.
+ *   Borrowed member accesses on external objects (such as `schema.shape.id`) are permitted.
  * @example
  *   // Incorrect
- *   const shape = 1
+ *   const userShape = { id: '1' }
  *   type PayloadShape = { id: string }
  *
  *   // Correct
+ *   const user = { id: '1' }
+ *   type Payload = { id: string }
  *   const field = schema.shape.id
- *   const value = outer.inner.shape
  */
 export const noShapeInSymbolNames = defineRule({
   meta: {

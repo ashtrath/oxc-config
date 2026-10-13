@@ -4,10 +4,6 @@ import { defineRule } from '@oxlint/plugins'
 
 import { getNodeParent, unwrapParenthesizedExpression } from '../lib/ast'
 
-export interface NoTrivialFunctionsOptions {
-  minimumReferences?: number
-}
-
 type FunctionNode = ESTree.ArrowFunctionExpression | ESTree.Function
 
 interface ForwardedParameter {
@@ -202,22 +198,36 @@ function countExternalReferences(
 }
 
 /**
- * Disallows top-level non-exported functions that only forward parameters or access a property
- * without adding substantial logic, when referenced fewer than a configured minimum number of
- * times.
+ * Configuration options for {@link noTrivialFunctions}.
+ */
+export interface NoTrivialFunctionsOptions {
+  /**
+   * Minimum number of external references within the file required to allow a trivial function.
+   *
+   * @defaultValue 5
+   */
+  minimumReferences?: number
+}
+
+/**
+ * Disallows top-level unexported functions that only forward arguments or access properties.
  *
+ * @remarks
+ *   Unexported functions that merely forward arguments (`x => fn(x)`) or access a single property
+ *   (`x => x.prop`) add indirection without value when referenced fewer than the configured
+ *   threshold (default 5). Inline trivial wrappers directly at their call sites.
  * @example
- *   // Incorrect (fewer than 5 references)
- *   function getName(user) {
+ *   // Incorrect (referenced fewer than 5 times)
+ *   function getName(user: User): string {
  *     return user.name
  *   }
- *   const parse = value => parseValue(value)
+ *   const parse = (value: string) => parseValue(value)
  *
  *   // Correct
- *   export function getName(user) {
+ *   export function getName(user: User): string {
  *     return user.name
  *   }
- *   const parse = value => parseValue(value.trim())
+ *   const parse = (value: string) => parseValue(value.trim())
  */
 export const noTrivialFunctions = defineRule({
   meta: {

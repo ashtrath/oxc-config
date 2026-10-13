@@ -20,14 +20,18 @@ function hasEmptyObjectBranch(node: ESTree.Expression): boolean {
 /**
  * Disallows object spreads that conditionally spread an empty object to omit fields.
  *
+ * @remarks
+ *   Spreading an empty object (`...(condition ? { a: 1 } : {})`) creates throwaway objects and
+ *   obscures object structure. Build the object in distinct statements, or assign optional
+ *   properties conditionally.
  * @example
  *   // Incorrect
- *   const obj = { ...(condition ? { key: value } : {}) }
+ *   const result = { ...(condition ? { a: 1 } : {}) }
  *
  *   // Correct
- *   const obj: Record<string, string> = {}
+ *   const result: Record<string, number> = {}
  *   if (condition) {
- *     obj.key = value
+ *     result.a = 1
  *   }
  */
 export const noConditionalEmptyObjectSpread = defineRule({

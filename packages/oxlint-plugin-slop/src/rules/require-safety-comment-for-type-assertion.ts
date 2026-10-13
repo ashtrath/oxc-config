@@ -6,10 +6,6 @@ import { defineRule } from '@oxlint/plugins'
 
 import { getNodeParent, isConstAssertion } from '../lib/ast'
 
-export interface RequireSafetyCommentForTypeAssertionOptions {
-  markers?: string[]
-}
-
 const DEFAULT_SAFETY_MARKERS = ['SAFETY', 'INVARIANT'] as const
 
 const COMMENT_OWNER_KINDS: Record<string, true> = {
@@ -94,15 +90,30 @@ function hasSafetyComment(
 }
 
 /**
- * Requires a nearby SAFETY or INVARIANT comment for every TypeScript type assertion except const
- * assertions.
+ * Configuration options for {@link requireSafetyCommentForTypeAssertion}.
+ */
+export interface RequireSafetyCommentForTypeAssertionOptions {
+  /**
+   * Uppercase comment markers that justify type assertions.
+   *
+   * @defaultValue ['SAFETY', 'INVARIANT']
+   */
+  markers?: string[]
+}
+
+/**
+ * Requires an explanatory safety comment for every non-const TypeScript type assertion.
  *
+ * @remarks
+ *   Type assertions (`as Type` and `<Type>`) bypass static type checking. Every assertion must have
+ *   an adjacent preceding comment beginning with an accepted marker (such as `// SAFETY:` or `//
+ *   INVARIANT:`). Const assertions (`as const`) are exempt.
  * @example
  *   // Incorrect
  *   const id = value as UserId
  *
  *   // Correct
- *   // SAFETY: The parser established the UserId invariant.
+ *   // SAFETY: The parser verified the id format.
  *   const id = value as UserId
  *   const values = [1, 2] as const
  */

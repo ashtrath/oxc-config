@@ -2,10 +2,6 @@ import type { ESTree } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-export interface NoTrivialTypeAliasesOptions {
-  allowPrimitives?: boolean
-}
-
 type Alias = ESTree.TSTypeAliasDeclaration
 type Terminal = 'primitive' | 'unknown'
 
@@ -60,17 +56,32 @@ function resolveTerminal(start: Alias, aliases: ReadonlyMap<string, Alias>): Ter
 }
 
 /**
- * Disallows top-level type aliases that resolve only to unparsed unknown or, when opted into strict
- * branding, bare primitives without constraints.
+ * Configuration options for {@link noTrivialTypeAliases}.
+ */
+export interface NoTrivialTypeAliasesOptions {
+  /**
+   * Whether to allow aliases that resolve to bare primitive types (`string`, `number`, etc.).
+   *
+   * @defaultValue true
+   */
+  allowPrimitives?: boolean
+}
+
+/**
+ * Disallows top-level type aliases that resolve only to `unknown` or bare primitives.
  *
+ * @remarks
+ *   Aliasing `unknown` obscures unvalidated input without providing type evidence. When
+ *   `allowPrimitives` is set to `false`, aliases to bare primitives without nominal branding or
+ *   constraints are also flagged.
  * @example
  *   // Incorrect
  *   type Unchecked = unknown
  *   type UserId = string // when { allowPrimitives: false }
  *
  *   // Correct
- *   type UserId = string // default { allowPrimitives: true }
- *   type UserId = string & { readonly __brand: unique symbol }
+ *   type UserId = string // allowed by default
+ *   type BrandedId = string & { readonly __brand: unique symbol }
  */
 export const noTrivialTypeAliases = defineRule({
   meta: {
