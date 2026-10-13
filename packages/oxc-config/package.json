@@ -1,6 +1,6 @@
 {
   "name": "@ashtrath/oxc-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Ashtrath's OXC (oxlint + oxfmt) config",
   "keywords": [
     "oxc",
@@ -30,6 +30,9 @@
     "./fmt": "./dist/fmt/index.mjs",
     "./lint": "./dist/lint/index.mjs",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "bun gen && tsdown",

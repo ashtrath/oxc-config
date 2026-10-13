@@ -1,6 +1,6 @@
 {
   "name": "@ashtrath/oxlint-plugin-slop",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Oxlint rules that flag low-value code and prose patterns.",
   "keywords": [
     "ai",
@@ -28,6 +28,9 @@
   "exports": {
     ".": "./dist/index.mjs",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsdown",

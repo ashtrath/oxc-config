@@ -15,6 +15,6 @@ export default ashtrathLint({
     reactDoctor: true,
   },
   typescript: {
-    typeAware: true,
+    typeAware: false,
   },
 })

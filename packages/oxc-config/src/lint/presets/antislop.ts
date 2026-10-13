@@ -9,7 +9,7 @@ export async function antislop(options: AntislopOptions = {}): Promise<OxlintCon
   const { cognitiveComplexity = 15, overrides = {}, slop = true, sonarjs = true } = options
 
   await ensurePackages([
-    ...(slop ? ['eslint-plugin-slop'] : []),
+    ...(slop ? ['@ashtrath/oxlint-plugin-slop'] : []),
     ...(sonarjs ? ['eslint-plugin-sonarjs'] : []),
   ])
 
@@ -37,16 +37,12 @@ export async function antislop(options: AntislopOptions = {}): Promise<OxlintCon
         rules: {
           ...(slop
             ? {
-                'slop/max-comment-length': 'warn',
                 'slop/no-em-dash': 'error',
+
+                'slop/max-comment-length': 'warn',
                 'slop/no-jargon': 'warn',
                 'slop/prefer-jsdoc': 'warn',
 
-                'slop/no-array-filter-map': 'error',
-                'slop/no-chained-type-assertions': 'error',
-                'slop/no-conditional-empty-object-spread': 'error',
-                'slop/no-reduce-accumulator-copy': 'error',
-                'slop/no-static-only-class': 'error',
                 'slop/no-trivial-functions': 'error',
                 'slop/no-trivial-type-aliases': 'error',
               }

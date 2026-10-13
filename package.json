@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ashtrat/oxc-config.git"
+    "url": "git+https://github.com/ashtrath/oxc-config.git"
   },
   "workspaces": {
     "packages": [
