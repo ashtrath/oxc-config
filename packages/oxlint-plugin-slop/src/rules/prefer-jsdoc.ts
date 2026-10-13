@@ -2,7 +2,7 @@ import type { Comment, Context, Node } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { getLineIndent } from '../lib/utils'
+import { getLineIndent } from '../lib/prose'
 
 interface AstNode {
   parent?: AstNode | null

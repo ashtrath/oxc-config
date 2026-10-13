@@ -2,7 +2,8 @@ import type { ESTree } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { arrayMethodTarget, isKnownArrayExpression, unwrapArrayExpression } from '../lib/array'
+import { isKnownArrayExpression } from '../lib/array'
+import { getStaticMemberTarget, unwrapExpression } from '../lib/ast'
 
 /**
  * Configuration options for the `slop/no-array-filter-map` rule.
@@ -20,7 +21,7 @@ function isBooleanFilter(call: ESTree.CallExpression): boolean {
   const argument = call.arguments[0]
   if (argument === undefined) return false
 
-  const unwrapped = unwrapArrayExpression(argument)
+  const unwrapped = unwrapExpression(argument)
   return unwrapped.type === 'Identifier' && unwrapped.name === 'Boolean'
 }
 
@@ -66,13 +67,13 @@ export const noArrayFilterMap = defineRule({
       },
 
       CallExpression(node) {
-        const outer = arrayMethodTarget(node.callee)
+        const outer = getStaticMemberTarget(node.callee)
         if (outer === null || (outer.name !== 'map' && outer.name !== 'filter')) return
 
-        const innerCall = unwrapArrayExpression(outer.object)
+        const innerCall = unwrapExpression(outer.object)
         if (innerCall.type !== 'CallExpression') return
 
-        const inner = arrayMethodTarget(innerCall.callee)
+        const inner = getStaticMemberTarget(innerCall.callee)
         if (inner === null || inner.name !== (outer.name === 'map' ? 'filter' : 'map')) return
 
         if (ignoreBooleanFilter && isBooleanFilter(outer.name === 'filter' ? node : innerCall)) {

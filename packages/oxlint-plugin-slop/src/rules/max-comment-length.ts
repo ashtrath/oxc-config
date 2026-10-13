@@ -2,7 +2,7 @@ import type { Comment, Context } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { startsOwnLine } from '../lib/utils'
+import { startsOwnLine } from '../lib/prose'
 
 export interface MaxCommentLengthOptions {
   ignoreJSDoc?: boolean

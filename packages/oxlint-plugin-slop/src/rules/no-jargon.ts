@@ -2,7 +2,7 @@ import type { Context } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { maskPreservingOffsets } from '../lib/utils'
+import { maskPreservingOffsets } from '../lib/prose'
 
 export interface NoJargonOptions {
   allow?: string[]

@@ -2,7 +2,7 @@ import type { ESTree } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { getNodeParent } from '../lib/utils'
+import { getNodeParent } from '../lib/ast'
 
 type ClassNode = ESTree.Class
 type ClassMember = ESTree.ClassElement

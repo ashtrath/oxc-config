@@ -2,15 +2,9 @@ import type { ESTree, SourceCode, Variable } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import {
-  arrayMethodTarget,
-  getConstInit,
-  isGlobalCopyOwner,
-  isKnownArrayExpression,
-  resolveArrayBinding,
-  unwrapArrayExpression,
-} from '../lib/array'
-import { getNodeParent } from '../lib/utils'
+import { isKnownArrayExpression } from '../lib/array'
+import { getNodeParent, getStaticMemberTarget, unwrapExpression } from '../lib/ast'
+import { getSingleAssignmentInit, isUnshadowedGlobal, resolveBinding } from '../lib/scope'
 
 interface ReducerInfo {
   accumulator: ESTree.Node
@@ -20,26 +14,30 @@ interface ReducerInfo {
 
 function enclosingReducer(node: ESTree.Node): ReducerInfo | null {
   let parent = getNodeParent(node)
+
   while (parent !== null) {
     if (parent.type === 'FunctionDeclaration') return null
+
     if (parent.type === 'ArrowFunctionExpression' || parent.type === 'FunctionExpression') {
       const callback = parent
       let owner = getNodeParent(callback)
-      while (owner !== null && unwrapArrayExpression(owner) === callback) {
+      while (owner !== null && unwrapExpression(owner) === callback) {
         owner = getNodeParent(owner)
       }
       if (owner === null || owner.type !== 'CallExpression') return null
-      const method = arrayMethodTarget(owner.callee)
+
+      const method = getStaticMemberTarget(owner.callee)
       const firstArgument = owner.arguments[0]
       if (
         method === null ||
         (method.name !== 'reduce' && method.name !== 'reduceRight') ||
         owner.arguments.length > 2 ||
         firstArgument === undefined ||
-        unwrapArrayExpression(firstArgument) !== callback
+        unwrapExpression(firstArgument) !== callback
       ) {
         return null
       }
+
       const firstParameter = callback.params[0]
       let accumulator: ESTree.Node | undefined
       if (firstParameter) {
@@ -47,10 +45,16 @@ function enclosingReducer(node: ESTree.Node): ReducerInfo | null {
           firstParameter.type === 'AssignmentPattern' ? firstParameter.left : firstParameter
       }
       if (!accumulator || accumulator.type !== 'Identifier') return null
-      return { accumulator, callback, initialValue: owner.arguments[1] }
+
+      return {
+        accumulator,
+        callback,
+        initialValue: owner.arguments[1],
+      }
     }
     parent = getNodeParent(parent)
   }
+
   return null
 }
 
@@ -60,15 +64,16 @@ function referencesAccumulator(
   accumulator: Variable,
   visited = new Set<Variable>(),
 ): boolean {
-  const variable = resolveArrayBinding(sourceCode, node)
+  const variable = resolveBinding(sourceCode, node)
   if (variable === null || visited.has(variable)) return false
   if (variable === accumulator) return true
   visited.add(variable)
-  if (variable.references.some(reference => reference.isWrite() && !reference.init)) return false
-  const init = getConstInit(variable)
+
+  const init = getSingleAssignmentInit(variable)
   if (init !== null) {
     return referencesAccumulator(sourceCode, init, accumulator, visited)
   }
+
   return false
 }
 
@@ -136,7 +141,7 @@ export const noReduceAccumulatorCopy = defineRule({
       },
 
       CallExpression(node) {
-        const method = arrayMethodTarget(node.callee)
+        const method = getStaticMemberTarget(node.callee)
         if (method === null) return
 
         const contextInfo = resolveReducerContext(node)
@@ -147,16 +152,16 @@ export const noReduceAccumulatorCopy = defineRule({
         let copiesAccumulator = false
         if (
           method.name === 'assign' &&
-          isGlobalCopyOwner(context.sourceCode, method.object, 'Object')
+          isUnshadowedGlobal(context.sourceCode, method.object, 'Object')
         ) {
           const target = node.arguments[0]
           copiesAccumulator =
             target !== undefined &&
-            unwrapArrayExpression(target).type === 'ObjectExpression' &&
+            unwrapExpression(target).type === 'ObjectExpression' &&
             node.arguments.slice(1).some(isAccumulator)
         } else if (
           method.name === 'from' &&
-          isGlobalCopyOwner(context.sourceCode, method.object, 'Array')
+          isUnshadowedGlobal(context.sourceCode, method.object, 'Array')
         ) {
           const source = node.arguments[0]
           copiesAccumulator = source !== undefined && isAccumulator(source)

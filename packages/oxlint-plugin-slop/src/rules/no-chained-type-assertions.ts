@@ -1,14 +1,15 @@
 import type { ESTree } from '@oxlint/plugins'
 
-import type { TypeAssertionExpression } from '../lib/utils'
+import type { TypeAssertionExpression } from '../lib/ast'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { getNodeParent, isConstAssertion, unwrapParenthesizedExpression } from '../lib/utils'
-
-function isTypeAssertion(node: ESTree.Node | null | undefined): node is TypeAssertionExpression {
-  return node?.type === 'TSAsExpression' || node?.type === 'TSTypeAssertion'
-}
+import {
+  getNodeParent,
+  isConstAssertion,
+  isTypeAssertion,
+  unwrapParenthesizedExpression,
+} from '../lib/ast'
 
 function isOutermostAssertion(node: TypeAssertionExpression): boolean {
   let current: ESTree.Expression = node

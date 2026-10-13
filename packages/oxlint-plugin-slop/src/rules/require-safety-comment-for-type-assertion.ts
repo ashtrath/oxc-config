@@ -1,10 +1,10 @@
 import type { ESTree, SourceCode } from '@oxlint/plugins'
 
-import type { TypeAssertionExpression } from '../lib/utils'
+import type { TypeAssertionExpression } from '../lib/ast'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { getNodeParent, isConstAssertion } from '../lib/utils'
+import { getNodeParent, isConstAssertion } from '../lib/ast'
 
 export interface RequireSafetyCommentForTypeAssertionOptions {
   markers?: string[]

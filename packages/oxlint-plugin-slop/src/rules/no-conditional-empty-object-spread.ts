@@ -2,7 +2,7 @@ import type { ESTree } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { unwrapParenthesizedExpression } from '../lib/utils'
+import { unwrapParenthesizedExpression } from '../lib/ast'
 
 function isEmptyObject(node: ESTree.Expression): boolean {
   const unwrapped = unwrapParenthesizedExpression(node)

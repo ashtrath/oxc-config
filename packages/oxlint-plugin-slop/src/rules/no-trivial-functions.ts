@@ -2,7 +2,7 @@ import type { ESTree, Variable } from '@oxlint/plugins'
 
 import { defineRule } from '@oxlint/plugins'
 
-import { getNodeParent, unwrapParenthesizedExpression } from '../lib/utils'
+import { getNodeParent, unwrapParenthesizedExpression } from '../lib/ast'
 
 export interface NoTrivialFunctionsOptions {
   minimumReferences?: number
