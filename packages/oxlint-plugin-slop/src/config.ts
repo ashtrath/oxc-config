@@ -1,107 +1,60 @@
 import type { ExternalPluginEntry } from 'oxlint'
 
-import type { SlopConfig, SlopConfigOptions, SlopRules } from './types'
+import type { SlopConfig, SlopConfigOptions, SlopPresetName, SlopRules } from './types'
 
 import { fileURLToPath } from 'node:url'
 
-/**
- * External Oxlint plugin entry for `@ashtrath/oxlint-plugin-slop`.
- */
-export const PLUGIN: ExternalPluginEntry = {
+const PLUGIN: ExternalPluginEntry = {
   name: 'slop',
   specifier: fileURLToPath(import.meta.resolve('./index.mjs', import.meta.url)),
 }
 
-/**
- * Rule configuration dictionary for the `slop/architecture` preset. Configures all five
- * architectural rules with `error` severity.
- */
-export const architectureRules: SlopRules = {
-  'slop/no-chained-type-assertions': 'error',
-  'slop/no-conditional-empty-object-spread': 'error',
-  'slop/no-static-only-class': 'error',
-  'slop/no-trivial-functions': 'error',
-  'slop/no-trivial-type-aliases': 'error',
+export const presets: Record<SlopPresetName, SlopRules> = {
+  architecture: {
+    'slop/no-chained-type-assertions': 'error',
+    'slop/no-conditional-empty-object-spread': 'error',
+    'slop/no-static-only-class': 'error',
+    'slop/no-trivial-functions': 'error',
+    'slop/no-trivial-type-aliases': 'error',
+  },
+  performance: {
+    'slop/no-array-filter-map': 'error',
+    'slop/no-reduce-accumulator-copy': 'error',
+  },
+  prose: {
+    'slop/max-comment-length': 'warn',
+    'slop/no-em-dash': 'warn',
+    'slop/no-jargon': 'warn',
+    'slop/prefer-jsdoc': 'warn',
+  },
 }
-
-/**
- * Curated preset configuration for architectural rules with `error` severity.
- */
-export const architecturePreset: SlopConfig = {
-  jsPlugins: [PLUGIN],
-  rules: { ...architectureRules },
-}
-
-/**
- * Rule configuration dictionary for the `slop/performance` preset. Configures both collection
- * performance rules with `error` severity.
- */
-export const performanceRules: SlopRules = {
-  'slop/no-array-filter-map': 'error',
-  'slop/no-reduce-accumulator-copy': 'error',
-}
-
-/**
- * Curated preset configuration for performance rules with `error` severity.
- */
-export const performancePreset: SlopConfig = {
-  jsPlugins: [PLUGIN],
-  rules: { ...performanceRules },
-}
-
-/**
- * Rule configuration dictionary for the `slop/prose` preset. Configures all four prose rules with
- * `warn` severity.
- */
-export const proseRules: SlopRules = {
-  'slop/max-comment-length': 'warn',
-  'slop/no-em-dash': 'warn',
-  'slop/no-jargon': 'warn',
-  'slop/prefer-jsdoc': 'warn',
-}
-
-/**
- * Curated preset configuration for prose rules with `warn` severity.
- */
-export const prosePreset: SlopConfig = {
-  jsPlugins: [PLUGIN],
-  rules: { ...proseRules },
-}
-
-/**
- * Available named presets in `@ashtrath/oxlint-plugin-slop`.
- */
-export const presets = {
-  architecture: architecturePreset,
-  performance: performancePreset,
-  prose: prosePreset,
-  'slop/architecture': architecturePreset,
-  'slop/performance': performancePreset,
-  'slop/prose': prosePreset,
-} as const
 
 /**
  * Creates an Oxlint configuration object with `@ashtrath/oxlint-plugin-slop`.
  *
  * @example
- *   ;```ts
  *   import { createSlopConfig } from '@ashtrath/oxlint-plugin-slop'
  *
  *   export default createSlopConfig({ preset: 'architecture' })
- *   ```
  *
  * @param options - Configuration options specifying preset selection and rule overrides.
  * @returns Configured `SlopConfig` object ready for Oxlint configuration.
  */
 export function createSlopConfig(options: SlopConfigOptions = {}): SlopConfig {
-  const presetConfig = options.preset ? presets[options.preset] : undefined
-  const presetRules: SlopRules = presetConfig ? { ...presetConfig.rules } : {}
+  const mergedRules: SlopRules = {}
+
+  if (options.presets) {
+    for (const name of options.presets) {
+      Object.assign(mergedRules, presets[name])
+    }
+  }
+
+  if (options.rules) {
+    Object.assign(mergedRules, options.rules)
+  }
 
   return {
     jsPlugins: [PLUGIN],
-    rules: {
-      ...presetRules,
-      ...options.rules,
-    },
+    rules: mergedRules,
   }
 }

@@ -12,6 +12,12 @@ export default defineProject({
           setupFiles: ['./test/setup.ts'],
         },
       },
+      {
+        test: {
+          name: 'integration',
+          include: ['test/*.test.ts'],
+        },
+      },
     ],
   },
 })

@@ -13,17 +13,10 @@ export interface SlopConfig {
   rules: SlopRules
 }
 
-export type SlopPresetName =
-  | 'architecture'
-  | 'performance'
-  | 'prose'
-  | 'slop/architecture'
-  | 'slop/performance'
-  | 'slop/prose'
+export type SlopPresetName = 'architecture' | 'performance' | 'prose'
 
 export interface SlopConfigOptions {
-  preset?: SlopPresetName
-  recommended?: boolean
+  presets?: SlopPresetName[]
   rules?: SlopRules
 }
 
