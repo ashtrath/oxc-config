@@ -61,6 +61,8 @@ const scenarios: Scenario[] = [
       },
       lint: {
         antislop: true,
+        nextjs: { reactDoctor: true },
+        react: { reactDoctor: true },
         tailwindcss: { entryPoint: 'src/styles.css' },
         typescript: true,
       },

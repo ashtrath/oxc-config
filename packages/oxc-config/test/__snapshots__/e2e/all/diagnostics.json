@@ -400,6 +400,22 @@
     ]
   },
   {
+    "message": "This <script> blocks the page from showing to your users until it loads. Add defer or async so it loads in the background.",
+    "code": "react-doctor(no-undeferred-third-party)",
+    "severity": "error",
+    "filename": "nextjs.jsx",
+    "labels": [
+      {
+        "span": {
+          "offset": 111,
+          "length": 44,
+          "line": 7,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
     "message": "Could not stat CSS entry point: <sandbox>/src/styles.css\n\nHint: Check that the file exists and is readable. A relative `entryPoint` is resolved against the directory of the nearest oxlint config (`.oxlintrc.json`, `.oxlintrc.jsonc`, `oxlint.config.ts` or `oxlint.config.mts`), falling back to the oxlint working directory.",
     "code": "tailwindcss(enforce-canonical)",
     "severity": "warning",

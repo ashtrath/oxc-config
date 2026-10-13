@@ -1,3 +1,5 @@
+import type { ExternalPluginEntry } from 'oxlint'
+
 import type { OxlintConfigItem, ReactOptions } from '../types'
 
 import { isPackageExists } from 'local-pkg'
@@ -17,14 +19,14 @@ const REACT_ROUTER_PACKAGES = [
 export async function react(options: ReactOptions = {}): Promise<OxlintConfigItem> {
   const { files = [GLOB_SRC], reactDoctor = false, overrides = {} } = options
 
-  let reactDoctorPlugin: any
+  const jsPlugins: ExternalPluginEntry[] = []
   if (reactDoctor) {
     await ensurePackages(['oxlint-plugin-react-doctor'])
 
-    reactDoctorPlugin = {
+    jsPlugins.push({
       name: 'react-doctor',
       specifier: resolvePlugin('oxlint-plugin-react-doctor'),
-    }
+    })
   }
 
   const isAllowConstantExport = isPackageExists('vite')
@@ -37,8 +39,8 @@ export async function react(options: ReactOptions = {}): Promise<OxlintConfigIte
     overrides: [
       {
         files,
+        jsPlugins,
         plugins: ['react'],
-        ...(reactDoctor ? { jsPlugins: [reactDoctorPlugin] } : {}),
         rules: {
           'react/error-boundaries': 'error',
           'react/jsx-key': ['error', { checkKeyMustBeforeSpread: true }],
@@ -201,8 +203,8 @@ export async function react(options: ReactOptions = {}): Promise<OxlintConfigIte
 
       {
         files: [GLOB_TS, GLOB_TSX],
+        jsPlugins,
         plugins: ['react'],
-        ...(reactDoctor ? { jsPlugins: [reactDoctorPlugin] } : {}),
         rules: {
           'react/no-unknown-property': 'off',
           'react/style-prop-object': 'off',

@@ -1,3 +1,5 @@
+import type { ExternalPluginEntry } from 'oxlint'
+
 import type { NextJSOptions, OxlintConfigItem, Rules } from '../types'
 
 import { GLOB_SRC } from '../../shared/globs'
@@ -6,14 +8,14 @@ import { ensurePackages, resolvePlugin } from '../../shared/utils'
 export async function nextjs(options: NextJSOptions = {}): Promise<OxlintConfigItem> {
   const { files = [GLOB_SRC], reactDoctor = false, overrides = {} } = options
 
-  let reactDoctorPlugin: any
+  const jsPlugins: ExternalPluginEntry[] = []
   if (reactDoctor) {
     await ensurePackages(['oxlint-plugin-react-doctor'])
 
-    reactDoctorPlugin = {
+    jsPlugins.push({
       name: 'react-doctor',
       specifier: resolvePlugin('oxlint-plugin-react-doctor'),
-    }
+    })
   }
 
   const reactDoctorRules: Rules = {
@@ -42,7 +44,7 @@ export async function nextjs(options: NextJSOptions = {}): Promise<OxlintConfigI
     overrides: [
       {
         files,
-        ...(reactDoctor ? { jsPlugins: [reactDoctorPlugin] } : {}),
+        jsPlugins,
         plugins: ['nextjs'],
         rules: {
           // Nextjs's recommended rules

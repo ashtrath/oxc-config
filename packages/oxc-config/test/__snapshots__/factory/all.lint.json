@@ -898,10 +898,72 @@
       "files": [
         "**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"
       ],
+      "jsPlugins": [
+        "react-doctor"
+      ],
       "plugins": [
         "react"
       ],
       "rules": {
+        "react-doctor/auth-token-in-web-storage": "error",
+        "react-doctor/client-passive-event-listeners": "warn",
+        "react-doctor/debounce-no-cleanup": "warn",
+        "react-doctor/dialog-has-accessible-name": "warn",
+        "react-doctor/effect-listener-cleanup-mismatch": "error",
+        "react-doctor/effect-listener-cleanup-reference-mismatch": "error",
+        "react-doctor/effect-needs-cleanup": "error",
+        "react-doctor/effect-observer-needs-disconnect": "warn",
+        "react-doctor/effect-raf-loop-needs-cancel": "warn",
+        "react-doctor/hooks-no-nan-in-deps": "error",
+        "react-doctor/html-no-invalid-paragraph-child": "error",
+        "react-doctor/html-no-invalid-table-nesting": "error",
+        "react-doctor/html-no-nested-interactive": "error",
+        "react-doctor/js-async-reduce-without-awaited-acc": "warn",
+        "react-doctor/js-hoist-intl": "warn",
+        "react-doctor/js-hoist-regexp": "warn",
+        "react-doctor/no-async-effect-callback": "error",
+        "react-doctor/no-call-component-as-function": "error",
+        "react-doctor/no-cascading-set-state": "warn",
+        "react-doctor/no-create-context-in-render": "error",
+        "react-doctor/no-create-ref-in-function-component": "error",
+        "react-doctor/no-create-store-in-render": "error",
+        "react-doctor/no-derived-useState": "warn",
+        "react-doctor/no-direct-state-mutation": "error",
+        "react-doctor/no-disabled-zoom": "warn",
+        "react-doctor/no-document-write": "error",
+        "react-doctor/no-effect-chain": "warn",
+        "react-doctor/no-effect-event-handler": "warn",
+        "react-doctor/no-effect-event-in-deps": "error",
+        "react-doctor/no-effect-with-fresh-deps": "error",
+        "react-doctor/no-event-trigger-state": "warn",
+        "react-doctor/no-flush-sync": "warn",
+        "react-doctor/no-img-lazy-with-high-fetchpriority": "warn",
+        "react-doctor/no-inline-prop-on-memo-component": "warn",
+        "react-doctor/no-layout-property-animation": "warn",
+        "react-doctor/no-mirror-prop-effect": "warn",
+        "react-doctor/no-moment": "warn",
+        "react-doctor/no-mutable-in-deps": "error",
+        "react-doctor/no-mutating-reducer-state": "error",
+        "react-doctor/no-outline-none": "warn",
+        "react-doctor/no-prop-callback-in-effect": "warn",
+        "react-doctor/no-random-key": "error",
+        "react-doctor/no-react-dom-deprecated-apis": "warn",
+        "react-doctor/no-react19-deprecated-apis": "warn",
+        "react-doctor/no-secrets-in-client-code": "error",
+        "react-doctor/no-self-updating-effect": "error",
+        "react-doctor/no-string-false-on-boolean-attribute": "error",
+        "react-doctor/no-sync-xhr": "error",
+        "react-doctor/no-transition-all": "warn",
+        "react-doctor/no-uncontrolled-input": "error",
+        "react-doctor/prefer-stable-empty-fallback": "warn",
+        "react-doctor/rendering-conditional-render": "error",
+        "react-doctor/rendering-hydration-mismatch-time": "error",
+        "react-doctor/rerender-dependencies": "warn",
+        "react-doctor/rerender-functional-setstate": "warn",
+        "react-doctor/rerender-lazy-ref-init": "warn",
+        "react-doctor/rerender-lazy-state-init": "warn",
+        "react-doctor/rerender-memo-before-early-return": "warn",
+        "react-doctor/rerender-memo-with-default-value": "warn",
         "react/error-boundaries": "error",
         "react/exhaustive-deps": "warn",
         "react/hook-use-state": "warn",
@@ -962,10 +1024,14 @@
         "**/*.{ts,mts,cts}",
         "**/*.{tsx,mtsx,ctsx}"
       ],
+      "jsPlugins": [
+        "react-doctor"
+      ],
       "plugins": [
         "react"
       ],
       "rules": {
+        "react-doctor/no-jsx-element-type": "error",
         "react/no-unknown-property": "off",
         "react/style-prop-object": "off"
       }
@@ -973,6 +1039,9 @@
     {
       "files": [
         "**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"
+      ],
+      "jsPlugins": [
+        "react-doctor"
       ],
       "plugins": [
         "nextjs"
@@ -998,7 +1067,25 @@
         "nextjs/no-sync-scripts": "error",
         "nextjs/no-title-in-document-head": "warn",
         "nextjs/no-typos": "warn",
-        "nextjs/no-unwanted-polyfillio": "warn"
+        "nextjs/no-unwanted-polyfillio": "warn",
+        "react-doctor/nextjs-async-dynamic-api-not-awaited": "error",
+        "react-doctor/nextjs-error-boundary-missing-use-client": "error",
+        "react-doctor/nextjs-global-error-missing-html-body": "error",
+        "react-doctor/nextjs-image-missing-sizes": "warn",
+        "react-doctor/nextjs-metadata-url-consistency": "warn",
+        "react-doctor/nextjs-no-client-side-redirect": "warn",
+        "react-doctor/nextjs-no-default-export-in-route-handler": "error",
+        "react-doctor/nextjs-no-edge-og-runtime": "warn",
+        "react-doctor/nextjs-no-head-import": "error",
+        "react-doctor/nextjs-no-redirect-in-try-catch": "error",
+        "react-doctor/nextjs-no-side-effect-in-get-handler": "error",
+        "react-doctor/nextjs-no-use-search-params-without-suspense": "error",
+        "react-doctor/nextjs-no-vercel-og-import": "warn",
+        "react-doctor/no-undeferred-third-party": "error",
+        "react-doctor/server-after-nonblocking": "error",
+        "react-doctor/server-auth-actions": "error",
+        "react-doctor/server-cache-with-object-literal": "error",
+        "react-doctor/server-no-mutable-module-state": "error"
       }
     },
     {
