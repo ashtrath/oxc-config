@@ -22,13 +22,19 @@ export async function vitest(options: VitestOptions): Promise<OxlintConfigItem> 
           'vitest/no-unneeded-async-expect-function': 'error',
           'vitest/prefer-called-exactly-once-with': 'error',
           'vitest/prefer-hooks-in-order': 'error',
-          'vitest/prefer-lowercase-title': 'error',
           'vitest/prefer-strict-boolean-matchers': 'error',
           'vitest/prefer-to-be': 'error',
           'vitest/valid-describe-callback': 'error',
           'vitest/valid-expect': 'error',
           'vitest/valid-expect-in-promise': 'error',
           'vitest/valid-title': 'error',
+          'vitest/prefer-lowercase-title': [
+            'error',
+            {
+              allowedPrefixes: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'API'],
+              ignoreTopLevelDescribe: true,
+            },
+          ],
 
           'vitest/no-commented-out-tests': 'warn',
           'vitest/no-disabled-tests': 'warn',
