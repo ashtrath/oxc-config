@@ -2,8 +2,6 @@ import type { OxlintConfig } from 'oxlint'
 
 import type { OxlintConfigItem, TypescriptOptions } from '../types'
 
-import { isPackageExists } from 'local-pkg'
-
 import { GLOB_TS, GLOB_TSX } from '../../shared/globs'
 import { ensurePackages } from '../../shared/utils'
 
@@ -12,7 +10,7 @@ export async function typescript(options: TypescriptOptions = {}): Promise<Oxlin
     files = [GLOB_TS, GLOB_TSX],
     type = 'app',
     overrides = {},
-    typeAware = isPackageExists('oxlint-tsgolint'),
+    typeAware = false,
     filesTypeAware = [GLOB_TS, GLOB_TSX],
     overridesTypeAware = {},
   } = options

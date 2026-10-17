@@ -66,9 +66,7 @@
     "**/*.min.*"
   ],
   "options": {
-    "reportUnusedDisableDirectives": "error",
-    "typeAware": true,
-    "typeCheck": true
+    "reportUnusedDisableDirectives": "error"
   },
   "jsPlugins": [
     "antfu",
@@ -744,49 +742,6 @@
         "typescript/prefer-namespace-keyword": "error",
         "typescript/triple-slash-reference": "off",
         "typescript/unified-signatures": "off"
-      }
-    },
-    {
-      "files": [
-        "**/*.{ts,mts,cts}",
-        "**/*.{tsx,mtsx,ctsx}"
-      ],
-      "rules": {
-        "no-implied-eval": "off",
-        "typescript/await-thenable": "error",
-        "typescript/dot-notation": [
-          "error",
-          {
-            "allowKeywords": true
-          }
-        ],
-        "typescript/no-deprecated": "warn",
-        "typescript/no-floating-promises": "error",
-        "typescript/no-for-in-array": "error",
-        "typescript/no-implied-eval": "error",
-        "typescript/no-misused-promises": "error",
-        "typescript/no-unnecessary-type-assertion": "error",
-        "typescript/no-unsafe-argument": "error",
-        "typescript/no-unsafe-assignment": "error",
-        "typescript/no-unsafe-call": "error",
-        "typescript/no-unsafe-member-access": "error",
-        "typescript/no-unsafe-return": "error",
-        "typescript/promise-function-async": "error",
-        "typescript/restrict-plus-operands": "error",
-        "typescript/restrict-template-expressions": "error",
-        "typescript/return-await": [
-          "error",
-          "in-try-catch"
-        ],
-        "typescript/strict-boolean-expressions": [
-          "error",
-          {
-            "allowNullableBoolean": true,
-            "allowNullableObject": true
-          }
-        ],
-        "typescript/switch-exhaustiveness-check": "error",
-        "typescript/unbound-method": "error"
       }
     },
     {

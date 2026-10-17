@@ -64,7 +64,7 @@ const scenarios: Scenario[] = [
         nextjs: { reactDoctor: true },
         react: { reactDoctor: true },
         tailwindcss: { entryPoint: 'src/styles.css' },
-        typescript: true,
+        typescript: { typeAware: true },
       },
     },
   },

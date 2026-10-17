@@ -83,9 +83,7 @@ export interface TypeAwareOptions {
   /**
    * Enables lint rules that require TypeScript type information.
    *
-   * @remarks
-   *   Automatically enabled when `oxlint-tsgolint` is detected.
-   * @default 'auto-detected'
+   * @default false
    * @requires `oxlint-tsgolint`
    * @see {@link https://oxc.rs/docs/guide/usage/linter/type-aware | Oxlint Type Aware Docs}
    */
