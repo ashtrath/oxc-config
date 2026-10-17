@@ -17,7 +17,7 @@
     },
     "packages/oxc-config": {
       "name": "@ashtrath/oxc-config",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "bin": "./bin/index.mjs",
       "dependencies": {
         "@antfu/install-pkg": "catalog:prod",
