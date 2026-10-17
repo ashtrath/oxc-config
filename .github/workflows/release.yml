@@ -56,6 +56,7 @@ jobs:
           bun pm pack --destination .
           npm publish ashtrath-oxlint-plugin-slop-*.tgz --access public --force
         working-directory: packages/oxlint-plugin-slop
+        continue-on-error: true
 
       - name: Publish @ashtrath/oxc-config
         run: |
