@@ -2,10 +2,8 @@ import type { ExternalPluginEntry } from 'oxlint'
 
 import type { OxlintConfigItem, ReactOptions } from '../types'
 
-import { isPackageExists } from 'local-pkg'
-
 import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../../shared/globs'
-import { ensurePackages, resolvePlugin } from '../../shared/utils'
+import { ensurePackages, hasAnyPackage, hasPackage, resolvePlugin } from '../../shared/utils'
 
 const REMIX_PACKAGES = ['@remix-run/node', '@remix-run/react', '@remix-run/serve', '@remix-run/dev']
 
@@ -29,11 +27,11 @@ export async function react(options: ReactOptions = {}): Promise<OxlintConfigIte
     })
   }
 
-  const isAllowConstantExport = isPackageExists('vite')
-  const isUsingNext = isPackageExists('next')
-  const isUsingReactCompiler = isPackageExists('babel-plugin-react-compiler')
-  const isUsingRemix = REMIX_PACKAGES.some(pkg => isPackageExists(pkg))
-  const isUsingReactRouter = REACT_ROUTER_PACKAGES.some(pkg => isPackageExists(pkg))
+  const isAllowConstantExport = hasPackage('vite')
+  const isUsingNext = hasPackage('next')
+  const isUsingReactCompiler = hasPackage('babel-plugin-react-compiler')
+  const isUsingRemix = hasAnyPackage(REMIX_PACKAGES)
+  const isUsingReactRouter = hasAnyPackage(REACT_ROUTER_PACKAGES)
 
   return {
     overrides: [

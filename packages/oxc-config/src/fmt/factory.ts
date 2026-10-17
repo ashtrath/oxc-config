@@ -2,10 +2,9 @@ import type { OxfmtConfig, OxfmtOverrideConfig } from 'oxfmt'
 
 import type { OxfmtFactoryOptions } from './types'
 
-import { isPackageExists } from 'local-pkg'
 import { defineConfig } from 'oxfmt'
 
-import { resolveIgnorePatterns } from '../shared/utils'
+import { hasAnyPackage, hasPackage, resolveIgnorePatterns } from '../shared/utils'
 
 /**
  * Creates an opinionated oxfmt formatter configuration.
@@ -33,14 +32,13 @@ export function ashtrathFmt(
   const {
     sortImports = true,
     sortPackageJson = true,
-    sortTailwindcss = isPackageExists('tailwindcss'),
+    sortTailwindcss = hasPackage('tailwindcss'),
     jsdoc = true,
     ignorePatterns: userIgnorePatterns = [],
     ...directOptions
   } = options
 
-  const hasTypescript =
-    isPackageExists('typescript') || isPackageExists('@typescript/native-preview')
+  const hasTypescript = hasAnyPackage(['typescript', '@typescript/native-preview'])
 
   return defineConfig({
     // Base config

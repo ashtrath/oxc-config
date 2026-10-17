@@ -1,7 +1,38 @@
+import { getPackagesSync } from '@manypkg/get-packages'
 import { isPackageExists } from 'local-pkg'
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { GLOB_EXCLUDE, GLOB_TS, GLOB_TSX } from './globs'
+
+const dirsCache = new Map<string, string[]>()
+
+export function getWorkspaceDirs(cwd = process.cwd()): string[] {
+  const targetDir = path.resolve(cwd)
+  const cached = dirsCache.get(targetDir)
+
+  if (cached) return cached
+
+  let dirs: string[]
+  try {
+    const { rootDir, packages } = getPackagesSync(targetDir)
+    dirs = [...new Set([rootDir, ...packages.map(pkg => pkg.dir)])]
+  } catch {
+    dirs = [targetDir] // no detectable workspace, behave like plain local-pkg
+  }
+
+  dirsCache.set(targetDir, dirs)
+  return dirs
+}
+
+export function hasPackage(name: string, cwd = process.cwd()): boolean {
+  return isPackageExists(name, { paths: getWorkspaceDirs(cwd) })
+}
+
+export function hasAnyPackage(names: string[], cwd = process.cwd()): boolean {
+  const paths = getWorkspaceDirs(cwd)
+  return names.some(name => isPackageExists(name, { paths }))
+}
 
 const scopeDir = fileURLToPath(new URL('.', import.meta.url))
 const isConfigInstalled = isPackageExists('@ashtrath/oxc-config')

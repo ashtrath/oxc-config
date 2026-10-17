@@ -37,6 +37,7 @@
         "@antfu/install-pkg": "^2.1.0",
         "@clack/prompts": "^1.8.1",
         "@e18e/eslint-plugin": "^0.8.1",
+        "@manypkg/get-packages": "^3.1.0",
         "@oxlint/plugins": "^1.87.0",
         "ansis": "^4.4.0",
         "citty": "^0.2.2",

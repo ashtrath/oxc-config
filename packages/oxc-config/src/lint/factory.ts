@@ -5,10 +5,9 @@ import type { Awaitable } from '../shared/types'
 import type { OxlintConfigItem, OxlintFactoryOptions } from './types'
 
 import { createDefu } from 'defu'
-import { isPackageExists } from 'local-pkg'
 import { defineConfig } from 'oxlint'
 
-import { isInEditorEnv, resolveIgnorePatterns } from '../shared/utils'
+import { hasAnyPackage, hasPackage, isInEditorEnv, resolveIgnorePatterns } from '../shared/utils'
 import {
   antislop,
   command,
@@ -95,13 +94,12 @@ export async function ashtrathLint(
     e18e: enableE18e = true,
     unicorn: enableUnicorn = true,
     jsx: enableJsx = true,
-    typescript: enableTypescript = isPackageExists('typescript') ||
-      isPackageExists('@typescript/native-preview'),
+    typescript: enableTypescript = hasAnyPackage(['typescript', '@typescript/native-preview']),
     antislop: enableAntiSlop = false,
     regexp: enableRegexp = true,
     vitest: enableVitest = true,
-    react: enableReact = isPackageExists('react'),
-    nextjs: enableNextJs = isPackageExists('next'),
+    react: enableReact = hasPackage('react'),
+    nextjs: enableNextJs = hasPackage('next'),
     tailwindcss: tailwindcssSettings = false,
     ignorePatterns: userIgnorePatterns = [],
   } = options

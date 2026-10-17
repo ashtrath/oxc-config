@@ -45,6 +45,7 @@
     "@antfu/install-pkg": "catalog:prod",
     "@clack/prompts": "catalog:prod",
     "@e18e/eslint-plugin": "catalog:prod",
+    "@manypkg/get-packages": "catalog:prod",
     "ansis": "catalog:prod",
     "citty": "catalog:prod",
     "defu": "catalog:prod",
